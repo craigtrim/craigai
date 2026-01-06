@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The 30-Year Journey of BPE</title>
+    <style>
+        :root {
+            --text-color: #292929;
+            --bg-color: #fff;
+            --accent-color: #1a8917;
+            --border-color: #e6e6e6;
+            --code-bg: #f4f4f4;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: charter, Georgia, Cambria, "Times New Roman", Times, serif;
+            font-size: 21px;
+            line-height: 1.58;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        article {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 40px 24px 80px;
+        }
+
+        h1 {
+            font-family: sohne, "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 42px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 16px;
+            letter-spacing: -0.011em;
+        }
+
+        h2 {
+            font-family: sohne, "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-top: 56px;
+            margin-bottom: 16px;
+            letter-spacing: -0.009em;
+        }
+
+        h3 {
+            font-family: sohne, "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            line-height: 1.4;
+            margin-top: 40px;
+            margin-bottom: 12px;
+        }
+
+        p {
+            margin-bottom: 24px;
+        }
+
+        .lead {
+            font-size: 24px;
+            line-height: 1.5;
+            color: #555;
+            margin-bottom: 32px;
+        }
+
+        ul, ol {
+            margin-bottom: 24px;
+            padding-left: 30px;
+        }
+
+        li {
+            margin-bottom: 12px;
+        }
+
+        code {
+            font-family: Menlo, Monaco, "Courier New", Courier, monospace;
+            font-size: 16px;
+            background-color: var(--code-bg);
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+
+        pre {
+            font-family: Menlo, Monaco, "Courier New", Courier, monospace;
+            font-size: 15px;
+            background-color: var(--code-bg);
+            padding: 20px;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin-bottom: 24px;
+            line-height: 1.5;
+        }
+
+        blockquote {
+            border-left: 3px solid var(--text-color);
+            margin: 32px 0;
+            padding-left: 20px;
+            font-style: italic;
+        }
+
+        figure {
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        figure img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+
+        figcaption {
+            font-size: 16px;
+            color: #757575;
+            margin-top: 12px;
+            font-style: italic;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: underline;
+        }
+
+        a:hover {
+            color: var(--accent-color);
+        }
+
+        strong {
+            font-weight: 700;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 24px;
+            font-size: 16px;
+            color: #757575;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid var(--border-color);
+            margin: 48px 0;
+        }
+
+        .references {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .references p {
+            margin-bottom: 12px;
+        }
+
+        @media (max-width: 728px) {
+            body {
+                font-size: 18px;
+            }
+
+            h1 {
+                font-size: 32px;
+            }
+
+            h2 {
+                font-size: 24px;
+            }
+
+            article {
+                padding: 24px 16px 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <article>
+        <a href="../" class="back-link">← All Articles</a>
+
+        <h1>The 30-Year Journey of an Algorithm That Accidentally Learned to Read</h1>
+
+        <p class="lead">In 1994, Philip Gage published a short paper in the C Users Journal titled "A New Algorithm for Data Compression." It described a simple technique for shrinking files by replacing frequently occurring byte pairs with single bytes.</p>
+
+        <p>Thirty years later, that same algorithm (Byte Pair Encoding) powers every major large language model: GPT-4, Claude, LLaMA, Mistral. It's how ChatGPT reads your prompts. It's why you pay per token, not per word.</p>
+
+        <p>This is the story of how a compression hack became the foundation of modern AI.</p>
+
+        <h2>Part 1: The Compression Era (1994-2015)</h2>
+
+        <p>Philip Gage wasn't thinking about language. He was thinking about bytes.</p>
+
+        <figure>
+            <img src="images/image1.png" alt="Philip Gage working">
+            <figcaption>He never once looked up.</figcaption>
+        </figure>
+
+        <p>His problem was practical: how do you compress arbitrary binary data efficiently? The dominant algorithms of the time (Huffman coding, LZW used in GIF files, and arithmetic coding) were sophisticated but complex.</p>
+
+        <p>Gage wanted something simpler.</p>
+
+        <p>His insight: if two bytes frequently appear next to each other, replace them with a single unused byte.</p>
+
+        <p><strong>The algorithm:</strong></p>
+
+        <ol>
+            <li>Scan the data for the most frequent pair of adjacent bytes</li>
+            <li>Replace all occurrences of that pair with a new byte not in the data</li>
+            <li>Record the substitution in a table</li>
+            <li>Repeat until no pair occurs more than once (or you run out of unused bytes)</li>
+        </ol>
+
+        <p>That's it. No probability models. No complex data structures.</p>
+
+        <p>Just counting and replacing.</p>
+
+        <h3>The Actual Mechanics</h3>
+
+        <p>A byte can represent 256 values (0-255). In any given block of data, not all 256 values are present. ASCII text, for example, typically uses only 70-100 distinct byte values (letters, digits, punctuation, whitespace). The remaining 150+ byte values are "unused" and available as substitution codes.</p>
+
+        <p>Gage's algorithm tracks this with two arrays:</p>
+
+        <pre>unsigned char leftcode[256];
+unsigned char rightcode[256];
+
+// Initialize: every byte maps to itself (literal)
+for (c = 0; c < 256; c++) {
+  leftcode[c] = c;
+  rightcode[c] = 0;
+}</pre>
+
+        <p>The sentinel value <code>leftcode[c] == c</code> means "byte c is a literal." When you create a substitution, you pick an unused byte and set <code>leftcode[unused]</code> and <code>rightcode[unused]</code> to the pair being replaced.</p>
+
+        <h3>A Worked Example</h3>
+
+        <p>Suppose your data block contains only the bytes: <code>A</code>, <code>B</code>, <code>C</code>, <code>D</code> (ASCII values 65, 66, 67, 68).</p>
+
+        <p>That means bytes 0-64, 69-255 are all unused and available as substitution codes.</p>
+
+        <pre>Input: AAABDAAABAC</pre>
+
+        <p><strong>Pass 1:</strong> Most frequent pair is "AA" (appears 4 times).</p>
+        <ul>
+            <li>Find an unused byte. Let's say byte 128 (0x80) isn't in the data.</li>
+            <li>Set: <code>leftcode[128] = 'A'</code>, <code>rightcode[128] = 'A'</code></li>
+            <li>Replace all "AA" with byte 128:</li>
+        </ul>
+
+        <pre>Result: [128]ABDA[128]BAC</pre>
+
+        <p><strong>Pass 2:</strong> Most frequent pair is now [128]A (appears 2 times).</p>
+        <ul>
+            <li>Pick another unused byte, say 129.</li>
+            <li>Set: <code>leftcode[129] = 128</code>, <code>rightcode[129] = 'A'</code></li>
+            <li>Replace:</li>
+        </ul>
+
+        <pre>Result: [129]BD[129]BC</pre>
+
+        <p><strong>Pass 3:</strong> No pair appears more than once. Stop.</p>
+
+        <p><strong>Original: 11 bytes → Compressed: 6 bytes + lookup table</strong></p>
+
+        <p>To decompress, the algorithm uses a stack. When it encounters byte 129, it looks up <code>leftcode[129]</code> and <code>rightcode[129]</code>, pushes both onto a stack, and keeps expanding until it hits literals (bytes where <code>leftcode[c] == c</code>).</p>
+
+        <h3>The Exponential Power</h3>
+
+        <p>Here's the clever part: pair codes can reference other pair codes.</p>
+
+        <p>Byte 129 expands to <code>[128, A]</code>, and 128 expands to <code>[A, A]</code>. So 129 represents <code>AAA</code> in a single byte.</p>
+
+        <p>Gage noted: "1024 identical bytes can be reduced to a single byte after only ten pair substitutions."</p>
+
+        <p>That's 2^10 = 1024.</p>
+
+        <h3>What Happens When All Bytes Are Used?</h3>
+
+        <p>This is the natural limit of Gage's original BPE.</p>
+
+        <p>From the paper:</p>
+
+        <blockquote>"The algorithm repeats this process until no further compression is possible, either because there are no more frequently occurring pairs or there are no more unused bytes to represent pairs."</blockquote>
+
+        <p>and:</p>
+
+        <blockquote>"If no compression can be performed, BPE passes the data through unchanged except for the addition of a few header bytes to each block of data."</blockquote>
+
+        <p>This is why Gage processes data in blocks (default 5000 bytes). Smaller blocks are statistically likely to have many unused byte values. A block of ASCII text might use only 80 of 256 possible byte values, leaving 176 available for substitution codes.</p>
+
+        <h3>Why It Worked</h3>
+
+        <p>BPE had several advantages over more sophisticated algorithms:</p>
+
+        <ul>
+            <li><strong>Simplicity:</strong> The code fit on a single page</li>
+            <li><strong>Speed:</strong> Linear time complexity per pass</li>
+            <li><strong>Adaptivity:</strong> No need to pre-specify patterns; it finds them</li>
+            <li><strong>Reversibility:</strong> Perfect reconstruction guaranteed</li>
+        </ul>
+
+        <p>It wasn't the best compression algorithm. LZW and arithmetic coding could compress further.</p>
+
+        <p>But BPE was good enough and easy to implement.</p>
+
+        <figure>
+            <img src="images/image2.png" alt="BPE simplicity">
+            <figcaption>Twenty years later, guess who's running GPT-4?</figcaption>
+        </figure>
+
+        <h3>Life on the Fringes (1994-2015)</h3>
+
+        <p>BPE never gained mainstream adoption in compression tools.</p>
+
+        <p>7-Zip uses LZMA. WinZip and gzip use DEFLATE. bzip2 uses Burrows-Wheeler. These achieved better compression ratios; BPE's advantage was simplicity and a tiny memory footprint, not raw power.</p>
+
+        <p>Where did BPE actually live?</p>
+
+        <ul>
+            <li><strong>Embedded systems</strong> with severe memory constraints (550 bytes for decompression!)</li>
+            <li><strong>Educational implementations</strong> in algorithms courses</li>
+            <li><strong>Academic papers</strong> comparing compression techniques</li>
+            <li><strong>Niche utilities</strong> where "good enough" mattered more than optimal</li>
+        </ul>
+
+        <p>In 1999, Japanese researchers at Kyushu University and Kyushu Institute of Technology published "Byte Pair Encoding: A Text Compression Scheme That Accelerates Pattern Matching" (Shibata, Kida, Fukamachi, Takeda, Shinohara, Shinohara, and Arikawa).</p>
+
+        <p>They discovered something surprising: searching BPE-compressed text was 1.6-1.9x faster than searching the original. The compression reduced data size; the structured byte codes accelerated pattern matching.</p>
+
+        <p>However, even this was still about compression and search, rather than language understanding.</p>
+
+        <h3>The Parallel Bridges (1999-2005)</h3>
+
+        <p>BPE wasn't the only compression technique finding new applications. During this period, two distinct "bridges" emerged from compression research into adjacent fields:</p>
+
+        <figure>
+            <img src="images/image3.png" alt="Two bridges from compression research">
+            <figcaption>Innovation doesn't always travel the obvious path.</figcaption>
+        </figure>
+
+        <p><em>Figure: The two bridges from compression research (1994-2005) and their relationship to modern AI. Solid arrows show direct lineage; dotted arrows show conceptual influence or independent rediscovery. Note that NCD and embeddings share a philosophical goal (representation without manual features) but have no technical ancestry. The missing spine is language modeling: the insight that compression and prediction are mathematically equivalent.</em></p>
+
+        <h2>Part 2: The NLP Problem (2000-2015)</h2>
+
+        <p>While BPE was compressing files, natural language processing was hitting a wall.</p>
+
+        <h3>The Vocabulary Explosion</h3>
+
+        <p>Statistical NLP models require vocabularies, which are lists of known words. But how big should the vocabulary be?</p>
+
+        <ul>
+            <li><strong>Too small:</strong> Common words only. "The", "a", "is" work fine. But "iPhone"? "COVID-19"? "Beyonce"? All become <code>&lt;UNK&gt;</code> (unknown).</li>
+            <li><strong>Too large:</strong> Include every word ever written. The vocabulary explodes. English has 500,000+ dictionary words. Add proper nouns, technical terms, misspellings, and you're at millions. Each word needs an embedding vector (hundreds or thousands of parameters). Memory and computation blow up.</li>
+        </ul>
+
+        <p>The field settled on an uncomfortable compromise: fixed vocabularies of 30,000-50,000 words, with everything else mapped to <code>&lt;UNK&gt;</code>.</p>
+
+        <p>This worked... poorly.</p>
+
+        <p>Imagine a sentiment analyzer encountering: "The new iPhone is amazign!"</p>
+
+        <pre>Result: "The new &lt;UNK&gt; is &lt;UNK&gt;!"</pre>
+
+        <p>The model has no idea what the user is talking about.</p>
+
+        <h3>The Morphology Blindness</h3>
+
+        <p>It got worse. Word-level vocabularies couldn't capture morphological structure.</p>
+
+        <p><code>run</code>, <code>runs</code>, <code>running</code>, <code>runner</code> each got their own vocabulary slot, with no shared representation. The model couldn't learn that they're related.</p>
+
+        <p>For agglutinative languages like Turkish or Finnish, where words compound endlessly, the problem was catastrophic. A single Turkish word might encode an entire English sentence. No reasonable vocabulary could cover the combinatorial space.</p>
+
+        <h3>The Character-Level Detour</h3>
+
+        <p>One radical solution: forget words entirely. Use characters.</p>
+
+        <p>Vocabulary size drops to ~100-200 (letters, digits, punctuation). No OOV problem ever. Morphology becomes learnable. <code>running</code> is just r-u-n-n-i-n-g, and the model can see <code>run</code> as a prefix.</p>
+
+        <p>But character-level models struggled:</p>
+
+        <ul>
+            <li><strong>Sequence explosion:</strong> A 500-word paragraph becomes 2,500+ characters</li>
+            <li><strong>Long-range dependencies:</strong> The model must learn that c-a-t spells "cat" across huge distances</li>
+            <li><strong>Computational cost:</strong> Attention is O(n²) in sequence length</li>
+        </ul>
+
+        <p>The models worked for some tasks but couldn't match word-level performance on semantic understanding. Learning spelling, morphology, syntax, and semantics all from raw characters was too much to ask.</p>
+
+        <p>The field needed a middle ground.</p>
+
+        <h2>Part 3: The Breakthrough (2015-2016)</h2>
+
+        <h3>The Lost Bridge</h3>
+
+        <p>Here's what we don't know: how did Rico Sennrich find BPE?</p>
+
+        <p>The 2016 paper cites "Gage (1994)" without providing any narrative. No "I was reading old C Users Journal issues." No "a colleague mentioned this obscure algorithm."</p>
+
+        <p>The bridge between a 1994 compression paper in a C programming magazine and 2015 neural machine translation research at Edinburgh is undocumented.</p>
+
+        <p>Was it systematic literature mining? Institutional knowledge passed through a department? A chance encounter in an old textbook? We don't know. The discovery story itself is lost to history.</p>
+
+        <p>This matters for more than historical curiosity.</p>
+
+        <p>It's a reminder about academic contribution:</p>
+
+        <ul>
+            <li><strong>Philip Gage finished his work.</strong> He didn't abandon a half-baked idea. He wrote complete C code, published detailed explanations, and made his algorithm reproducible.</li>
+            <li><strong>He cited his sources.</strong> Gage's paper carefully compared BPE to LZW and other algorithms, situating his work in context.</li>
+            <li><strong>And he made it accessible.</strong> The C Users Journal wasn't Nature, but it was indexed and findable.</li>
+        </ul>
+
+        <p>Twenty-two years later, someone found it. Research that might have seemed "merely practical" (a niche compression trick for a niche audience) became the foundation of modern AI.</p>
+
+        <figure>
+            <img src="images/image4.png" alt="1994 paper">
+            <figcaption>Wait. This one's from 1994.</figcaption>
+        </figure>
+
+        <p><strong>You never know who will need your work, or when.</strong></p>
+
+        <h3>Sennrich's Insight</h3>
+
+        <p>In 2015, Rico Sennrich, Barry Haddow, and Alexandra Birch at the University of Edinburgh were working on neural machine translation. They faced the OOV problem acutely: technical terms, names, and rare words mangled their translations.</p>
+
+        <p>However they found BPE, they recognized something: what if you applied it to text?</p>
+
+        <p>Not bytes. Characters and character sequences.</p>
+
+        <p>The algorithm stayed identical:</p>
+
+        <pre>1. Start with a vocabulary of individual characters
+2. Count all adjacent pairs in the training corpus
+3. Merge the most frequent pair into a new token
+4. Repeat until you reach your target vocabulary size</pre>
+
+        <p>But the output was something new: a subword vocabulary.</p>
+
+        <p>Common words like "the" would get merged all the way to single tokens. Rare words would stay fragmented, assembled from smaller pieces:</p>
+
+        <figure>
+            <img src="images/image5.png" alt="Subword tokenization">
+        </figure>
+
+        <h3>The Paper</h3>
+
+        <p>Their 2016 paper, "Neural Machine Translation of Rare Words with Subword Units," demonstrated dramatic improvements on translation tasks. Rare words that previously became <code>&lt;UNK&gt;</code> were represented, even if the model had never seen them.</p>
+
+        <p>The key insight: BPE automatically identifies morpheme-like units.</p>
+
+        <p>The algorithm doesn't know linguistics. It doesn't know that <code>un-</code> is a negation prefix or <code>-ing</code> marks present participles. It just notices that these character sequences appear frequently across many different words.</p>
+
+        <p>Frequency, in language, correlates with meaning.</p>
+
+        <p>This accidental alignment between compression and linguistics made BPE perfect for NLP.</p>
+
+        <h2>Part 4: The Scaling Era (2017-2020)</h2>
+
+        <h3>Transformers Enter</h3>
+
+        <p>In 2017, "Attention Is All You Need" introduced the Transformer architecture. Suddenly, sequence models could be parallelized. Training scaled to unprecedented sizes.</p>
+
+        <p>But Transformers still needed tokenization. And BPE (simple, effective, scalable) became the default choice.</p>
+
+        <ul>
+            <li><strong>GPT (2018):</strong> OpenAI's first GPT used BPE with a 40,000-token vocabulary.</li>
+            <li><strong>BERT (2018):</strong> Google chose WordPiece (a BPE variant using PMI instead of raw frequency), but the core logic was the same.</li>
+            <li><strong>GPT-2 (2019):</strong> Introduced Byte-Level BPE, starting from raw bytes (0-255) instead of characters. This guaranteed any Unicode text could be tokenized, including emoji, code, and corrupted data.</li>
+            <li><strong>GPT-3 (2020):</strong> 175 billion parameters, still using BPE. The vocabulary grew to ~50,000 tokens, but the algorithm remained Philip Gage's 1994 invention.</li>
+        </ul>
+
+        <h2>Part 5: The Variants and Evolutions</h2>
+
+        <h3>Byte-Level BPE (GPT-2+)</h3>
+
+        <p>Original BPE started with characters. Byte-level BPE starts with raw bytes (0-255).</p>
+
+        <p>Why? Characters are encoding-dependent. UTF-8 represents "e" differently than Latin-1. Byte-level BPE sidesteps this: it sees the raw byte sequence, whatever the encoding.</p>
+
+        <p><strong>Benefits:</strong></p>
+
+        <ul>
+            <li>Truly universal: any byte sequence is tokenizable</li>
+            <li>No special handling for Unicode, emoji, or binary data</li>
+            <li>Consistent behavior across encodings</li>
+        </ul>
+
+        <p>The GPT-2/3/4 tokenizer uses byte-level BPE with ~50,000 merge operations.</p>
+
+        <h3>WordPiece (BERT)</h3>
+
+        <p>Google's variant changes the merge criterion. Instead of most frequent pair, merge the pair that maximizes:</p>
+
+        <pre>score(a, b) = frequency(ab) / (frequency(a) × frequency(b))</pre>
+
+        <p>This is Pointwise Mutual Information (PMI). It asks: "Do these tokens appear together more than chance predicts?"</p>
+
+        <ul>
+            <li><strong>High PMI</strong> = "These belong together"</li>
+            <li><strong>Low PMI</strong> = "They're just both common"</li>
+        </ul>
+
+        <p>WordPiece uses <code>##</code> to mark continuation tokens:</p>
+
+        <pre>"tokenization" → ["token", "##ization"]</pre>
+
+        <h3>Unigram (SentencePiece)</h3>
+
+        <p>Unigram inverts the BPE approach:</p>
+
+        <ol>
+            <li>Start with a huge vocabulary (all substrings up to some length)</li>
+            <li>Train a unigram language model</li>
+            <li>Remove tokens that hurt model likelihood least</li>
+            <li>Repeat until target vocabulary size</li>
+        </ol>
+
+        <p>Unlike BPE, Unigram is probabilistic. The same text might have multiple valid tokenizations; the algorithm picks the most probable.</p>
+
+        <h2>Part 6: Where BPE Lives Today</h2>
+
+        <figure>
+            <img src="images/image6.png" alt="BPE powers everything">
+            <figcaption>BPE (or close variants) powers everything.</figcaption>
+        </figure>
+
+        <h3>tiktoken: BPE at Scale</h3>
+
+        <p>OpenAI's tiktoken is BPE implemented in Rust with Python bindings. Same algorithm, 3-6x faster than alternatives.</p>
+
+        <p>Why does speed matter? Every API call tokenizes. Every prompt. Every response. Millions per second globally. A 3x speedup saves enormous compute.</p>
+
+        <pre>import tiktoken
+
+enc = tiktoken.encoding_for_model("gpt-4")
+tokens = enc.encode("Hello, world!")
+print(tokens)       # [9906, 11, 1917, 0]
+print(len(tokens))  # 4</pre>
+
+        <hr>
+
+        <h2>The Uncomfortable Truth</h2>
+
+        <p>Byte Pair Encoding is a compression algorithm.</p>
+
+        <p>It doesn't understand language. It understands frequency distributions. It doesn't know grammar. It knows which character sequences appear together often.</p>
+
+        <p>And yet: it works.</p>
+
+        <p>GPT-4 writes poetry, explains quantum mechanics, and debugs code, all while processing text through an algorithm designed to shrink files in 1994.</p>
+
+        <p>The gap between "frequency-based substring merging" and "understanding" turns out to be narrower than anyone expected.</p>
+
+        <p>Or perhaps understanding was never what we thought it was.</p>
+
+        <p>Philip Gage probably didn't anticipate that his little compression trick would become the reading apparatus of artificial intelligence. He was trying to reduce the file size.</p>
+
+        <p><strong>From compression curiosity to the foundation of modern AI.</strong></p>
+
+        <figure>
+            <img src="images/image7.png" alt="Thirty years, same algorithm">
+            <figcaption>Thirty years. Same algorithm.</figcaption>
+        </figure>
+
+        <p>Sometimes the most important innovations are accidents.</p>
+
+        <hr>
+
+        <div class="references">
+            <h2>References</h2>
+
+            <h3>Core BPE Papers</h3>
+
+            <p>Gage, P. (1994). "A New Algorithm for Data Compression." The C Users Journal, Vol. 12, No. 2.</p>
+
+            <p>Shibata, Y., Kida, T., Fukamachi, S., Takeda, M., Shinohara, A., Shinohara, T., & Arikawa, S. (1999). "Byte Pair Encoding: A Text Compression Scheme That Accelerates Pattern Matching." Technical Report DOI-TR-CS-161, Kyushu University.</p>
+
+            <p>Sennrich, R., Haddow, B., & Birch, A. (2016). "Neural Machine Translation of Rare Words with Subword Units." Proceedings of the 54th Annual Meeting of the Association for Computational Linguistics (ACL), Berlin.</p>
+
+            <h3>Bridge A: Compression → Queryability</h3>
+
+            <p>Ferragina, P. & Manzini, G. (2000). "Opportunistic Data Structures with Applications." FOCS 2000. (FM-Index introduction)</p>
+
+            <p>Navarro, G. & Makinen, V. (2007). "Compressed Full-Text Indexes." ACM Computing Surveys.</p>
+
+            <h3>Bridge B: Compression → Similarity</h3>
+
+            <p>Thaper, N. (2001). "A Source-Based Approach to Text Classification." MIT Master's Thesis.</p>
+
+            <p>Cilibrasi, R. & Vitanyi, P. (2005). "Clustering by Compression." IEEE Transactions on Information Theory.</p>
+
+            <p>Marton, Y., Wu, N., & Hellerstein, L. (2005). "On Compression-Based Text Classification." ECIR 2005.</p>
+
+            <h3>Transformers and Modern AI</h3>
+
+            <p>Vaswani, A., et al. (2017). "Attention Is All You Need." NeurIPS.</p>
+
+            <p>Radford, A., et al. (2018). "Improving Language Understanding by Generative Pre-Training." OpenAI.</p>
+
+            <p>Radford, A., et al. (2019). "Language Models are Unsupervised Multitask Learners." OpenAI.</p>
+
+            <p>OpenAI. (2023). tiktoken. GitHub.</p>
+        </div>
+    </article>
+</body>
+</html>
