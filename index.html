@@ -132,7 +132,7 @@
             padding: 16px 20px;
             border-radius: 4px;
             margin: 24px 0;
-            text-align: center;
+            text-align: left;
         }
 
         a {
@@ -286,14 +286,14 @@
         <p>You likely recognize:</p>
 
         <ul>
-            <li>"un-" → negation (same as in "unfair," "undo")</li>
-            <li>"happy" → the emotional state</li>
-            <li>"-ness" → converts adjective to noun</li>
+            <li><code>un-</code> → negation (same as in <code>unfair</code>, <code>undo</code>)</li>
+            <li><code>happy</code> → the emotional state</li>
+            <li><code>-ness</code> → converts adjective to noun</li>
         </ul>
 
         <p>This compositional understanding is precisely what subword tokenization tries to capture.</p>
 
-        <p>A good tokenizer should learn that "un" is a meaningful prefix that appears across many words, rather than treating "unhappy" and "unfair" as completely unrelated tokens.</p>
+        <p>A good tokenizer should learn that <code>un</code> is a meaningful prefix that appears across many words, rather than treating <code>unhappy</code> and <code>unfair</code> as completely unrelated tokens.</p>
 
         <figure>
             <img src="images/image4.png" alt="Subword tokenization concept">
@@ -305,16 +305,16 @@
         <p>If a model has never seen the word "unhappiness" during training, but it has learned:</p>
 
         <ul>
-            <li>"un-" as a negation prefix</li>
-            <li>"happy" as an emotion word</li>
-            <li>"-ness" as a nominalizer</li>
+            <li><code>un-</code> as a negation prefix</li>
+            <li><code>happy</code> as an emotion word</li>
+            <li><code>-ness</code> as a nominalizer</li>
         </ul>
 
         <p>…then it can potentially generalize to understand the composition of "unhappiness".</p>
 
         <p>This is the promise of subword tokenization: <strong>morphologically-aware representations</strong> that enable generalization to unseen words.</p>
 
-        <p>But here's the catch: modern tokenizers learn these patterns statistically, not linguistically. They don't "know" that "un-" means negation. They just notice it appears frequently as a prefix. This works remarkably well, but it also leads to some bizarre edge cases we'll explore later.</p>
+        <p>But here's the catch: modern tokenizers learn these patterns statistically, not linguistically. They don't "know" that <code>un-</code> means negation. They just notice it appears frequently as a prefix. This works remarkably well, but it also leads to some bizarre edge cases we'll explore later.</p>
 
         <h2>Historical Evolution: From Whitespace to BPE</h2>
 
@@ -335,9 +335,9 @@
         <p>The <a href="https://catalog.ldc.upenn.edu/docs/LDC95T7/cl93.html">Penn Treebank Standard</a> (1993) established conventions still used today:</p>
 
         <ul>
-            <li>Contractions split: "don't" → "do" + "n't"</li>
-            <li>Possessives split: "John's" → "John" + "'s"</li>
-            <li>Punctuation separated: "end." → "end" + "."</li>
+            <li>Contractions split: <code>don't</code> → <code>do</code> + <code>n't</code></li>
+            <li>Possessives split: <code>John's</code> → <code>John</code> + <code>'s</code></li>
+            <li>Punctuation separated: <code>end.</code> → <code>end</code> + <code>.</code></li>
         </ul>
 
         <p>But rule-based systems faced insurmountable challenges:</p>
@@ -361,7 +361,7 @@
         <ul>
             <li><strong>Vocabulary explosion:</strong> English has 170,000+ words; technical domains add more</li>
             <li><strong>OOV problem:</strong> New words, names, typos → all become <code>&lt;UNK&gt;</code></li>
-            <li><strong>Morphological blindness:</strong> "run," "runs," "running," "runner" = 4 separate entries</li>
+            <li><strong>Morphological blindness:</strong> <code>run</code>, <code>runs</code>, <code>running</code>, <code>runner</code> = 4 separate entries</li>
             <li><strong>Storage/memory:</strong> Embedding matrices for 50K+ words are huge</li>
         </ul>
 
@@ -384,8 +384,8 @@
         <p>Problems:</p>
 
         <ul>
-            <li><strong>Sequence length explosion:</strong> "hello" = 5 tokens instead of 1</li>
-            <li><strong>Long-range dependencies:</strong> Model must learn that "c-a-t" means the same across huge distances</li>
+            <li><strong>Sequence length explosion:</strong> <code>hello</code> = 5 tokens instead of 1</li>
+            <li><strong>Long-range dependencies:</strong> Model must learn that <code>c-a-t</code> means the same across huge distances</li>
             <li><strong>Computational cost:</strong> Attention is O(n²) in sequence length</li>
         </ul>
 
@@ -474,13 +474,13 @@ Result: "lo w &lt;/w&gt;", "lo w e r &lt;/w&gt;", "n e w est &lt;/w&gt;"
 
         <p>A remarkably effective hack, but a hack nonetheless.</p>
 
-        <p>We wanted models that understand language. We got models that understand statistically-frequent byte sequences. BPE doesn't know that "un-" means negation. It just noticed the pattern appears often enough to merit its own token. The fact that this correlates with morphological structure is convenient, not intentional.</p>
+        <p>We wanted models that understand language. We got models that understand statistically-frequent byte sequences. BPE doesn't know that <code>un-</code> means negation. It just noticed the pattern appears often enough to merit its own token. The fact that this correlates with morphological structure is convenient, not intentional.</p>
 
         <p>And yet: it works. LLMs can write poetry, explain quantum mechanics, and debug your code, all while processing text through a compression algorithm from 1994. The gap between "frequency-based substring merging" and "understanding" turns out to be narrower than anyone expected.</p>
 
         <p>Perhaps understanding was never what we thought it was.</p>
 
-        <p>So the next time an LLM confidently miscounts the letters in "strawberry," remember: it never saw the word. It saw <code>["str", "aw", "berry"]</code> and did its best.</p>
+        <p>So the next time an LLM confidently miscounts the letters in <code>strawberry</code>, remember: it never saw the word. It saw <code>["str", "aw", "berry"]</code> and did its best.</p>
 
         <p>We all are.</p>
     </article>
