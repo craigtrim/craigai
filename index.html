@@ -212,7 +212,11 @@
 </head>
 <body>
     <div class="container">
-        <img src="hero.png" alt="Abstract nested pairs" class="hero">
+        <img id="hero" alt="Abstract nested pairs" class="hero">
+        <script>
+            const heroes = ['hero1.png', 'hero2.png', 'hero3.png', 'hero4.png', 'hero5.png'];
+            document.getElementById('hero').src = heroes[Math.floor(Math.random() * heroes.length)];
+        </script>
 
         <section class="first-section">
             <h2 class="section-title">Writing</h2>
