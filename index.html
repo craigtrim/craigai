@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tokenization: The Elegant Hack Powering Modern AI</title>
+    <style>
+        :root {
+            --text-color: #292929;
+            --bg-color: #fff;
+            --accent-color: #1a8917;
+            --border-color: #e6e6e6;
+            --code-bg: #f4f4f4;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: charter, Georgia, Cambria, "Times New Roman", Times, serif;
+            font-size: 21px;
+            line-height: 1.58;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        article {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 40px 24px 80px;
+        }
+
+        h1 {
+            font-family: sohne, "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 42px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 16px;
+            letter-spacing: -0.011em;
+        }
+
+        h2 {
+            font-family: sohne, "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-top: 56px;
+            margin-bottom: 16px;
+            letter-spacing: -0.009em;
+        }
+
+        h3 {
+            font-family: sohne, "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            line-height: 1.4;
+            margin-top: 40px;
+            margin-bottom: 12px;
+        }
+
+        p {
+            margin-bottom: 24px;
+        }
+
+        .lead {
+            font-size: 24px;
+            line-height: 1.5;
+            color: #555;
+            margin-bottom: 32px;
+        }
+
+        ul {
+            margin-bottom: 24px;
+            padding-left: 30px;
+        }
+
+        li {
+            margin-bottom: 12px;
+        }
+
+        code {
+            font-family: Menlo, Monaco, "Courier New", Courier, monospace;
+            font-size: 16px;
+            background-color: var(--code-bg);
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+
+        pre {
+            font-family: Menlo, Monaco, "Courier New", Courier, monospace;
+            font-size: 15px;
+            background-color: var(--code-bg);
+            padding: 20px;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin-bottom: 24px;
+            line-height: 1.5;
+        }
+
+        blockquote {
+            border-left: 3px solid var(--text-color);
+            margin: 32px 0;
+            padding-left: 20px;
+            font-style: italic;
+        }
+
+        figure {
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        figure img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+
+        figcaption {
+            font-size: 16px;
+            color: #757575;
+            margin-top: 12px;
+            font-style: italic;
+        }
+
+        .equation {
+            font-family: Menlo, Monaco, "Courier New", Courier, monospace;
+            font-size: 15px;
+            background-color: var(--code-bg);
+            padding: 16px 20px;
+            border-radius: 4px;
+            margin: 24px 0;
+            text-align: center;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: underline;
+        }
+
+        a:hover {
+            color: var(--accent-color);
+        }
+
+        strong {
+            font-weight: 700;
+        }
+
+        .timeline {
+            background-color: var(--code-bg);
+            padding: 24px;
+            border-radius: 8px;
+            margin: 32px 0;
+        }
+
+        .timeline p {
+            margin-bottom: 8px;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid var(--border-color);
+            margin: 48px 0;
+        }
+
+        @media (max-width: 728px) {
+            body {
+                font-size: 18px;
+            }
+
+            h1 {
+                font-size: 32px;
+            }
+
+            h2 {
+                font-size: 24px;
+            }
+
+            article {
+                padding: 24px 16px 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <article>
+        <h1>Tokenization: The Elegant Hack Powering Modern AI</h1>
+
+        <p class="lead">Here's an uncomfortable truth about the AI systems everyone's talking about: they can't read.</p>
+
+        <p>When you type "ChatGPT is amazing!" into an LLM, the model doesn't see words.</p>
+
+        <p>It sees something like:</p>
+
+        <pre>["Chat", "G", "PT", " is", " amazing", "!"]</pre>
+
+        <p>This transformation from human-readable text to model-digestible tokens is tokenization. It's a hack. A remarkably effective hack, refined over decades, but a hack nonetheless. And it's arguably the most under appreciated component of modern AI systems.</p>
+
+        <p>Understanding tokenization isn't academic trivia.</p>
+
+        <p>It directly impacts:</p>
+
+        <ul>
+            <li><strong>Cost:</strong> You pay per token, not per word</li>
+            <li><strong>Context limits:</strong> That 128K context window? It's tokens, not characters</li>
+            <li><strong>Model behavior:</strong> Why does GPT struggle with counting letters? Tokenization.</li>
+            <li><strong>Multilingual performance:</strong> Why do non-English languages use more tokens?</li>
+            <li><strong>Security:</strong> Prompt injection often exploits tokenization edge cases</li>
+        </ul>
+
+        <p>These aren't separate considerations. They're symptoms of the same design choice. The choice is made not from linguistic theory, but from compression algorithms and corpus statistics.</p>
+
+        <p>If you want to understand how large language models behave, fail, and occasionally surprise you, you have to start here. At the seams.</p>
+
+        <h2>Linguistic Foundations: What Is a "Word" Anyway?</h2>
+
+        <p>Before we can understand why tokenization is hard, we need to confront an uncomfortable truth: linguists don't agree on what a "word" is.</p>
+
+        <p>Most people assume a word is a sequence of characters separated by spaces.</p>
+
+        <p>Like this.</p>
+
+        <p>Or like this.</p>
+
+        <p>But… maybe… not so much… like this?</p>
+
+        <p>Consider:</p>
+
+        <figure>
+            <img src="images/image1.png" alt="Linguistic word examples">
+            <figcaption>Ask a linguist, lose an afternoon</figcaption>
+        </figure>
+
+        <figure>
+            <img src="images/image2.png" alt="NLP challenges with words">
+            <figcaption>Why NLP Engineers Drink</figcaption>
+        </figure>
+
+        <p>The whitespace heuristic fails catastrophically for languages such as Chinese, Japanese, and Thai, which lack word boundaries.</p>
+
+        <p>It also fails for agglutinative languages like Turkish, Finnish, and German that compose complex meanings into single orthographic words.</p>
+
+        <h3>Linguistic Levels of Analysis</h3>
+
+        <p>Linguists distinguish multiple levels of textual structure.</p>
+
+        <p><strong>Graphemes</strong> are the smallest units of writing: letters, characters, the atomic symbols of a script. In English, that's <em>a, b, c...</em> In Chinese, each character is its own grapheme: <em>分, 词, 难</em>. An English word might be five graphemes; a Chinese sentence might be three.</p>
+
+        <p><strong>Morphemes</strong> are the smallest units of meaning.</p>
+
+        <p>Take <em>unhappiness</em>: that's three morphemes. <em>un-</em> signals negation (same pattern as <em>unfair, undo</em>). <em>happy</em> is the root. <em>-ness</em> converts adjective to noun</p>
+
+        <div class="equation">unhappiness = un- (negation) + happy (root) + -ness (nominalization)</div>
+
+        <p>Or consider <em>cats</em>: just <em>cat</em> plus <em>-s</em> for plural</p>
+
+        <div class="equation">cats = cat (root) + -s (plural)</div>
+
+        <p>But then there's <em>sang</em>, where past tense isn't a suffix at all. It's encoded in the vowel change from <em>sing</em>. Linguists call this ablaut. Tokenizers call it a headache.</p>
+
+        <div class="equation">sang = sing (root) + past tense (expressed via ablaut, not suffix!)</div>
+
+        <figure>
+            <img src="images/image3.png" alt="Morphemes illustration">
+            <figcaption>At least these have spaces between them.</figcaption>
+        </figure>
+
+        <p><strong>Lexemes</strong> are abstract dictionary entries. You don't look up <em>runs, ran,</em> and <em>running</em> separately; they're all instances of the lexeme <em>RUN</em>. The spelling changes, the tense changes, but the core meaning persists.</p>
+
+        <p>This abstraction is something humans do effortlessly and tokenizers struggle with. A word-level vocabulary treats <em>run</em> and <em>running</em> as unrelated entries, wasting capacity on redundant semantics. Subword tokenization recovers some of this: <em>running</em> becomes <code>["run", "ning"]</code>. But the connection is statistical accident, not linguistic insight.</p>
+
+        <p><strong>Orthographic words</strong> are simply what appears between spaces. A convention that varies wildly across languages. Chinese uses no spaces at all. German compresses entire sentences into single compounds. English can't decide whether "ice cream" is one word or two.</p>
+
+        <p><strong>Phonological words</strong> are prosodic units in speech that your mouth treats as a single chunk. When you say "going to" as intention (not motion), you don't produce two distinct words. You say "gonna"; one stress pattern, one breath unit, no internal pause. The orthography insists on two words; your vocal tract disagrees.</p>
+
+        <p>This mismatch matters: tokenizers typically operate on orthographic boundaries, but meaning often lives in phonological ones.</p>
+
+        <h3>The Morpheme Insight</h3>
+
+        <p>Here's the key insight for tokenization: morphemes carry meaning, not orthographic words.</p>
+
+        <p>When you read "unhappiness," you don't process it as an atomic unit.</p>
+
+        <p>You likely recognize:</p>
+
+        <ul>
+            <li>"un-" → negation (same as in "unfair," "undo")</li>
+            <li>"happy" → the emotional state</li>
+            <li>"-ness" → converts adjective to noun</li>
+        </ul>
+
+        <p>This compositional understanding is precisely what subword tokenization tries to capture.</p>
+
+        <p>A good tokenizer should learn that "un" is a meaningful prefix that appears across many words, rather than treating "unhappy" and "unfair" as completely unrelated tokens.</p>
+
+        <figure>
+            <img src="images/image4.png" alt="Subword tokenization concept">
+            <figcaption>The pieces are all there. Theoretically.</figcaption>
+        </figure>
+
+        <h3>Why This Matters for LLMs</h3>
+
+        <p>If a model has never seen the word "unhappiness" during training, but it has learned:</p>
+
+        <ul>
+            <li>"un-" as a negation prefix</li>
+            <li>"happy" as an emotion word</li>
+            <li>"-ness" as a nominalizer</li>
+        </ul>
+
+        <p>…then it can potentially generalize to understand the composition of "unhappiness".</p>
+
+        <p>This is the promise of subword tokenization: <strong>morphologically-aware representations</strong> that enable generalization to unseen words.</p>
+
+        <p>But here's the catch: modern tokenizers learn these patterns statistically, not linguistically. They don't "know" that "un-" means negation. They just notice it appears frequently as a prefix. This works remarkably well, but it also leads to some bizarre edge cases we'll explore later.</p>
+
+        <h2>Historical Evolution: From Whitespace to BPE</h2>
+
+        <p>The history of tokenization mirrors the evolution of NLP itself.</p>
+
+        <h3>Era 1: Rule-Based Tokenization (1950s-1990s)</h3>
+
+        <p>Early NLP systems used hand-crafted rules:</p>
+
+        <ul>
+            <li>Split on whitespace</li>
+            <li>Handle punctuation (., !, ?)</li>
+            <li>Handle contractions (don't → do + n't OR don't → don + 't?)</li>
+            <li>Handle possessives (John's → John + 's)</li>
+            <li>Handle hyphenation (well-known → well-known OR well + known?)</li>
+        </ul>
+
+        <p>The <a href="https://catalog.ldc.upenn.edu/docs/LDC95T7/cl93.html">Penn Treebank Standard</a> (1993) established conventions still used today:</p>
+
+        <ul>
+            <li>Contractions split: "don't" → "do" + "n't"</li>
+            <li>Possessives split: "John's" → "John" + "'s"</li>
+            <li>Punctuation separated: "end." → "end" + "."</li>
+        </ul>
+
+        <p>But rule-based systems faced insurmountable challenges:</p>
+
+        <ul>
+            <li>Every language needed different rules</li>
+            <li>Edge cases proliferated (what about Ph.D.? U.S.A.? 3.14?)</li>
+            <li>No way to handle out-of-vocabulary (OOV) words</li>
+        </ul>
+
+        <h3>Era 2: Word-Level Vocabularies (1990s-2017)</h3>
+
+        <p>Statistical NLP models used fixed vocabularies of the N most common words:</p>
+
+        <pre>vocabulary = ["the", "a", "is", "happy", "cat", ...]  # Top 50,000 words</pre>
+
+        <p>Unknown words → <code>&lt;UNK&gt;</code> token</p>
+
+        <p>Problems:</p>
+
+        <ul>
+            <li><strong>Vocabulary explosion:</strong> English has 170,000+ words; technical domains add more</li>
+            <li><strong>OOV problem:</strong> New words, names, typos → all become <code>&lt;UNK&gt;</code></li>
+            <li><strong>Morphological blindness:</strong> "run," "runs," "running," "runner" = 4 separate entries</li>
+            <li><strong>Storage/memory:</strong> Embedding matrices for 50K+ words are huge</li>
+        </ul>
+
+        <p>The OOV problem was particularly brutal. Imagine a sentiment analysis model encountering:</p>
+
+        <ul>
+            <li><strong>Brand names:</strong> "I love my new iPhone" → "I love my new <code>&lt;UNK&gt;</code>"</li>
+            <li><strong>Typos:</strong> "This is amazign" → "This is <code>&lt;UNK&gt;</code>"</li>
+            <li><strong>Slang:</strong> "That's lowkey fire" → "That's <code>&lt;UNK&gt;</code> <code>&lt;UNK&gt;</code>"</li>
+        </ul>
+
+        <h3>Era 3: Character-Level Models (2015–2017)</h3>
+
+        <p>One radical solution: forget words entirely, just use characters.</p>
+
+        <pre>Vocabulary = {a, b, c, …, A, B, C, …, 0, 1, 2, …, punctuation}</pre>
+
+        <p>~100–200 tokens total. No OOV problem ever!</p>
+
+        <p>Problems:</p>
+
+        <ul>
+            <li><strong>Sequence length explosion:</strong> "hello" = 5 tokens instead of 1</li>
+            <li><strong>Long-range dependencies:</strong> Model must learn that "c-a-t" means the same across huge distances</li>
+            <li><strong>Computational cost:</strong> Attention is O(n²) in sequence length</li>
+        </ul>
+
+        <p>Character-level models worked for some tasks but struggled with semantic understanding. The model had to learn spelling, morphology, syntax, and semantics all from raw characters.</p>
+
+        <p>Too much to ask!</p>
+
+        <h3>Era 4: Subword Tokenization (2016-Present)</h3>
+
+        <p>The breakthrough insight: find a middle ground between words and characters.</p>
+
+        <p>Instead of a fixed vocabulary of words OR characters, learn a vocabulary of frequent substrings that balance:</p>
+
+        <ul>
+            <li>Coverage (no OOV)</li>
+            <li>Efficiency (reasonable sequence lengths)</li>
+            <li>Semantic coherence (meaningful units)</li>
+        </ul>
+
+        <p>This is exactly what Byte Pair Encoding (BPE) achieves. Originally a data compression algorithm from 1994, it was adapted for NLP by <a href="https://arxiv.org/abs/1508.07909">Sennrich et al. in 2016</a> and quickly became the foundation for modern tokenization.</p>
+
+        <p><strong>Algorithm:</strong></p>
+
+        <ol>
+            <li>Start with character vocabulary: <code>{a, b, c, …, }</code></li>
+            <li>Count all adjacent character pairs in training data</li>
+            <li>Merge most frequent pair into new token</li>
+            <li>Repeat until desired vocabulary size</li>
+        </ol>
+
+        <p><strong>Example evolution:</strong></p>
+
+        <pre>Initial: "l o w &lt;/w&gt;", "l o w e r &lt;/w&gt;", "n e w e s t &lt;/w&gt;"
+Most frequent pair: "e s" → merge to "es"
+Result: "l o w &lt;/w&gt;", "l o w e r &lt;/w&gt;", "n e w es t &lt;/w&gt;"
+
+Most frequent pair: "es t" → merge to "est"
+Result: "l o w &lt;/w&gt;", "l o w e r &lt;/w&gt;", "n e w est &lt;/w&gt;"
+
+Most frequent pair: "l o" → merge to "lo"
+Result: "lo w &lt;/w&gt;", "lo w e r &lt;/w&gt;", "n e w est &lt;/w&gt;"
+
+... continue until vocabulary size reached</pre>
+
+        <p>Each merge consolidates the most frequent pattern. After thousands of iterations, the vocabulary stabilizes: common sequences have earned their own tokens, while rare combinations remain fragmented, assembled on demand from smaller pieces.</p>
+
+        <figure>
+            <img src="images/image5.png" alt="BPE visualization">
+            <figcaption>Zipf's revenge</figcaption>
+        </figure>
+
+        <p><strong>The genius:</strong> common words become single tokens, rare words decompose into subwords.</p>
+
+        <figure>
+            <img src="images/image6.png" alt="Long word tokenization">
+            <figcaption>Pneumonoultramicroscopicsilicovolcanoconiosis enters the chat.</figcaption>
+        </figure>
+
+        <h3>Timeline of Major Tokenizers</h3>
+
+        <div class="timeline">
+            <p><strong>2016:</strong> BPE — Original GPT, early transformers</p>
+            <p><strong>2018:</strong> WordPiece — BERT, DistilBERT</p>
+            <p><strong>2018:</strong> SentencePiece — T5, ALBERT, XLNet, mBART</p>
+            <p><strong>2019:</strong> Unigram LM — SentencePiece option</p>
+            <p><strong>2020:</strong> Byte-level BPE — GPT-2, GPT-3, GPT-4</p>
+            <p><strong>2023:</strong> tiktoken — OpenAI's optimized implementation</p>
+        </div>
+
+        <hr>
+
+        <h2>The Uncomfortable Truth</h2>
+
+        <p>Tokenization is a hack.</p>
+
+        <p>A remarkably effective hack, but a hack nonetheless.</p>
+
+        <p>We wanted models that understand language. We got models that understand statistically-frequent byte sequences. BPE doesn't know that "un-" means negation. It just noticed the pattern appears often enough to merit its own token. The fact that this correlates with morphological structure is convenient, not intentional.</p>
+
+        <p>And yet: it works. LLMs can write poetry, explain quantum mechanics, and debug your code, all while processing text through a compression algorithm from 1994. The gap between "frequency-based substring merging" and "understanding" turns out to be narrower than anyone expected.</p>
+
+        <p>Perhaps understanding was never what we thought it was.</p>
+
+        <p>So the next time an LLM confidently miscounts the letters in "strawberry," remember: it never saw the word. It saw <code>["str", "aw", "berry"]</code> and did its best.</p>
+
+        <p>We all are.</p>
+    </article>
+</body>
+</html>
