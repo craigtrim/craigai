@@ -1,0 +1,11 @@
+config.sh
+cosc-sandbox/
+temp/
+canvas-api-key
+.DS_Store
+resources/.DS_Store
+
+# Large zip files (exceed GitHub 100MB limit)
+templates/courses/DSCI-630-ChatGPT-for-Data-Science/week-02/files/minds14_audio.zip
+templates/courses/DSCI-630-ChatGPT-for-Data-Science/week-03/files/flower_photos.zip
+templates/courses/DSCI-630-ChatGPT-for-Data-Science/week-03/files/football_golden_foot.zip
