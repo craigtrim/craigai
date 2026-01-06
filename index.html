@@ -134,6 +134,62 @@
             margin-bottom: 48px;
         }
 
+        .section-header {
+            margin-top: 64px;
+            margin-bottom: 32px;
+        }
+
+        .section-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin: 0 0 8px 0;
+        }
+
+        .section-subtitle {
+            font-size: 16px;
+            color: #757575;
+            margin: 0;
+        }
+
+        .demos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 32px;
+        }
+
+        .demo-card {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: box-shadow 0.2s ease, transform 0.2s ease;
+            background: white;
+        }
+
+        .demo-card:hover {
+            box-shadow: var(--card-hover-shadow);
+            transform: translateY(-2px);
+        }
+
+        .demo-card a {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .demo-icon {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+        }
+
+        .first-section {
+            margin-top: 0;
+            margin-bottom: 48px;
+        }
+
         @media (max-width: 728px) {
             .container {
                 padding: 32px 16px;
@@ -143,7 +199,7 @@
                 font-size: 32px;
             }
 
-            .articles-grid {
+            .articles-grid, .demos-grid {
                 grid-template-columns: 1fr;
                 gap: 24px;
             }
@@ -154,40 +210,73 @@
     <div class="container">
         <img src="hero.png" alt="Abstract nested pairs" class="hero">
 
-        <header>
-            <h1>Articles</h1>
-            <p class="subtitle">Technical writing on AI, NLP, and machine learning</p>
-        </header>
+        <section class="first-section">
+            <div class="section-header" style="margin-top: 0;">
+                <h2 class="section-title">Writing</h2>
+                <p class="section-subtitle">Technical articles on AI, NLP, and machine learning</p>
+            </div>
 
-        <div class="articles-grid">
-            <article class="article-card">
-                <a href="tokenization/">
-                    <div class="card-content">
-                        <span class="card-tag">NLP</span>
-                        <h2 class="card-title">Tokenization: The Elegant Hack Powering Modern AI</h2>
-                        <p class="card-description">Understanding how LLMs transform text into tokens, and why this seemingly simple process has profound implications for cost, context limits, and model behavior.</p>
-                    </div>
-                    <div class="card-meta">
-                        <span>12 min read</span>
-                        <span>Tokenization</span>
-                    </div>
-                </a>
-            </article>
+            <div class="articles-grid">
+                <article class="article-card">
+                    <a href="tokenization/">
+                        <div class="card-content">
+                            <span class="card-tag">NLP</span>
+                            <h3 class="card-title">Tokenization: The Elegant Hack Powering Modern AI</h3>
+                            <p class="card-description">Understanding how LLMs transform text into tokens, and why this seemingly simple process has profound implications for cost, context limits, and model behavior.</p>
+                        </div>
+                        <div class="card-meta">
+                            <span>12 min read</span>
+                            <span>Tokenization</span>
+                        </div>
+                    </a>
+                </article>
 
-            <article class="article-card">
-                <a href="bpe-history/">
-                    <div class="card-content">
-                        <span class="card-tag">History</span>
-                        <h2 class="card-title">The 30-Year Journey of an Algorithm That Accidentally Learned to Read</h2>
-                        <p class="card-description">How a 1994 data compression algorithm became the foundation of modern AI. The untold story of Byte Pair Encoding's journey from C Users Journal to GPT-4.</p>
-                    </div>
-                    <div class="card-meta">
-                        <span>15 min read</span>
-                        <span>BPE History</span>
-                    </div>
-                </a>
-            </article>
-        </div>
+                <article class="article-card">
+                    <a href="bpe-history/">
+                        <div class="card-content">
+                            <span class="card-tag">History</span>
+                            <h3 class="card-title">The 30-Year Journey of an Algorithm That Accidentally Learned to Read</h3>
+                            <p class="card-description">How a 1994 data compression algorithm became the foundation of modern AI. The untold story of Byte Pair Encoding's journey from C Users Journal to GPT-4.</p>
+                        </div>
+                        <div class="card-meta">
+                            <span>15 min read</span>
+                            <span>BPE History</span>
+                        </div>
+                    </a>
+                </article>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-header">
+                <h2 class="section-title">Interactive Demos</h2>
+                <p class="section-subtitle">Explore concepts hands-on with these CodeSandbox experiments</p>
+            </div>
+
+            <div class="demos-grid">
+                <div class="demo-card">
+                    <a href="https://codesandbox.io/p/sandbox/tokenization-demo-y4qczk" target="_blank" rel="noopener">
+                        <div class="demo-icon">&#x1F4DD;</div>
+                        <div class="card-content">
+                            <span class="card-tag">Interactive</span>
+                            <h3 class="card-title">The Evolution of Tokenization</h3>
+                            <p class="card-description">Watch how text gets tokenized across different eras of NLP, from rule-based to modern subword methods.</p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="demo-card">
+                    <a href="https://codesandbox.io/p/sandbox/bpe-compression-demo-cw29y3" target="_blank" rel="noopener">
+                        <div class="demo-icon">&#x1F5DC;</div>
+                        <div class="card-content">
+                            <span class="card-tag">Interactive</span>
+                            <h3 class="card-title">BPE Compression: The Algorithm</h3>
+                            <p class="card-description">Step through Byte Pair Encoding compression in real-time. See how frequent pairs get merged into single tokens.</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
 
         <footer>
             <p><a href="https://github.com/craigtrim">GitHub</a> · <a href="https://medium.com/@craigtrim">Medium</a></p>

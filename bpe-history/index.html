@@ -219,6 +219,17 @@
 
         <p>Just counting and replacing.</p>
 
+        <figure class="interactive-demo">
+            <iframe
+                src="https://codesandbox.io/embed/bpe-compression-demo-cw29y3?fontsize=14&hidenavigation=1&theme=dark&view=preview"
+                style="width: 100%; height: 500px; border: 0; border-radius: 8px; overflow: hidden;"
+                title="BPE Compression Demo"
+                allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+                sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts">
+            </iframe>
+            <figcaption>Interactive: BPE compression algorithm in action</figcaption>
+        </figure>
+
         <h3>The Actual Mechanics</h3>
 
         <p>A byte can represent 256 values (0-255). In any given block of data, not all 256 values are present. ASCII text, for example, typically uses only 70-100 distinct byte values (letters, digits, punctuation, whitespace). The remaining 150+ byte values are "unused" and available as substitution codes.</p>
