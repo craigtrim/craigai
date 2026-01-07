@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why Non-English Speakers Pay More for AI</title>
+    <style>
+        :root {
+            --text-color: #292929;
+            --bg-color: #fff;
+            --accent-color: #1a8917;
+            --border-color: #e6e6e6;
+            --code-bg: #f4f4f4;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: charter, Georgia, Cambria, "Times New Roman", Times, serif;
+            font-size: 21px;
+            line-height: 1.58;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        article {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 40px 24px 80px;
+        }
+
+        h1 {
+            font-family: sohne, "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 42px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 16px;
+            letter-spacing: -0.011em;
+        }
+
+        h2 {
+            font-family: sohne, "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-top: 56px;
+            margin-bottom: 16px;
+            letter-spacing: -0.009em;
+        }
+
+        h3 {
+            font-family: sohne, "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            line-height: 1.4;
+            margin-top: 40px;
+            margin-bottom: 12px;
+        }
+
+        p {
+            margin-bottom: 24px;
+        }
+
+        .lead {
+            font-size: 24px;
+            line-height: 1.5;
+            color: #555;
+            margin-bottom: 32px;
+        }
+
+        ul, ol {
+            margin-bottom: 24px;
+            padding-left: 30px;
+        }
+
+        li {
+            margin-bottom: 12px;
+        }
+
+        code {
+            font-family: Menlo, Monaco, "Courier New", Courier, monospace;
+            font-size: 16px;
+            background-color: var(--code-bg);
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+
+        pre {
+            font-family: Menlo, Monaco, "Courier New", Courier, monospace;
+            font-size: 14px;
+            background-color: var(--code-bg);
+            padding: 20px;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin-bottom: 24px;
+            line-height: 1.5;
+        }
+
+        blockquote {
+            border-left: 3px solid var(--text-color);
+            margin: 32px 0;
+            padding-left: 20px;
+            font-style: italic;
+        }
+
+        figure {
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        figure img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+
+        figcaption {
+            font-size: 16px;
+            color: #757575;
+            margin-top: 12px;
+            font-style: italic;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: underline;
+        }
+
+        a:hover {
+            color: var(--accent-color);
+        }
+
+        strong {
+            font-weight: 700;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 24px;
+            font-size: 16px;
+            color: #757575;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid var(--border-color);
+            margin: 48px 0;
+        }
+
+        .separator {
+            text-align: center;
+            margin: 48px 0;
+            color: #757575;
+        }
+
+        .references {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .references p {
+            margin-bottom: 12px;
+        }
+
+        /* Data table styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: Menlo, Monaco, "Courier New", Courier, monospace;
+            font-size: 14px;
+            margin: 24px 0;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 8px 12px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            font-weight: 600;
+            color: #555;
+        }
+
+        tr:hover {
+            background-color: #fafafa;
+        }
+
+        .ratio-low { color: #22c55e; }
+        .ratio-mid { color: #eab308; }
+        .ratio-high { color: #f97316; }
+        .ratio-extreme { color: #ef4444; }
+
+        /* Bar chart styling */
+        .bar-chart {
+            background-color: var(--code-bg);
+            padding: 20px;
+            border-radius: 4px;
+            margin: 24px 0;
+            font-family: Menlo, Monaco, "Courier New", Courier, monospace;
+            font-size: 13px;
+        }
+
+        .bar-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .bar-label {
+            width: 90px;
+            flex-shrink: 0;
+        }
+
+        .bar-container {
+            flex-grow: 1;
+            height: 20px;
+            background-color: #e5e5e5;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .bar-fill {
+            height: 100%;
+            background-color: #292929;
+        }
+
+        .bar-value {
+            width: 50px;
+            text-align: right;
+            margin-left: 8px;
+            flex-shrink: 0;
+        }
+
+        .chart-legend {
+            margin-top: 16px;
+            font-size: 12px;
+            color: #757575;
+        }
+
+        /* Interactive demo embed */
+        .interactive-demo {
+            margin: 40px 0;
+        }
+
+        .interactive-demo iframe {
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        @media (max-width: 728px) {
+            body {
+                font-size: 18px;
+            }
+
+            h1 {
+                font-size: 32px;
+            }
+
+            h2 {
+                font-size: 24px;
+            }
+
+            article {
+                padding: 24px 16px 60px;
+            }
+
+            table {
+                font-size: 12px;
+            }
+
+            th, td {
+                padding: 6px 8px;
+            }
+
+            pre {
+                font-size: 12px;
+                padding: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <article>
+        <a href="../" class="back-link">&larr; All Articles</a>
+
+        <h1>Why Non-English Speakers Pay More for AI</h1>
+
+        <p class="lead">Same meaning, different price. The hidden cost of tokenization.</p>
+
+        <p>Type "I, for one, welcome our new insect overlords" into GPT-4.</p>
+
+        <p>12 (sub-word) tokens.</p>
+
+        <p>Type it in Japanese. Twenty-two tokens.<br>
+        Type it in Hindi. Fifty-three tokens.<br>
+        Type it in Tamil. Eighty-six tokens.</p>
+
+        <p>Same groveling to our arthropod masters. Same model. Up to 7x the cost.</p>
+
+        <figure>
+            <img src="../images/multilingual-tax/news-anchor-insect-overlords.png" alt="News anchor surrendering to insect overlords">
+            <figcaption>The cost of surrender depends on your alphabet.</figcaption>
+        </figure>
+
+        <p>At first glance, this looks unfair. Same intent, same semantics, same model, wildly different token counts. But the tokenizer isn't measuring meaning. It's measuring <em>how well your language was economically represented at training time</em>.</p>
+
+        <p>Kent Brockman surrenders in 12 tokens. Tamil speakers need 86.</p>
+
+        <h2>The Problem in Numbers</h2>
+
+        <p>Let's tokenize the same sentence across 31 languages. The meaning is identical: <em>"I, for one, welcome our new insect overlords."</em></p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Language</th>
+                    <th>Tokens</th>
+                    <th>Ratio</th>
+                    <th>Text</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>English</td><td>12</td><td class="ratio-low">1.0x</td><td>I, for one, welcome our new insect overlords.</td></tr>
+                <tr><td>German</td><td>17</td><td class="ratio-low">1.4x</td><td>Ich für meinen Teil begrüße unsere neuen Insekten-Oberherren.</td></tr>
+                <tr><td>Dutch</td><td>17</td><td class="ratio-low">1.4x</td><td>Ik, voor mijn part, verwelkom onze nieuwe insectenheersers.</td></tr>
+                <tr><td>Indonesian</td><td>18</td><td class="ratio-low">1.5x</td><td>Saya, untuk satu, menyambut penguasa serangga baru kita.</td></tr>
+                <tr><td>French</td><td>19</td><td class="ratio-mid">1.6x</td><td>Pour ma part, je souhaite la bienvenue à nos nouveaux maîtres insectes.</td></tr>
+                <tr><td>Spanish</td><td>19</td><td class="ratio-mid">1.6x</td><td>Yo, por mi parte, doy la bienvenida a nuestros nuevos señores insectos.</td></tr>
+                <tr><td>Czech</td><td>19</td><td class="ratio-mid">1.6x</td><td>Já osobně vítám naše nové hmyzí pány.</td></tr>
+                <tr><td>Norwegian</td><td>20</td><td class="ratio-mid">1.7x</td><td>Jeg, for min del, ønsker våre nye insektherskere velkommen.</td></tr>
+                <tr><td>Swedish</td><td>20</td><td class="ratio-mid">1.7x</td><td>Jag, för min del, välkomnar våra nya insektshärskare.</td></tr>
+                <tr><td>Italian</td><td>20</td><td class="ratio-mid">1.7x</td><td>Io, per primo, do il benvenuto ai nostri nuovi signori insetti.</td></tr>
+                <tr><td>Danish</td><td>20</td><td class="ratio-mid">1.7x</td><td>Jeg, for min del, byder vores nye insektherskere velkommen.</td></tr>
+                <tr><td>Polish</td><td>21</td><td class="ratio-mid">1.8x</td><td>Ja, ze swojej strony, witam naszych nowych władców owadów.</td></tr>
+                <tr><td>Turkish</td><td>22</td><td class="ratio-mid">1.8x</td><td>Ben, kendi adıma, yeni böcek efendilerimizi karşılıyorum.</td></tr>
+                <tr><td>Japanese</td><td>22</td><td class="ratio-mid">1.8x</td><td>私は新しい昆虫の支配者たちを歓迎します。</td></tr>
+                <tr><td>Portuguese</td><td>23</td><td class="ratio-mid">1.9x</td><td>Eu, por minha parte, dou as boas-vindas aos nossos novos senhores insetos.</td></tr>
+                <tr><td>Hungarian</td><td>23</td><td class="ratio-mid">1.9x</td><td>Én a magam részéről üdvözlöm új rovar urainkat.</td></tr>
+                <tr><td>Chinese</td><td>23</td><td class="ratio-mid">1.9x</td><td>我，作为其中一员，欢迎我们新的昆虫霸主。</td></tr>
+                <tr><td>Romanian</td><td>24</td><td class="ratio-mid">2.0x</td><td>Eu, personal, îi întâmpin pe noii noștri stăpâni insecte.</td></tr>
+                <tr><td>Finnish</td><td>25</td><td class="ratio-high">2.1x</td><td>Minä puolestani toivotan uudet hyönteisherramme tervetulleiksi.</td></tr>
+                <tr><td>Russian</td><td>28</td><td class="ratio-high">2.3x</td><td>Я, например, приветствую наших новых повелителей-насекомых.</td></tr>
+                <tr><td>Ukrainian</td><td>28</td><td class="ratio-high">2.3x</td><td>Я, наприклад, вітаю наших нових повелителів-комах.</td></tr>
+                <tr><td>Swahili</td><td>29</td><td class="ratio-high">2.4x</td><td>Mimi, kwa upande wangu, nawakaribisha watawala wetu wapya wa wadudu.</td></tr>
+                <tr><td>Greek</td><td>29</td><td class="ratio-high">2.4x</td><td>Εγώ, προσωπικά, καλωσορίζω τους νέους μας κυρίαρχους έντομα.</td></tr>
+                <tr><td>Arabic</td><td>30</td><td class="ratio-high">2.5x</td><td>أنا، من جهتي، أرحب بسادتنا الحشرات الجدد.</td></tr>
+                <tr><td>Hebrew</td><td>31</td><td class="ratio-high">2.6x</td><td>אני, מצדי, מקבל בברכה את אדוני החרקים החדשים שלנו.</td></tr>
+                <tr><td>Korean</td><td>32</td><td class="ratio-high">2.7x</td><td>저는 개인적으로 우리의 새로운 곤충 지배자들을 환영합니다.</td></tr>
+                <tr><td>Vietnamese</td><td>34</td><td class="ratio-high">2.8x</td><td>Tôi, về phần mình, chào đón những chúa tể côn trùng mới của chúng ta.</td></tr>
+                <tr><td>Thai</td><td>44</td><td class="ratio-extreme">3.7x</td><td>ผม ในส่วนตัว ยินดีต้อนรับเจ้านายแมลงคนใหม่ของเรา</td></tr>
+                <tr><td>Hindi</td><td>53</td><td class="ratio-extreme">4.4x</td><td>मैं, अपनी ओर से, हमारे नए कीट स्वामियों का स्वागत करता हूं।</td></tr>
+                <tr><td>Bengali</td><td>61</td><td class="ratio-extreme">5.1x</td><td>আমি, আমার পক্ষ থেকে, আমাদের নতুন পোকা প্রভুদের স্বাগত জানাই।</td></tr>
+                <tr><td>Tamil</td><td>86</td><td class="ratio-extreme">7.2x</td><td>நான், எனது பங்கிற்கு, எங்கள் புதிய பூச்சி அதிபதிகளை வரவேற்கிறேன்.</td></tr>
+            </tbody>
+        </table>
+
+        <p>Tamil speakers pay <strong>7.2x more tokens</strong> than English speakers for the same information.</p>
+
+        <p class="separator">&#8226; &#8226; &#8226;</p>
+
+        <p>That outcome follows directly from history.</p>
+
+        <p><a href="../bpe-history/">Byte Pair Encoding began as a compression algorithm in the 1990s</a>. Engineers designed it to shrink arbitrary data by repeatedly merging the most frequent byte sequences. It did not emerge from linguistics. It emerged from pragmatism. When modern language models adopted BPE, they inherited that logic intact.</p>
+
+        <figure class="interactive-demo">
+            <iframe
+                src="https://codesandbox.io/embed/cw89l8?fontsize=14&hidenavigation=1&theme=dark&view=preview"
+                style="width: 100%; height: 500px; border: 0; border-radius: 8px; overflow: hidden;"
+                title="Multilingual Token Calculator"
+                allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+                sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts">
+            </iframe>
+            <figcaption>Interactive: Compare token costs across languages</figcaption>
+        </figure>
+
+        <p>Frequency determines value.</p>
+
+        <p>Substrings that appear often in the training data become single, cheap tokens. Substrings that appear less often remain fragmented into smaller pieces. English benefits because English dominates the corpus. Japanese fragments because the tokenizer encountered its patterns less often during training.</p>
+
+        <p>The tokenizer does not struggle with Japanese. It simply stores Japanese inefficiently.</p>
+
+        <p>That inefficiency shows up as cost.</p>
+
+        <p>Type "Hello, how are you?" in Tamil. Twenty-eight tokens.</p>
+
+        <p>Languages the tokenizer saw less frequently get understood less efficiently. And the difference isn't small.</p>
+
+        <p>Tamil speakers pay 7x what English speakers pay for the same information.</p>
+
+        <p>Token counts drive pricing, context limits, and truncation behavior. When Japanese text expands into more tokens, fewer ideas fit into the same context window. Long prompts collapse sooner. Retrieval pipelines return less semantic content per request. None of this looks dramatic in isolation. All of it compounds.</p>
+
+        <p>Engineers optimized tokenization for scale, speed, and statistical coverage, not for linguistic equity. A compression algorithm rewards what it sees most often. It always has.</p>
+
+        <p class="separator">&#8226; &#8226; &#8226;</p>
+
+        <h2>Why Function Words Matter</h2>
+
+        <p>In English corpora, a very small set of function words accounts for an outsized share of all tokens:</p>
+
+        <ul>
+            <li><strong>Articles:</strong> the, a</li>
+            <li><strong>Prepositions:</strong> of, to, in, for</li>
+            <li><strong>Pronouns:</strong> I, you, we, it</li>
+            <li><strong>Auxiliaries:</strong> is, are, was, have</li>
+            <li><strong>Conjunctions:</strong> and, but, or</li>
+            <li><strong>Particles and markers:</strong> not, that</li>
+        </ul>
+
+        <p>Depending on corpus and counting method, the top 50 to 100 words in English often cover 45-60% of all word occurrences in running text. Most of those words are function words.</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Language</th>
+                    <th>Type</th>
+                    <th>Content Words (Lexicon)</th>
+                    <th>Function Words (Lexicon)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>English</td><td>Analytic</td><td>~99.7% (~170K words)</td><td>~0.3% (~300 words)</td></tr>
+                <tr><td>Chinese</td><td>Isolating</td><td>~99.5% (~50K words)</td><td>~0.5% (~250 words)</td></tr>
+                <tr><td>Japanese</td><td>Agglutinative</td><td>~99.8% (~50K words)</td><td>~0.2% (~100 words)</td></tr>
+                <tr><td>Russian</td><td>Fusional</td><td>~99.5% (~150K words)</td><td>~0.5% (~400 words)</td></tr>
+                <tr><td>Arabic</td><td>Fusional</td><td>~99.6% (~60K words)</td><td>~0.4% (~200 words)</td></tr>
+                <tr><td>Korean</td><td>Agglutinative</td><td>~99.8% (~50K words)</td><td>~0.2% (~80 words)</td></tr>
+                <tr><td>Turkish</td><td>Agglutinative</td><td>~99.9% (~100K words)</td><td>~0.1% (~50 words)</td></tr>
+                <tr><td>Hungarian</td><td>Agglutinative</td><td>~99.9% (~80K words)</td><td>~0.1% (~40 words)</td></tr>
+                <tr><td>Finnish</td><td>Agglutinative</td><td>~99.9% (~90K words)</td><td>~0.1% (~40 words)</td></tr>
+                <tr><td>Swahili</td><td>Agglutinative</td><td>~99.9% (~50K words)</td><td>~0.1% (~30 words)</td></tr>
+                <tr><td>Inuktitut</td><td>Polysynthetic</td><td>~99.95% (~10K roots)</td><td>~0.05% (~20 words)</td></tr>
+            </tbody>
+        </table>
+
+        <p>English concentrates usage into a few function words.</p>
+
+        <div class="bar-chart">
+            <p style="margin-bottom: 16px; font-weight: 600;">Function Words in Actual Usage (sorted high &rarr; low)</p>
+            <div class="bar-row"><span class="bar-label">English</span><div class="bar-container"><div class="bar-fill" style="width: 55%;"></div></div><span class="bar-value">55%</span></div>
+            <div class="bar-row"><span class="bar-label">Chinese</span><div class="bar-container"><div class="bar-fill" style="width: 45%;"></div></div><span class="bar-value">45%</span></div>
+            <div class="bar-row"><span class="bar-label">Japanese</span><div class="bar-container"><div class="bar-fill" style="width: 40%;"></div></div><span class="bar-value">40%</span></div>
+            <div class="bar-row"><span class="bar-label">Russian</span><div class="bar-container"><div class="bar-fill" style="width: 35%;"></div></div><span class="bar-value">35%</span></div>
+            <div class="bar-row"><span class="bar-label">Arabic</span><div class="bar-container"><div class="bar-fill" style="width: 30%;"></div></div><span class="bar-value">30%</span></div>
+            <div class="bar-row"><span class="bar-label">Korean</span><div class="bar-container"><div class="bar-fill" style="width: 25%;"></div></div><span class="bar-value">25%</span></div>
+            <div class="bar-row"><span class="bar-label">Turkish</span><div class="bar-container"><div class="bar-fill" style="width: 20%;"></div></div><span class="bar-value">20%</span></div>
+            <div class="bar-row"><span class="bar-label">Hungarian</span><div class="bar-container"><div class="bar-fill" style="width: 18%;"></div></div><span class="bar-value">18%</span></div>
+            <div class="bar-row"><span class="bar-label">Finnish</span><div class="bar-container"><div class="bar-fill" style="width: 15%;"></div></div><span class="bar-value">15%</span></div>
+            <div class="bar-row"><span class="bar-label">Swahili</span><div class="bar-container"><div class="bar-fill" style="width: 12%;"></div></div><span class="bar-value">12%</span></div>
+            <div class="bar-row"><span class="bar-label">Inuktitut</span><div class="bar-container"><div class="bar-fill" style="width: 5%;"></div></div><span class="bar-value">5%</span></div>
+            <div class="chart-legend">&#9608; Function words &nbsp;&nbsp; &#9617; Content words</div>
+        </div>
+
+        <p>BPE does not care what compresses.</p>
+
+        <p>It only cares what repeats.</p>
+
+        <p>English repeats for two reasons that compound:</p>
+
+        <ol>
+            <li><strong>Corpus dominance</strong><br>English appears far more often than any other language in LLM training data. That guarantees its surface forms get seen orders of magnitude more times.</li>
+            <li><strong>Internal repetition structure</strong><br>Within English, a small set of function words accounts for roughly half of all usage. Those words repeat constantly and with minimal variation.</li>
+        </ol>
+
+        <p>Corpus dominance determines <em>which</em> language benefits.</p>
+
+        <p>Function-word concentration determines <em>how much</em> it benefits.</p>
+
+        <p>Neither alone is sufficient.</p>
+
+        <p class="separator">&#8226; &#8226; &#8226;</p>
+
+        <h2>Morphological Typology</h2>
+
+        <p>Linguists classify languages by how they package meaning into words. Some languages use many small, separate words. Others pack entire sentences into single, complex words. This structural difference has profound implications for how well BPE tokenization can compress text.</p>
+
+        <p><strong>The four major types:</strong></p>
+
+        <ul>
+            <li><strong>Analytic</strong> &mdash; Grammar lives in separate function words: "the," "will," "of." Words stay short and stable. (English, Chinese, Vietnamese)</li>
+            <li><strong>Agglutinative</strong> &mdash; Grammar attaches as chains of suffixes. One word can encode subject, tense, mood, and more. (Turkish, Finnish, Korean, Swahili)</li>
+            <li><strong>Fusional</strong> &mdash; Single affixes encode multiple grammatical features at once, often irregularly. (Russian, Arabic, Spanish)</li>
+            <li><strong>Polysynthetic</strong> &mdash; Entire sentences compress into single words. Extreme morphological productivity. (Inuktitut, Mohawk, Yupik)</li>
+        </ul>
+
+        <p><strong>Why this matters for tokenization:</strong></p>
+
+        <p>BPE learns to compress text by finding repeated byte sequences. Languages with many short, stable, frequently-repeated words give BPE lots of reusable patterns. Languages that encode meaning in long, productive word forms produce fewer exact repetitions and hit a compression ceiling that no amount of training data can overcome.</p>
+
+        <figure class="interactive-demo">
+            <iframe
+                src="https://codesandbox.io/embed/fghj4p?fontsize=14&hidenavigation=1&theme=dark&view=preview"
+                style="width: 100%; height: 600px; border: 0; border-radius: 8px; overflow: hidden;"
+                title="Morphological Types Radar Charts"
+                allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+                sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts">
+            </iframe>
+            <figcaption>Corpus dominance lowers cost; morphology sets the floor.</figcaption>
+        </figure>
+
+        <p>Token cost is not a property of meaning. It emerges from repetition, exposure, and structure. Corpus dominance decides which language benefits. Morphology decides how far that benefit can go.</p>
+
+        <h3>The Compression Ceiling Explorer</h3>
+
+        <p>The charts above show static snapshots, but the real insight comes from seeing how these properties change (or don't) as training data grows.</p>
+
+        <p>The interactive demo below lets you experiment with two variables:</p>
+
+        <ol>
+            <li><strong>Language type:</strong> Select Analytic (English), Agglutinative (Turkish), Fusional (Russian), or Polysynthetic (Inuktitut)</li>
+            <li><strong>Corpus dominance:</strong> Slide from 1% to 100% to simulate what happens as a language gets more representation in training data</li>
+        </ol>
+
+        <p>Watch what happens as you drag the slider. For English, the polygon expands dramatically as more data means more compression. But for Polysynthetic languages, something different happens: the polygon grows, but hits a wall. Even at 100% corpus dominance, it can't reach the compression levels that English achieves at 50%.</p>
+
+        <p>This is the ceiling in action. Three of the five axes (Word Boundary Clarity, Function Word Frequency, Surface Form Stability) are <em>fixed</em> because they're determined by grammar, not data. Only two axes (Byte Reuse Potential, Compression Achieved) respond to more training data.</p>
+
+        <p>Can you try make Polysynthetic beat Analytic?</p>
+
+        <p>Not likely. English not only has corpus dominance, it has the highest structural ceiling. Even in a hypothetical world where Inuktitut dominated the training corpus, it would still tokenize less efficiently than English does today.</p>
+
+        <figure class="interactive-demo">
+            <iframe
+                src="https://codesandbox.io/embed/z43ltr?fontsize=14&hidenavigation=1&theme=dark&view=preview"
+                style="width: 100%; height: 700px; border: 0; border-radius: 8px; overflow: hidden;"
+                title="Compression Ceiling Explorer"
+                allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+                sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts">
+            </iframe>
+            <figcaption>Try to make Polysynthetic beat Analytic. You can't.</figcaption>
+        </figure>
+
+        <p>English wins twice: once from corpus dominance (it has the most training data), and again from structural advantage (its grammar creates the most compressible patterns). Other languages can close the first gap with more data. They cannot close the second.</p>
+
+        <p>The ceiling is baked into the grammar itself.</p>
+
+        <p class="separator">&#8226; &#8226; &#8226;</p>
+
+        <h2>The Compounding Costs</h2>
+
+        <h3>Direct Financial Cost</h3>
+
+        <p>At GPT-4 pricing ($2.50 per million input tokens):</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Language</th>
+                    <th>Tokens/1000 words</th>
+                    <th>Cost</th>
+                    <th>Ratio</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>English</td><td>~1,300</td><td>$0.00325</td><td class="ratio-low">1.0x</td></tr>
+                <tr><td>Spanish</td><td>~1,800</td><td>$0.00450</td><td class="ratio-low">1.4x</td></tr>
+                <tr><td>Russian</td><td>~3,000</td><td>$0.00750</td><td class="ratio-high">2.3x</td></tr>
+                <tr><td>Arabic</td><td>~3,250</td><td>$0.00813</td><td class="ratio-high">2.5x</td></tr>
+                <tr><td>Tamil</td><td>~9,400</td><td>$0.02350</td><td class="ratio-extreme">7.2x</td></tr>
+            </tbody>
+        </table>
+
+        <p>For a company processing millions of customer queries in Tamil, the infrastructure cost is <strong>7x higher</strong> than an English-only competitor.</p>
+
+        <h3>Context Window Tax</h3>
+
+        <p>GPT-4's 128K context window sounds huge. But in tokens, not characters.</p>
+
+        <figure>
+            <img src="../images/multilingual-tax/globe-puzzle-1.png" alt="Globe made of puzzle pieces with one hemisphere fragmented">
+            <figcaption>The pieces are all there. Some just cost more.</figcaption>
+        </figure>
+
+        <p>If you're working in Tamil, that 128K window holds roughly <strong>14K words</strong> of content.</p>
+
+        <p>In English, the same window holds <strong>~100K words</strong>.</p>
+
+        <p>Same advertised limit. 7x less actual capacity.</p>
+
+        <h3>Quality Degradation</h3>
+
+        <p>Fragmented tokens don't just cost more. They may perform worse.</p>
+
+        <p>When a word is split into pieces, the model must:</p>
+
+        <ol>
+            <li>Recognize the pieces as belonging together</li>
+            <li>Compose meaning across token boundaries</li>
+            <li>Handle the increased sequence length</li>
+        </ol>
+
+        <p><a href="https://aclanthology.org/2021.findings-acl.110/">Research suggests models perform better on languages with more efficient tokenization</a>. The tokenizer isn't neutral infrastructure. It's a performance bottleneck.</p>
+
+        <p class="separator">&#8226; &#8226; &#8226;</p>
+
+        <h2>Who Pays Most?</h2>
+
+        <p><strong>Winners:</strong></p>
+        <ul>
+            <li>English, German, French, Spanish</li>
+            <li>Chinese (dedicated vocabulary space)</li>
+            <li>Code (heavily represented in training)</li>
+        </ul>
+
+        <p><strong>Moderate tax (2-3x):</strong></p>
+        <ul>
+            <li>Russian, Japanese, Korean</li>
+            <li>Portuguese, Italian, Dutch</li>
+        </ul>
+
+        <p><strong>Heavy tax (3-5x+):</strong></p>
+        <ul>
+            <li>Arabic, Hebrew, Persian</li>
+            <li>Hindi, Tamil, Bengali, Telugu</li>
+            <li>Thai, Vietnamese, Indonesian</li>
+            <li>Swahili, Yoruba, Amharic</li>
+            <li>Most languages spoken by &lt;100M people</li>
+        </ul>
+
+        <p class="separator">&#8226; &#8226; &#8226;</p>
+
+        <h2>What's Being Done</h2>
+
+        <p>GPT-4o doubled vocabulary size (~200K tokens vs ~100K). This helps somewhat, allocating more tokens to non-English text.</p>
+
+        <p>Some models train tokenizers on balanced multilingual corpora:</p>
+
+        <ul>
+            <li><strong>BLOOM:</strong> Explicitly balanced across 46 languages</li>
+            <li><strong>mT5:</strong> Trained on mC4, covering 101 languages</li>
+        </ul>
+
+        <p>These help with the corpus dominance problem. They don't solve the morphological ceiling.</p>
+
+        <h3>For Developers</h3>
+
+        <ol>
+            <li><strong>Understand the cost:</strong> Your API bills reflect tokenization efficiency</li>
+            <li><strong>Advocate:</strong> Push vendors for better multilingual support</li>
+            <li><strong>Use efficient prompts:</strong> Especially in high-token languages</li>
+            <li><strong>Consider local models:</strong> Language-specific models may be more cost-effective</li>
+        </ol>
+
+        <hr>
+
+        <h2>The Bottom Line</h2>
+
+        <p>Tokenization is not neutral infrastructure. It encodes assumptions about whose language matters.</p>
+
+        <p>A child in Chennai asking questions in Tamil pays 7x the computational cost of a child in Chicago asking in English. Same curiosity. Same questions. Different price.</p>
+
+        <figure>
+            <img src="../images/multilingual-tax/praying-mantis-overlords.png" alt="People kneeling before insect overlord">
+            <figcaption>We all kneel before the algorithm. Some just pay more for the privilege.</figcaption>
+        </figure>
+
+        <p>The multilingual tax is a technical debt we've chosen to accept. Whether we continue accepting it is a choice too.</p>
+
+        <hr>
+
+        <h2>Appendix: Token Counts for Common Phrases</h2>
+
+        <h3>"Hello, how are you?"</h3>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Language</th>
+                    <th>Tokens</th>
+                    <th>Text</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>English</td><td>6</td><td>Hello, how are you?</td></tr>
+                <tr><td>Chinese</td><td>7</td><td>你好，你好吗？</td></tr>
+                <tr><td>Spanish</td><td>9</td><td>Hola, ¿cómo estás?</td></tr>
+                <tr><td>French</td><td>9</td><td>Bonjour, comment allez-vous?</td></tr>
+                <tr><td>German</td><td>9</td><td>Hallo, wie geht es Ihnen?</td></tr>
+                <tr><td>Russian</td><td>10</td><td>Привет, как дела?</td></tr>
+                <tr><td>Swahili</td><td>10</td><td>Habari, u hali gani?</td></tr>
+                <tr><td>Japanese</td><td>11</td><td>こんにちは、お元気ですか？</td></tr>
+                <tr><td>Hebrew</td><td>12</td><td>שלום, מה שלומך?</td></tr>
+                <tr><td>Korean</td><td>13</td><td>안녕하세요, 어떻게 지내세요?</td></tr>
+                <tr><td>Arabic</td><td>14</td><td>مرحبا، كيف حالك؟</td></tr>
+                <tr><td>Greek</td><td>14</td><td>Γεια σας, πώς είστε;</td></tr>
+                <tr><td>Hindi</td><td>18</td><td>नमस्ते, आप कैसे हैं?</td></tr>
+                <tr><td>Thai</td><td>21</td><td>สวัสดี คุณเป็นอย่างไรบ้าง?</td></tr>
+                <tr><td>Tamil</td><td>28</td><td>வணக்கம், நீங்கள் எப்படி இருக்கிறீர்கள்?</td></tr>
+            </tbody>
+        </table>
+
+        <h3>"I love you"</h3>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Language</th>
+                    <th>Tokens</th>
+                    <th>Text</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>English</td><td>3</td><td>I love you</td></tr>
+                <tr><td>Spanish</td><td>3</td><td>Te quiero</td></tr>
+                <tr><td>Chinese</td><td>4</td><td>我爱你</td></tr>
+                <tr><td>French</td><td>4</td><td>Je t'aime</td></tr>
+                <tr><td>German</td><td>4</td><td>Ich liebe dich</td></tr>
+                <tr><td>Japanese</td><td>5</td><td>愛してる</td></tr>
+                <tr><td>Arabic</td><td>6</td><td>أحبك</td></tr>
+                <tr><td>Korean</td><td>6</td><td>사랑해요</td></tr>
+                <tr><td>Russian</td><td>7</td><td>Я тебя люблю</td></tr>
+                <tr><td>Hindi</td><td>16</td><td>मैं तुमसे प्यार करता हूँ</td></tr>
+                <tr><td>Tamil</td><td>19</td><td>நான் உன்னை காதலிக்கிறேன்</td></tr>
+            </tbody>
+        </table>
+
+        <hr>
+
+        <div class="references">
+            <h2>References</h2>
+
+            <p>1. Petrov, A., et al. (2023). <a href="https://arxiv.org/abs/2305.15425">"Language Model Tokenizers Introduce Unfairness Between Languages."</a> arXiv.</p>
+
+            <p>2. Ahia, O., et al. (2023). <a href="https://aclanthology.org/2023.emnlp-main.614/">"Do All Languages Cost the Same? Tokenization in the Era of Commercial Language Models."</a> EMNLP.</p>
+
+            <p>3. Rust, P., et al. (2021). <a href="https://aclanthology.org/2021.findings-acl.110/">"How Good is Your Tokenizer? On the Monolingual Performance of Multilingual Language Models."</a> ACL.</p>
+
+            <p>4. OpenAI. (2023). <a href="https://github.com/openai/tiktoken">tiktoken</a>. GitHub.</p>
+
+            <p>5. Conneau, A., et al. (2020). <a href="https://aclanthology.org/2020.acl-main.747/">"Unsupervised Cross-lingual Representation Learning at Scale."</a> ACL.</p>
+        </div>
+
+        <hr>
+
+        <p><em>Previous in this series: <a href="../bpe-history/">The 30-Year Journey of an Algorithm That Accidentally Learned to Read</a></em></p>
+
+        <p><em>Next in this series: Tokenization Failures: When AI Can't Count to Three (coming soon)</em></p>
+
+    </article>
+</body>
+</html>
