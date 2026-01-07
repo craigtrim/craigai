@@ -297,10 +297,14 @@
         <p>12 (sub-word) tokens.</p>
 
         <p>Type it in Japanese. Twenty-two tokens.<br>
-        Type it in Hindi. Fifty-three tokens.<br>
+        Type it in Hindi. Fifty-six tokens.<br>
         Type it in Tamil. Eighty-six tokens.</p>
 
         <p>Same groveling to our arthropod masters. Same model. Up to 7x the cost.</p>
+
+        <p>At first glance, this looks unfair. Same intent, same semantics, wildly different bills. But the tokenizer isn't measuring meaning. It's measuring how well your language was economically represented at training time.</p>
+
+        <p>Kent Brockman surrenders in 12 tokens. Tamil speakers need 86.</p>
 
         <figure>
             <img id="overlord-img" alt="People kneeling before insect overlord">
@@ -312,12 +316,6 @@
         </script>
 
         <p>At first glance, this looks unfair. Same intent, same semantics, same model, wildly different token counts. But the tokenizer isn't measuring meaning. It's measuring <em>how well your language was economically represented at training time</em>.</p>
-
-        <p>Kent Brockman surrenders in 12 tokens. Tamil speakers need 86.</p>
-
-        <h2>The Problem in Numbers</h2>
-
-        <p>Let's tokenize the same sentence across 31 languages. The meaning is identical: <em>"I, for one, welcome our new insect overlords."</em></p>
 
         <table>
             <thead>
@@ -351,21 +349,17 @@
                 <tr><td>Russian</td><td>28</td><td class="ratio-high">2.3x</td><td>Я, например, приветствую наших новых повелителей-насекомых.</td></tr>
                 <tr><td>Ukrainian</td><td>28</td><td class="ratio-high">2.3x</td><td>Я, наприклад, вітаю наших нових повелителів-комах.</td></tr>
                 <tr><td>Swahili</td><td>29</td><td class="ratio-high">2.4x</td><td>Mimi, kwa upande wangu, nawakaribisha watawala wetu wapya wa wadudu.</td></tr>
-                <tr><td>Greek</td><td>29</td><td class="ratio-high">2.4x</td><td>Εγώ, προσωπικά, καλωσορίζω τους νέους μας κυρίαρχους έντομα.</td></tr>
                 <tr><td>Arabic</td><td>30</td><td class="ratio-high">2.5x</td><td>أنا، من جهتي، أرحب بسادتنا الحشرات الجدد.</td></tr>
-                <tr><td>Hebrew</td><td>31</td><td class="ratio-high">2.6x</td><td>אני, מצדי, מקבל בברכה את אדוני החרקים החדשים שלנו.</td></tr>
                 <tr><td>Korean</td><td>32</td><td class="ratio-high">2.7x</td><td>저는 개인적으로 우리의 새로운 곤충 지배자들을 환영합니다.</td></tr>
                 <tr><td>Vietnamese</td><td>34</td><td class="ratio-high">2.8x</td><td>Tôi, về phần mình, chào đón những chúa tể côn trùng mới của chúng ta.</td></tr>
                 <tr><td>Thai</td><td>44</td><td class="ratio-extreme">3.7x</td><td>ผม ในส่วนตัว ยินดีต้อนรับเจ้านายแมลงคนใหม่ของเรา</td></tr>
-                <tr><td>Hindi</td><td>53</td><td class="ratio-extreme">4.4x</td><td>मैं, अपनी ओर से, हमारे नए कीट स्वामियों का स्वागत करता हूं।</td></tr>
-                <tr><td>Bengali</td><td>61</td><td class="ratio-extreme">5.1x</td><td>আমি, আমার পক্ষ থেকে, আমাদের নতুন পোকা প্রভুদের স্বাগত জানাই।</td></tr>
+                <tr><td>Hebrew</td><td>46</td><td class="ratio-extreme">3.8x</td><td>אני, מצדי, מקבל בברכה את אדוני החרקים החדשים שלנו.</td></tr>
+                <tr><td>Greek</td><td>54</td><td class="ratio-extreme">4.5x</td><td>Εγώ, προσωπικά, καλωσορίζω τους νέους μας κυρίαρχους έντομα.</td></tr>
+                <tr><td>Hindi</td><td>56</td><td class="ratio-extreme">4.7x</td><td>मैं, अपनी ओर से, हमारे नए कीट स्वामियों का स्वागत करता हूं।</td></tr>
+                <tr><td>Bengali</td><td>75</td><td class="ratio-extreme">6.2x</td><td>আমি, আমার পক্ষ থেকে, আমাদের নতুন পোকা প্রভুদের স্বাগত জানাই।</td></tr>
                 <tr><td>Tamil</td><td>86</td><td class="ratio-extreme">7.2x</td><td>நான், எனது பங்கிற்கு, எங்கள் புதிய பூச்சி அதிபதிகளை வரவேற்கிறேன்.</td></tr>
             </tbody>
         </table>
-
-        <p>Tamil speakers pay <strong>7.2x more tokens</strong> than English speakers for the same information.</p>
-
-        <p class="separator">&#8226; &#8226; &#8226;</p>
 
         <p>That outcome follows directly from history.</p>
 
@@ -379,7 +373,7 @@
                 allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
                 sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts">
             </iframe>
-            <figcaption>Interactive: Compare token costs across languages</figcaption>
+            <figcaption>Try this out as an interactive demo</figcaption>
         </figure>
 
         <p>Frequency determines value.</p>
@@ -390,19 +384,15 @@
 
         <p>That inefficiency shows up as cost.</p>
 
-        <p>Type "Hello, how are you?" in Tamil. Twenty-eight tokens.</p>
+        <p>Type "Hello, how are you?" in Tamil. Twenty-three tokens.</p>
 
         <p>Languages the tokenizer saw less frequently get understood less efficiently. And the difference isn't small.</p>
 
-        <p>Tamil speakers pay 7x what English speakers pay for the same information.</p>
+        <p>Tamil speakers pay 4x what English speakers pay for the same information.</p>
 
-        <p>Token counts drive pricing, context limits, and truncation behavior. When Japanese text expands into more tokens, fewer ideas fit into the same context window. Long prompts collapse sooner. Retrieval pipelines return less semantic content per request. None of this looks dramatic in isolation. All of it compounds.</p>
+        <p>Token counts drive pricing, context limits, and truncation behavior. When Japanese text expands into more tokens, fewer ideas fit into the same context window. Long prompts collapse sooner. Retrieval pipelines return less semantic content per request. None of this looks dramatic in isolation. Together, it reshapes what multilingual users can afford to do.</p>
 
-        <p>Engineers optimized tokenization for scale, speed, and statistical coverage, not for linguistic equity. A compression algorithm rewards what it sees most often. It always has.</p>
-
-        <p class="separator">&#8226; &#8226; &#8226;</p>
-
-        <h2>Why Function Words Matter</h2>
+        <p>This behavior does not reflect a mistake. It reflects a design tradeoff. Engineers optimized tokenization for scale, speed, and statistical coverage, not for linguistic equity. A compression algorithm rewards what it sees most often. It always has.</p>
 
         <p>In English corpora, a very small set of function words accounts for an outsized share of all tokens:</p>
 
@@ -424,20 +414,22 @@
                     <th>Type</th>
                     <th>Content Words (Lexicon)</th>
                     <th>Function Words (Lexicon)</th>
+                    <th>Content Words (Usage)</th>
+                    <th>Function Words (Usage)</th>
                 </tr>
             </thead>
             <tbody>
-                <tr><td>English</td><td>Analytic</td><td>~99.7% (~170K words)</td><td>~0.3% (~300 words)</td></tr>
-                <tr><td>Chinese</td><td>Isolating</td><td>~99.5% (~50K words)</td><td>~0.5% (~250 words)</td></tr>
-                <tr><td>Japanese</td><td>Agglutinative</td><td>~99.8% (~50K words)</td><td>~0.2% (~100 words)</td></tr>
-                <tr><td>Russian</td><td>Fusional</td><td>~99.5% (~150K words)</td><td>~0.5% (~400 words)</td></tr>
-                <tr><td>Arabic</td><td>Fusional</td><td>~99.6% (~60K words)</td><td>~0.4% (~200 words)</td></tr>
-                <tr><td>Korean</td><td>Agglutinative</td><td>~99.8% (~50K words)</td><td>~0.2% (~80 words)</td></tr>
-                <tr><td>Turkish</td><td>Agglutinative</td><td>~99.9% (~100K words)</td><td>~0.1% (~50 words)</td></tr>
-                <tr><td>Hungarian</td><td>Agglutinative</td><td>~99.9% (~80K words)</td><td>~0.1% (~40 words)</td></tr>
-                <tr><td>Finnish</td><td>Agglutinative</td><td>~99.9% (~90K words)</td><td>~0.1% (~40 words)</td></tr>
-                <tr><td>Swahili</td><td>Agglutinative</td><td>~99.9% (~50K words)</td><td>~0.1% (~30 words)</td></tr>
-                <tr><td>Inuktitut</td><td>Polysynthetic</td><td>~99.95% (~10K roots)</td><td>~0.05% (~20 words)</td></tr>
+                <tr><td>English</td><td>Analytic</td><td>~99.7% (~170K words)</td><td>~0.3% (~300 words)</td><td>~45%</td><td>~55%</td></tr>
+                <tr><td>Chinese</td><td>Isolating</td><td>~99.5% (~50K words)</td><td>~0.5% (~250 words)</td><td>~55%</td><td>~45%</td></tr>
+                <tr><td>Japanese</td><td>Agglutinative</td><td>~99.8% (~50K words)</td><td>~0.2% (~100 words)</td><td>~60%</td><td>~40%</td></tr>
+                <tr><td>Russian</td><td>Fusional</td><td>~99.5% (~150K words)</td><td>~0.5% (~400 words)</td><td>~65%</td><td>~35%</td></tr>
+                <tr><td>Arabic</td><td>Fusional</td><td>~99.6% (~60K words)</td><td>~0.4% (~200 words)</td><td>~70%</td><td>~30%</td></tr>
+                <tr><td>Korean</td><td>Agglutinative</td><td>~99.8% (~50K words)</td><td>~0.2% (~80 words)</td><td>~75%</td><td>~25%</td></tr>
+                <tr><td>Turkish</td><td>Agglutinative</td><td>~99.9% (~100K words)</td><td>~0.1% (~50 words)</td><td>~80%</td><td>~20%</td></tr>
+                <tr><td>Hungarian</td><td>Agglutinative</td><td>~99.9% (~80K words)</td><td>~0.1% (~40 words)</td><td>~82%</td><td>~18%</td></tr>
+                <tr><td>Finnish</td><td>Agglutinative</td><td>~99.9% (~90K words)</td><td>~0.1% (~40 words)</td><td>~85%</td><td>~15%</td></tr>
+                <tr><td>Swahili</td><td>Agglutinative</td><td>~99.9% (~50K words)</td><td>~0.1% (~30 words)</td><td>~88%</td><td>~12%</td></tr>
+                <tr><td>Inuktitut</td><td>Polysynthetic</td><td>~99.95% (~10K roots)</td><td>~0.05% (~20 words)</td><td>~95%</td><td>~5%</td></tr>
             </tbody>
         </table>
 
@@ -476,10 +468,6 @@
 
         <p>Neither alone is sufficient.</p>
 
-        <p class="separator">&#8226; &#8226; &#8226;</p>
-
-        <h2>Morphological Typology</h2>
-
         <p>Linguists classify languages by how they package meaning into words. Some languages use many small, separate words. Others pack entire sentences into single, complex words. This structural difference has profound implications for how well BPE tokenization can compress text.</p>
 
         <p><strong>The four major types:</strong></p>
@@ -495,6 +483,8 @@
 
         <p>BPE learns to compress text by finding repeated byte sequences. Languages with many short, stable, frequently-repeated words give BPE lots of reusable patterns. Languages that encode meaning in long, productive word forms produce fewer exact repetitions and hit a compression ceiling that no amount of training data can overcome.</p>
 
+        <p>The charts below show five properties that BPE exploits for compression. Notice how the polygon shrinks from Analytic &rarr; Polysynthetic. The smaller the polygon, the harder it is for BPE to achieve efficient tokenization regardless of how much training data exists.</p>
+
         <figure class="interactive-demo">
             <iframe
                 src="https://codesandbox.io/embed/fghj4p?fontsize=14&hidenavigation=1&theme=dark&view=preview"
@@ -508,7 +498,7 @@
 
         <p>Token cost is not a property of meaning. It emerges from repetition, exposure, and structure. Corpus dominance decides which language benefits. Morphology decides how far that benefit can go.</p>
 
-        <h3>The Compression Ceiling Explorer</h3>
+        <h3>Try It Yourself: The Compression Ceiling Explorer</h3>
 
         <p>The charts above show static snapshots, but the real insight comes from seeing how these properties change (or don't) as training data grows.</p>
 
@@ -535,14 +525,12 @@
                 allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
                 sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts">
             </iframe>
-            <figcaption>Try to make Polysynthetic beat Analytic. You can't.</figcaption>
+            <figcaption>It's not just about how much data exists. It's about what compression is possible.</figcaption>
         </figure>
 
         <p>English wins twice: once from corpus dominance (it has the most training data), and again from structural advantage (its grammar creates the most compressible patterns). Other languages can close the first gap with more data. They cannot close the second.</p>
 
         <p>The ceiling is baked into the grammar itself.</p>
-
-        <p class="separator">&#8226; &#8226; &#8226;</p>
 
         <h2>The Compounding Costs</h2>
 
@@ -574,12 +562,12 @@
 
         <p>GPT-4's 128K context window sounds huge. But in tokens, not characters.</p>
 
+        <p>If you're working in Tamil, that 128K window holds roughly <strong>14K words</strong> of content.</p>
+
         <figure>
             <img src="../images/multilingual-tax/globe-puzzle-1.png" alt="Globe made of puzzle pieces with one hemisphere fragmented">
             <figcaption>The pieces are all there. Some just cost more.</figcaption>
         </figure>
-
-        <p>If you're working in Tamil, that 128K window holds roughly <strong>14K words</strong> of content.</p>
 
         <p>In English, the same window holds <strong>~100K words</strong>.</p>
 
@@ -598,8 +586,6 @@
         </ol>
 
         <p><a href="https://aclanthology.org/2021.findings-acl.110/">Research suggests models perform better on languages with more efficient tokenization</a>. The tokenizer isn't neutral infrastructure. It's a performance bottleneck.</p>
-
-        <p class="separator">&#8226; &#8226; &#8226;</p>
 
         <h2>Who Pays Most?</h2>
 
@@ -625,10 +611,6 @@
             <li>Most languages spoken by &lt;100M people</li>
         </ul>
 
-        <p class="separator">&#8226; &#8226; &#8226;</p>
-
-        <h2>What's Being Done</h2>
-
         <p>GPT-4o doubled vocabulary size (~200K tokens vs ~100K). This helps somewhat, allocating more tokens to non-English text.</p>
 
         <p>Some models train tokenizers on balanced multilingual corpora:</p>
@@ -636,91 +618,22 @@
         <ul>
             <li><strong>BLOOM:</strong> Explicitly balanced across 46 languages</li>
             <li><strong>mT5:</strong> Trained on mC4, covering 101 languages</li>
+            <li><strong>XLM-RoBERTa:</strong> Designed for cross-lingual transfer</li>
         </ul>
 
-        <p>These help with the corpus dominance problem. They don't solve the morphological ceiling.</p>
+        <p>These narrow the gap but don't eliminate it.</p>
 
-        <h3>For Developers</h3>
+        <h3>Language-Specific Models</h3>
 
-        <ol>
-            <li><strong>Understand the cost:</strong> Your API bills reflect tokenization efficiency</li>
-            <li><strong>Advocate:</strong> Push vendors for better multilingual support</li>
-            <li><strong>Use efficient prompts:</strong> Especially in high-token languages</li>
-            <li><strong>Consider local models:</strong> Language-specific models may be more cost-effective</li>
-        </ol>
+        <p>For high-stakes applications, dedicated models exist:</p>
 
-        <hr>
+        <ul>
+            <li><strong>Japanese:</strong> rinna, ELYZA</li>
+            <li><strong>Chinese:</strong> ChatGLM, Qwen</li>
+            <li><strong>Arabic:</strong> Jais, AraGPT2</li>
+        </ul>
 
-        <h2>The Bottom Line</h2>
-
-        <p>Tokenization is not neutral infrastructure. It encodes assumptions about whose language matters.</p>
-
-        <p>A child in Chennai asking questions in Tamil pays 7x the computational cost of a child in Chicago asking in English. Same curiosity. Same questions. Different price.</p>
-
-        <figure>
-            <img src="../images/multilingual-tax/praying-mantis-overlords.png" alt="People kneeling before insect overlord">
-            <figcaption>We all kneel before the algorithm. Some just pay more for the privilege.</figcaption>
-        </figure>
-
-        <p>The multilingual tax is a technical debt we've chosen to accept. Whether we continue accepting it is a choice too.</p>
-
-        <hr>
-
-        <h2>Appendix: Token Counts for Common Phrases</h2>
-
-        <h3>"Hello, how are you?"</h3>
-
-        <table>
-            <thead>
-                <tr>
-                    <th>Language</th>
-                    <th>Tokens</th>
-                    <th>Text</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr><td>English</td><td>6</td><td>Hello, how are you?</td></tr>
-                <tr><td>Chinese</td><td>7</td><td>你好，你好吗？</td></tr>
-                <tr><td>Spanish</td><td>9</td><td>Hola, ¿cómo estás?</td></tr>
-                <tr><td>French</td><td>9</td><td>Bonjour, comment allez-vous?</td></tr>
-                <tr><td>German</td><td>9</td><td>Hallo, wie geht es Ihnen?</td></tr>
-                <tr><td>Russian</td><td>10</td><td>Привет, как дела?</td></tr>
-                <tr><td>Swahili</td><td>10</td><td>Habari, u hali gani?</td></tr>
-                <tr><td>Japanese</td><td>11</td><td>こんにちは、お元気ですか？</td></tr>
-                <tr><td>Hebrew</td><td>12</td><td>שלום, מה שלומך?</td></tr>
-                <tr><td>Korean</td><td>13</td><td>안녕하세요, 어떻게 지내세요?</td></tr>
-                <tr><td>Arabic</td><td>14</td><td>مرحبا، كيف حالك؟</td></tr>
-                <tr><td>Greek</td><td>14</td><td>Γεια σας, πώς είστε;</td></tr>
-                <tr><td>Hindi</td><td>18</td><td>नमस्ते, आप कैसे हैं?</td></tr>
-                <tr><td>Thai</td><td>21</td><td>สวัสดี คุณเป็นอย่างไรบ้าง?</td></tr>
-                <tr><td>Tamil</td><td>28</td><td>வணக்கம், நீங்கள் எப்படி இருக்கிறீர்கள்?</td></tr>
-            </tbody>
-        </table>
-
-        <h3>"I love you"</h3>
-
-        <table>
-            <thead>
-                <tr>
-                    <th>Language</th>
-                    <th>Tokens</th>
-                    <th>Text</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr><td>English</td><td>3</td><td>I love you</td></tr>
-                <tr><td>Spanish</td><td>3</td><td>Te quiero</td></tr>
-                <tr><td>Chinese</td><td>4</td><td>我爱你</td></tr>
-                <tr><td>French</td><td>4</td><td>Je t'aime</td></tr>
-                <tr><td>German</td><td>4</td><td>Ich liebe dich</td></tr>
-                <tr><td>Japanese</td><td>5</td><td>愛してる</td></tr>
-                <tr><td>Arabic</td><td>6</td><td>أحبك</td></tr>
-                <tr><td>Korean</td><td>6</td><td>사랑해요</td></tr>
-                <tr><td>Russian</td><td>7</td><td>Я тебя люблю</td></tr>
-                <tr><td>Hindi</td><td>16</td><td>मैं तुमसे प्यार करता हूँ</td></tr>
-                <tr><td>Tamil</td><td>19</td><td>நான் உன்னை காதலிக்கிறேன்</td></tr>
-            </tbody>
-        </table>
+        <p>These optimize tokenization for their target language but sacrifice English performance.</p>
 
         <hr>
 
@@ -737,12 +650,6 @@
 
             <p>5. Conneau, A., et al. (2020). <a href="https://aclanthology.org/2020.acl-main.747/">"Unsupervised Cross-lingual Representation Learning at Scale."</a> ACL.</p>
         </div>
-
-        <hr>
-
-        <p><em>Previous in this series: <a href="../bpe-history/">The 30-Year Journey of an Algorithm That Accidentally Learned to Read</a></em></p>
-
-        <p><em>Next in this series: Tokenization Failures: When AI Can't Count to Three (coming soon)</em></p>
 
     </article>
 </body>
