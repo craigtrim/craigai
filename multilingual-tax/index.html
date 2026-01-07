@@ -303,9 +303,13 @@
         <p>Same groveling to our arthropod masters. Same model. Up to 7x the cost.</p>
 
         <figure>
-            <img src="../images/multilingual-tax/praying-mantis-overlords.png" alt="People kneeling before insect overlord">
+            <img id="overlord-img" alt="People kneeling before insect overlord">
             <figcaption>The cost of surrender depends on your alphabet.</figcaption>
         </figure>
+        <script>
+            const overlordImages = ['../images/multilingual-tax/praying-mantis-overlords.png', '../images/multilingual-tax/news-anchor-insect-overlords.png'];
+            document.getElementById('overlord-img').src = overlordImages[Math.floor(Math.random() * overlordImages.length)];
+        </script>
 
         <p>At first glance, this looks unfair. Same intent, same semantics, same model, wildly different token counts. But the tokenizer isn't measuring meaning. It's measuring <em>how well your language was economically represented at training time</em>.</p>
 
