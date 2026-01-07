@@ -436,7 +436,17 @@ Result: "lo w &lt;/w&gt;", "lo w e r &lt;/w&gt;", "n e w est &lt;/w&gt;"
         <p>Each merge consolidates the most frequent pattern. After thousands of iterations, the vocabulary stabilizes: common sequences have earned their own tokens, while rare combinations remain fragmented, assembled on demand from smaller pieces.</p>
 
         <figure>
-            <img src="images/image5.png" alt="BPE visualization">
+            <pre style="font-size: 14px; text-align: left;">
+Word                                            Tokenization
+············································································
+the                                             ["the"]
+running                                         ["run", "ning"]
+transformers                                    ["transform", "ers"]
+Pneumonoultramicroscopicsilicovolcanoconiosis   ["P", "ne", "um", "ono", "ult",
+                                                 "ram", "ic", "ros", "cop", "ic",
+                                                 "s", "il", "ic", "ov", "ol",
+                                                 "can", "oc", "on", "i", "osis"]
+            </pre>
             <figcaption>Zipf's revenge</figcaption>
         </figure>
 
