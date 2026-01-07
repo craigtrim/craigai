@@ -381,101 +381,83 @@
         </section>
 
         <!--
-            ARTWORK SECTION
+            IMAGES SECTION
             AI-generated CARTOON illustrations from articles only.
             DO NOT include: flowcharts, mermaid diagrams, tables, screenshots, iframes.
             ONLY include: AI-generated artistic/cartoon imagery.
 
-            IMPORTANT: Captions must match the figcaption in the source article EXACTLY.
-            If an article randomly rotates between images, just pick one for this gallery.
+            IMPORTANT:
+            1. Captions must match the figcaption in the source article EXACTLY.
+            2. If an article randomly rotates images, just pick one for this gallery.
+            3. Each image card links to article#anchor where anchor matches the figure id in the source article.
+               - The source article <figure> must have id="img-X" attribute
+               - The link here should be href="article/#img-X"
 
-            Current artwork sources:
-            - tokenization/: image1-6.png (all cartoons)
-            - bpe-history/: image1-2.png, image4.png, image6-7.png (image3 is flowchart, image5 has no caption)
-            - multilingual-tax/: praying-mantis-overlords.png, globe-puzzle-1.png
+            Current images (CARTOONS ONLY):
+            - tokenization/: image2, image3, image4, image6 (image1 & image5 are tables)
+            - bpe-history/: image1, image2, image4 (image3=flowchart, image5=no caption, image6=table, image7=timeline)
+            - multilingual-tax/: praying-mantis-overlords, globe-puzzle-1
         -->
         <section>
             <h2 class="section-title">Images</h2>
             <div class="artwork-grid">
                 <!-- From: tokenization/index.html -->
+                <!-- image1 is a table, image5 is a table - excluded -->
                 <div class="artwork-card">
-                    <a href="tokenization/">
-                        <img src="tokenization/images/image1.png" alt="Linguistic word examples" class="artwork-image">
-                        <div class="artwork-caption">Ask a linguist, lose an afternoon</div>
-                    </a>
-                </div>
-                <div class="artwork-card">
-                    <a href="tokenization/">
+                    <a href="tokenization/#img-2">
                         <img src="tokenization/images/image2.png" alt="NLP challenges with words" class="artwork-image">
                         <div class="artwork-caption">Why NLP Engineers Drink</div>
                     </a>
                 </div>
                 <div class="artwork-card">
-                    <a href="tokenization/">
+                    <a href="tokenization/#img-3">
                         <img src="tokenization/images/image3.png" alt="Morphemes illustration" class="artwork-image">
                         <div class="artwork-caption">At least these have spaces between them.</div>
                     </a>
                 </div>
                 <div class="artwork-card">
-                    <a href="tokenization/">
+                    <a href="tokenization/#img-4">
                         <img src="tokenization/images/image4.png" alt="Subword tokenization concept" class="artwork-image">
                         <div class="artwork-caption">The pieces are all there. Theoretically.</div>
                     </a>
                 </div>
                 <div class="artwork-card">
-                    <a href="tokenization/">
-                        <img src="tokenization/images/image5.png" alt="BPE visualization" class="artwork-image">
-                        <div class="artwork-caption">Zipf's revenge</div>
-                    </a>
-                </div>
-                <div class="artwork-card">
-                    <a href="tokenization/">
+                    <a href="tokenization/#img-6">
                         <img src="tokenization/images/image6.png" alt="Long word tokenization" class="artwork-image">
                         <div class="artwork-caption">Pneumonoultramicroscopicsilicovolcanoconiosis enters the chat.</div>
                     </a>
                 </div>
 
                 <!-- From: bpe-history/index.html -->
+                <!-- image3 is flowchart, image5 has no caption, image6 is table, image7 is timeline table - excluded -->
                 <div class="artwork-card">
-                    <a href="bpe-history/">
+                    <a href="bpe-history/#img-1">
                         <img src="bpe-history/images/image1.png" alt="Philip Gage working" class="artwork-image">
                         <div class="artwork-caption">He never once looked up.</div>
                     </a>
                 </div>
                 <div class="artwork-card">
-                    <a href="bpe-history/">
+                    <a href="bpe-history/#img-2">
                         <img src="bpe-history/images/image2.png" alt="BPE simplicity" class="artwork-image">
                         <div class="artwork-caption">Twenty years later, guess who's running GPT-4?</div>
                     </a>
                 </div>
                 <div class="artwork-card">
-                    <a href="bpe-history/">
+                    <a href="bpe-history/#img-4">
                         <img src="bpe-history/images/image4.png" alt="1994 paper" class="artwork-image">
                         <div class="artwork-caption">Wait. This one's from 1994.</div>
-                    </a>
-                </div>
-                <div class="artwork-card">
-                    <a href="bpe-history/">
-                        <img src="bpe-history/images/image6.png" alt="BPE powers everything" class="artwork-image">
-                        <div class="artwork-caption">BPE (or close variants) powers everything.</div>
-                    </a>
-                </div>
-                <div class="artwork-card">
-                    <a href="bpe-history/">
-                        <img src="bpe-history/images/image7.png" alt="Thirty years, same algorithm" class="artwork-image">
-                        <div class="artwork-caption">Thirty years. Same algorithm.</div>
                     </a>
                 </div>
 
                 <!-- From: multilingual-tax/index.html -->
                 <div class="artwork-card">
-                    <a href="multilingual-tax/">
+                    <a href="multilingual-tax/#img-overlords">
                         <img src="images/multilingual-tax/praying-mantis-overlords.png" alt="People kneeling before insect overlord" class="artwork-image">
                         <div class="artwork-caption">The cost of surrender depends on your alphabet.</div>
                     </a>
                 </div>
                 <div class="artwork-card">
-                    <a href="multilingual-tax/">
+                    <a href="multilingual-tax/#img-globe">
                         <img src="images/multilingual-tax/globe-puzzle-1.png" alt="Globe made of puzzle pieces with one hemisphere fragmented" class="artwork-image">
                         <div class="artwork-caption">The pieces are all there. Some just cost more.</div>
                     </a>
