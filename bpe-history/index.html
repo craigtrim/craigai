@@ -456,7 +456,17 @@ for (c = 0; c < 256; c++) {
         <p>Common words like "the" would get merged all the way to single tokens. Rare words would stay fragmented, assembled from smaller pieces:</p>
 
         <figure>
-            <img src="images/image5.png" alt="Subword tokenization">
+            <pre style="font-size: 14px; text-align: left;">
+Word                                            Tokenization
+············································································
+the                                             ["the"]
+running                                         ["run", "ning"]
+transformers                                    ["transform", "ers"]
+Pneumonoultramicroscopicsilicovolcanoconiosis   ["P", "ne", "um", "ono", "ult",
+                                                 "ram", "ic", "ros", "cop", "ic",
+                                                 "s", "il", "ic", "ov", "ol",
+                                                 "can", "oc", "on", "i", "osis"]
+            </pre>
         </figure>
 
         <h3>The Paper</h3>
@@ -537,7 +547,20 @@ for (c = 0; c < 256; c++) {
         <h2>Part 6: Where BPE Lives Today</h2>
 
         <figure>
-            <img src="images/image6.png" alt="BPE powers everything">
+            <pre style="font-size: 14px; text-align: left;">
+Model              Tokenizer      Vocabulary Size
+··················································
+GPT-2              BPE            50,257
+GPT-3              BPE            50,257
+GPT-4              BPE            100,277
+BERT               WordPiece      30,522
+RoBERTa            BPE            50,265
+T5                 SentencePiece  32,000
+LLaMA              SentencePiece  32,000
+LLaMA 2            SentencePiece  32,000
+Claude             BPE            ~100,000
+Mistral            SentencePiece  32,000
+            </pre>
             <figcaption>BPE (or close variants) powers everything.</figcaption>
         </figure>
 
@@ -575,7 +598,20 @@ print(len(tokens))  # 4</pre>
         <p><strong>From compression curiosity to the foundation of modern AI.</strong></p>
 
         <figure>
-            <img src="images/image7.png" alt="Thirty years, same algorithm">
+            <pre style="font-size: 14px; text-align: left;">
+Year   Event
+·······························································
+1994   Philip Gage publishes BPE in C Users Journal
+1999   Japanese researchers show BPE accelerates pattern matching
+2015   Sennrich applies BPE to neural machine translation
+2016   "Neural Machine Translation of Rare Words" published
+2017   Transformers architecture introduced
+2018   GPT-1 uses BPE (40K vocabulary)
+2018   BERT uses WordPiece (BPE variant)
+2019   GPT-2 introduces byte-level BPE
+2020   GPT-3 scales to 175B parameters, still BPE
+2023   GPT-4, Claude, LLaMA all use BPE variants
+            </pre>
             <figcaption>Thirty years. Same algorithm.</figcaption>
         </figure>
 
