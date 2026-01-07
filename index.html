@@ -113,12 +113,6 @@
             justify-content: space-between;
         }
 
-        .card-topic {
-            font-style: italic;
-            font-weight: 500;
-            letter-spacing: 0.02em;
-        }
-
         footer {
             margin-top: 64px;
             padding-top: 32px;
@@ -234,6 +228,10 @@
             margin-bottom: 48px;
         }
 
+        section {
+            margin-top: 48px;
+        }
+
         @media (max-width: 728px) {
             .container {
                 padding: 32px 16px;
@@ -252,12 +250,23 @@
 </head>
 <body>
     <div class="container">
+        <!--
+            HERO IMAGE
+            Randomly rotates between 5 abstract hero images on page load.
+            Images stored in: images/heroes/hero1-5.png
+        -->
         <img id="hero" alt="Abstract nested pairs" class="hero">
         <script>
             const heroes = ['images/heroes/hero1.png', 'images/heroes/hero2.png', 'images/heroes/hero3.png', 'images/heroes/hero4.png', 'images/heroes/hero5.png'];
             document.getElementById('hero').src = heroes[Math.floor(Math.random() * heroes.length)];
         </script>
 
+        <!--
+            WRITING SECTION
+            Article cards linking to full articles.
+            - Tag (upper left): category label in green
+            - card-meta: read time only (removed topic from lower right)
+        -->
         <section class="first-section">
             <h2 class="section-title">Writing</h2>
             <div class="articles-grid">
@@ -270,7 +279,7 @@
                         </div>
                         <div class="card-meta">
                             <span>12 min read</span>
-                            <span class="card-topic">Tokenization</span>
+                            <span>2025</span>
                         </div>
                     </a>
                 </article>
@@ -284,7 +293,7 @@
                         </div>
                         <div class="card-meta">
                             <span>15 min read</span>
-                            <span class="card-topic">History</span>
+                            <span>2025</span>
                         </div>
                     </a>
                 </article>
@@ -298,13 +307,18 @@
                         </div>
                         <div class="card-meta">
                             <span>10 min read</span>
-                            <span class="card-topic">Tokenization</span>
+                            <span>2025</span>
                         </div>
                     </a>
                 </article>
             </div>
         </section>
 
+        <!--
+            DEMOS SECTION
+            Interactive CodeSandbox demos.
+            Each card has an emoji icon in a dark gradient header.
+        -->
         <section>
             <h2 class="section-title">Demos</h2>
             <div class="demos-grid">
@@ -365,27 +379,28 @@
             </div>
         </section>
 
+        <!--
+            ARTWORK SECTION
+            AI-generated CARTOON illustrations from articles only.
+            DO NOT include: flowcharts, mermaid diagrams, tables, screenshots.
+            ONLY include: AI-generated artistic/cartoon imagery.
+
+            IMPORTANT: Captions must match the figcaption in the source article.
+            If an article randomly rotates between images, just pick one for this gallery.
+
+            Current artwork:
+            1. praying-mantis-overlords.png - from multilingual-tax article
+               Caption: "The cost of surrender depends on your alphabet."
+               (Article also has news-anchor-insect-overlords.png with same caption - pick one)
+        -->
         <section>
             <h2 class="section-title">Artwork</h2>
             <div class="artwork-grid">
+                <!-- From: multilingual-tax/index.html - the overlord image with figcaption -->
                 <div class="artwork-card">
-                    <a href="multilingual-tax/" title="The cost of surrender depends on your alphabet">
+                    <a href="multilingual-tax/">
                         <img src="images/multilingual-tax/praying-mantis-overlords.png" alt="People kneeling before insect overlord" class="artwork-image">
-                        <div class="artwork-caption">The cost of surrender depends on your alphabet</div>
-                    </a>
-                </div>
-
-                <div class="artwork-card">
-                    <a href="multilingual-tax/" title="News anchor broadcasting the insect takeover">
-                        <img src="images/multilingual-tax/news-anchor-insect-overlords.png" alt="News anchor with insect overlords" class="artwork-image">
-                        <div class="artwork-caption">Breaking news from the new world order</div>
-                    </a>
-                </div>
-
-                <div class="artwork-card">
-                    <a href="bpe-history/" title="Philip Gage, inventor of BPE">
-                        <img src="images/bpe-history/gage-bridges.png" alt="Philip Gage portrait with bridges" class="artwork-image">
-                        <div class="artwork-caption">The man who accidentally taught machines to read</div>
+                        <div class="artwork-caption">The cost of surrender depends on your alphabet.</div>
                     </a>
                 </div>
             </div>
