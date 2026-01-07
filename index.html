@@ -191,6 +191,44 @@
             font-size: 48px;
         }
 
+        .artwork-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 32px;
+        }
+
+        .artwork-card {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: box-shadow 0.2s ease, transform 0.2s ease;
+            background: white;
+        }
+
+        .artwork-card:hover {
+            box-shadow: var(--card-hover-shadow);
+            transform: translateY(-2px);
+        }
+
+        .artwork-card a {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .artwork-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .artwork-caption {
+            padding: 16px 24px;
+            font-size: 14px;
+            color: #757575;
+            border-top: 1px solid var(--border-color);
+        }
+
         .first-section {
             margin-top: 0;
             margin-bottom: 48px;
@@ -205,7 +243,7 @@
                 font-size: 32px;
             }
 
-            .articles-grid, .demos-grid {
+            .articles-grid, .demos-grid, .artwork-grid {
                 grid-template-columns: 1fr;
                 gap: 24px;
             }
@@ -322,6 +360,32 @@
                             <h3 class="card-title">Why More Data Won't Fix This</h3>
                             <p class="card-description">Slide corpus dominance from 1% to 100% and watch morphology set an immovable ceiling on compression.</p>
                         </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="section-title">Artwork</h2>
+            <div class="artwork-grid">
+                <div class="artwork-card">
+                    <a href="multilingual-tax/" title="The cost of surrender depends on your alphabet">
+                        <img src="images/multilingual-tax/praying-mantis-overlords.png" alt="People kneeling before insect overlord" class="artwork-image">
+                        <div class="artwork-caption">The cost of surrender depends on your alphabet</div>
+                    </a>
+                </div>
+
+                <div class="artwork-card">
+                    <a href="multilingual-tax/" title="News anchor broadcasting the insect takeover">
+                        <img src="images/multilingual-tax/news-anchor-insect-overlords.png" alt="News anchor with insect overlords" class="artwork-image">
+                        <div class="artwork-caption">Breaking news from the new world order</div>
+                    </a>
+                </div>
+
+                <div class="artwork-card">
+                    <a href="bpe-history/" title="Philip Gage, inventor of BPE">
+                        <img src="images/bpe-history/gage-bridges.png" alt="Philip Gage portrait with bridges" class="artwork-image">
+                        <div class="artwork-caption">The man who accidentally taught machines to read</div>
                     </a>
                 </div>
             </div>
