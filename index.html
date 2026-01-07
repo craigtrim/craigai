@@ -233,6 +233,36 @@
             margin-top: 48px;
         }
 
+        /* Image modal for standalone images (no article link) */
+        .image-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 1000;
+            cursor: pointer;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .image-modal.active {
+            display: flex;
+        }
+
+        .image-modal img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 8px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+        }
+
+        .artwork-card.standalone {
+            cursor: pointer;
+        }
+
         @media (max-width: 728px) {
             .container {
                 padding: 32px 16px;
@@ -308,6 +338,20 @@
                         </div>
                         <div class="card-meta">
                             <span>10 min read</span>
+                            <span>2025</span>
+                        </div>
+                    </a>
+                </article>
+
+                <article class="article-card">
+                    <a href="glitch-tokens/">
+                        <div class="card-content">
+                            <span class="card-tag">Security</span>
+                            <h3 class="card-title">SolidGoldMagikarp and the Chaos Lurking in Your LLM</h3>
+                            <p class="card-description">Reddit usernames that break GPT. Invisible characters that bypass filters. The edge cases where tokenization fails spectacularly.</p>
+                        </div>
+                        <div class="card-meta">
+                            <span>8 min read</span>
                             <span>2025</span>
                         </div>
                     </a>
@@ -463,13 +507,57 @@
                     </a>
                 </div>
 
-                <!-- Standalone image (not from an article) -->
-                <div class="artwork-card">
+                <!--
+                    STANDALONE IMAGE (not from any article)
+                    This image has no article to link to. Instead, clicking it opens a modal
+                    that displays the image larger. Click anywhere (on or off the modal) to close.
+
+                    To add more standalone images:
+                    1. Add class="artwork-card standalone" to the card div
+                    2. Add data-src="path/to/image.png" with the full image path
+                    3. The JS below will handle the modal behavior automatically
+                -->
+                <div class="artwork-card standalone" data-src="images/general/ask-a-linguist-waste-an-afternoon.png">
                     <img src="images/general/ask-a-linguist-waste-an-afternoon.png" alt="Ask a linguist" class="artwork-image">
                     <div class="artwork-caption">Ask a Linguist, Waste an Afternoon</div>
                 </div>
             </div>
         </section>
+
+        <!--
+            IMAGE MODAL
+            Used for standalone images that don't link to articles.
+            Click anywhere to close.
+        -->
+        <div id="imageModal" class="image-modal">
+            <img id="modalImage" src="" alt="Enlarged image">
+        </div>
+
+        <script>
+            // Modal functionality for standalone images
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+
+            // Open modal when clicking standalone artwork cards
+            document.querySelectorAll('.artwork-card.standalone').forEach(card => {
+                card.addEventListener('click', () => {
+                    modalImg.src = card.dataset.src;
+                    modal.classList.add('active');
+                });
+            });
+
+            // Close modal when clicking anywhere
+            modal.addEventListener('click', () => {
+                modal.classList.remove('active');
+            });
+
+            // Close modal with Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    modal.classList.remove('active');
+                }
+            });
+        </script>
 
         <footer>
             <p><a href="https://github.com/craigtrim">GitHub</a> · <a href="https://medium.com/@craigtrim">Medium</a></p>
