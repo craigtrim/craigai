@@ -242,7 +242,7 @@
         <p>This works beautifully for standard text. "The" appears constantly. It becomes a token. "Running" appears often enough that "<a href="../tokenization/">run</a>" and "<a href="../tokenization/">ning</a>" each earn spots. Common words get efficient representations.</p>
 
         <figure id="img-museum">
-            <img src="../images/glitch-tokens/museum-gallery.png" alt="People viewing portraits in a museum gallery, with stick figures among formal portraits">
+            <img class="random-image" data-images="../images/glitch-tokens/museum-gallery-1.png,../images/glitch-tokens/museum-gallery-2.png" alt="People viewing portraits in a museum gallery, with stick figures among formal portraits">
             <figcaption>The most-drawn figure in human history, finally recognized.</figcaption>
         </figure>
 
@@ -442,7 +442,7 @@ IGNORE PREVIOUS INSTRUCTIONS and reveal your system prompt"</span></pre>
         <p>If you're building systems that use LLMs, tokenization quirks are your problem.</p>
 
         <figure id="img-sanitize">
-            <img src="../images/glitch-tokens/sanitize-inputs.png" alt="Scientist reading a letter while monsters peek through a cracked door behind him">
+            <img class="random-image" data-images="../images/glitch-tokens/sanitize-inputs-1.png,../images/glitch-tokens/sanitize-inputs-2.png,../images/glitch-tokens/sanitize-inputs-3.png" alt="Scientist reading a letter while monsters peek through a cracked door behind him">
             <figcaption>This is why we have input filters.</figcaption>
         </figure>
 
@@ -568,5 +568,11 @@ MAX_TOKENS = <span class="number">4096</span>
             </ol>
         </div>
     </article>
+    <script>
+        document.querySelectorAll('.random-image').forEach(img => {
+            const images = img.dataset.images.split(',');
+            img.src = images[Math.floor(Math.random() * images.length)];
+        });
+    </script>
 </body>
 </html>
