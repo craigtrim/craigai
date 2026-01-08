@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why LLMs Struggle with Arithmetic</title>
+    <style>
+        :root {
+            --text-primary: #1a1a1a;
+            --text-secondary: #4a4a4a;
+            --bg-primary: #ffffff;
+            --bg-code: #f6f8fa;
+            --border-color: #e1e4e8;
+            --accent: #0066cc;
+            --code-text: #24292e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background: var(--bg-primary);
+            font-size: 18px;
+        }
+
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+        }
+
+        h1 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+
+        h2 {
+            font-size: 1.35rem;
+            font-weight: 600;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        p {
+            margin-bottom: 1.25rem;
+            color: var(--text-secondary);
+        }
+
+        .lead {
+            font-size: 1.15rem;
+            color: var(--text-primary);
+            margin-bottom: 2rem;
+        }
+
+        code {
+            font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+            font-size: 0.9em;
+            background: var(--bg-code);
+            padding: 0.2em 0.4em;
+            border-radius: 4px;
+            color: var(--code-text);
+        }
+
+        pre {
+            background: var(--bg-code);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.25rem;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+
+        pre code {
+            background: none;
+            padding: 0;
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+
+        .highlight {
+            background: #fffbdd;
+            padding: 0.1em 0.3em;
+            border-radius: 3px;
+        }
+
+        .section {
+            margin-bottom: 2rem;
+        }
+
+        .divider {
+            border: none;
+            border-top: 1px solid var(--border-color);
+            margin: 3rem 0;
+        }
+
+        em {
+            font-style: italic;
+            color: var(--text-primary);
+        }
+
+        strong {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        @media (max-width: 600px) {
+            body {
+                font-size: 16px;
+            }
+
+            h1 {
+                font-size: 1.75rem;
+            }
+
+            .container {
+                padding: 2rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Why LLMs Struggle with Arithmetic</h1>
+
+        <p class="lead">Large language models are surprisingly bad at math. This isn't a bug that will be fixed with more training. It's structural.</p>
+
+        <div class="section">
+            <h2>Wrong direction</h2>
+            <p>Humans add numbers right-to-left. Start with the ones column, carry to the tens. LLMs generate text left-to-right. To output <code>157 + 286 = 443</code>, the model must produce the "4" in the hundreds place before calculating whether the tens place generates a carry.</p>
+            <p>It's being asked to write the answer before computing it.</p>
+        </div>
+
+        <div class="section">
+            <h2>No scratchpad</h2>
+            <p>Arithmetic requires working memory. Hold the carry. Track your position. Transformers don't have this. They have attention over previous tokens, which is a powerful yet distinct feature.</p>
+            <p>Chain-of-thought prompting works because it externalizes the scratchpad into the token stream itself.</p>
+        </div>
+
+        <div class="section">
+            <h2>Pattern matching, not algorithms</h2>
+            <p>LLMs learn that <code>7 + 8</code> is often followed by <code>15</code> in training data. They haven't learned the addition algorithm. They've learned a statistical approximation of its outputs.</p>
+            <p>This works for common cases and degrades for rare ones.</p>
+        </div>
+
+        <div class="section">
+            <h2>Tokenization makes it worse</h2>
+            <p><code>12345</code> might become <code>["123", "45"]</code>. The digit structure that makes arithmetic tractable has been obscured before the model sees it.</p>
+            <p>The model must reason about positional place value across arbitrary chunk boundaries.</p>
+
+            <pre><code>enc.encode("12345")   # ["123", "45"]
+enc.encode("12344")   # ["123", "44"]
+
+# To compare these numbers, the model sees:
+# "123" + "45" vs "123" + "44"
+# It must reconstruct digit positions from chunks.</code></pre>
+        </div>
+
+        <div class="section">
+            <h2>Training data sparsity</h2>
+            <p><code>2 + 2 = 4</code> appears constantly. <code>847293 + 392847 = 1240140</code> appears rarely.</p>
+            <p>The model has strong priors on small numbers and weak priors on large ones.</p>
+        </div>
+
+        <hr class="divider">
+
+        <div class="section">
+            <h2>The result</h2>
+            <p>LLMs can do arithmetic. They just do it the hard way—through learned statistical patterns rather than algorithmic execution.</p>
+            <p>This is reliable for small numbers but unreliable for large ones, and fundamentally limited in ways that adding more parameters won't solve.</p>
+        </div>
+    </div>
+</body>
+</html>
