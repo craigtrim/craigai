@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧪</text></svg>">
+    <title>Breaking Text</title>
+    <style>
+        :root {
+            --text-color: #292929;
+            --bg-color: #fff;
+            --accent-color: #1a8917;
+            --border-color: #e6e6e6;
+            --code-bg: #f4f4f4;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: charter, Georgia, Cambria, "Times New Roman", Times, serif;
+            font-size: 21px;
+            line-height: 1.58;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        article {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 40px 24px 80px;
+        }
+
+        h1 {
+            font-family: sohne, "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 42px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 16px;
+            letter-spacing: -0.011em;
+        }
+
+        h2 {
+            font-family: sohne, "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-top: 56px;
+            margin-bottom: 16px;
+            letter-spacing: -0.009em;
+        }
+
+        h3 {
+            font-family: sohne, "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            line-height: 1.4;
+            margin-top: 40px;
+            margin-bottom: 12px;
+        }
+
+        p {
+            margin-bottom: 24px;
+        }
+
+        .lead {
+            font-size: 24px;
+            line-height: 1.5;
+            color: #555;
+            margin-bottom: 32px;
+            font-style: italic;
+        }
+
+        ul, ol {
+            margin-bottom: 24px;
+            padding-left: 30px;
+        }
+
+        li {
+            margin-bottom: 12px;
+        }
+
+        code {
+            font-family: Menlo, Monaco, "Courier New", Courier, monospace;
+            font-size: 16px;
+            background-color: var(--code-bg);
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+
+        pre {
+            font-family: Menlo, Monaco, "Courier New", Courier, monospace;
+            font-size: 15px;
+            background-color: var(--code-bg);
+            padding: 20px;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin-bottom: 24px;
+            line-height: 1.5;
+        }
+
+        blockquote {
+            border-left: 3px solid var(--text-color);
+            margin: 32px 0;
+            padding-left: 20px;
+            font-style: italic;
+        }
+
+        figure {
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        figure img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+
+        figcaption {
+            font-size: 16px;
+            color: #757575;
+            margin-top: 12px;
+            font-style: italic;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: underline;
+        }
+
+        a:hover {
+            color: var(--accent-color);
+        }
+
+        strong {
+            font-weight: 700;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid var(--border-color);
+            margin: 48px 0;
+        }
+
+        .section-break {
+            text-align: center;
+            margin: 48px 0;
+            color: #757575;
+            letter-spacing: 0.5em;
+        }
+
+        .interactive-demo {
+            margin: 40px 0;
+        }
+
+        .interactive-demo iframe {
+            width: 100%;
+            height: 500px;
+            border: 0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .keyword {
+            color: #d73a49;
+        }
+
+        .string {
+            color: #032f62;
+        }
+
+        .comment {
+            color: #6a737d;
+        }
+
+        .function {
+            color: #6f42c1;
+        }
+
+        .number {
+            color: #005cc5;
+        }
+
+        @media (max-width: 728px) {
+            body {
+                font-size: 18px;
+            }
+
+            h1 {
+                font-size: 32px;
+            }
+
+            h2 {
+                font-size: 24px;
+            }
+
+            article {
+                padding: 24px 16px 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <article>
+        <a href="../" style="display: inline-block; margin-bottom: 24px; font-size: 16px; color: #757575; text-decoration: none;">&larr; All Articles</a>
+
+        <h1>Breaking Text</h1>
+
+        <p class="lead">Four algorithms. Four trade-offs. None of them know what a word is. That's why your LLM sees 'str', 'aw', 'berry'.</p>
+
+        <figure id="img-1">
+            <img src="images/breaking-text-01.png" alt="Two scientists standing in a desert of letter blocks">
+            <figcaption>I am not in danger of fragmentation. I am the fragmenter.</figcaption>
+        </figure>
+
+        <p>In the <a href="../tokenization/">previous article</a>, we explored why tokenization is hard. Words aren't what we think they are. Languages don't follow rules. And the whitespace heuristic fails catastrophically outside of English.</p>
+
+        <p>AI systems deploy a collection of statistical hacks, each with its own trade-offs, quirks, and failure modes.</p>
+
+        <p>These algorithms don't understand language.</p>
+
+        <p>They understand frequency distributions.</p>
+
+        <div class="section-break">• • •</div>
+
+        <h2>The Four Approaches</h2>
+
+        <p>Think of tokenization algorithms like different philosophies for dividing a pizza:</p>
+
+        <p><strong>BPE:</strong> Start with crumbs. Merge the pieces that appear together most often. Keep merging until you have reasonably-sized slices.</p>
+
+        <p><strong>WordPiece:</strong> Same idea, but smarter about which pieces "belong" together. Don't just count frequency, but ask whether two pieces appear together <em>more than you'd expect by chance</em>.</p>
+
+        <p><strong>SentencePiece:</strong> Stop assuming the pizza has natural cutting lines. Maybe it's a calzone. Treat the whole thing as dough and let statistics find the boundaries.</p>
+
+        <p><strong>Unigram:</strong> Start with the whole pizza. Remove slices that matter least. Keep removing until you hit your target number of pieces.</p>
+
+        <p>Same problem. Four very different intuitions.</p>
+
+        <h3>BPE: The Compression Algorithm That Could</h3>
+
+        <p><strong>Used by:</strong> <a href="https://openai.com/research/gpt-2">GPT-2</a>, <a href="https://openai.com/research/gpt-3">GPT-3</a>, <a href="https://openai.com/research/gpt-4">GPT-4</a>, <a href="https://ai.meta.com/llama/">LLaMA</a>, Mistral, Claude</p>
+
+        <p>Byte Pair Encoding wasn't invented for NLP. It was invented for data compression. In 1994.</p>
+
+        <p>The insight is elegant: if two bytes frequently appear next to each other, replace them with a single new byte. Repeat until you've compressed the data.</p>
+
+        <p><a href="https://arxiv.org/abs/1508.07909">Sennrich et al. (2016)</a> realized this same logic applies to text. Characters that frequently appear together should become a single token.</p>
+
+        <p><strong>The Algorithm:</strong></p>
+
+        <ol>
+            <li>Start with a vocabulary of individual characters</li>
+            <li>Count every adjacent pair in your training data</li>
+            <li>Merge the most frequent pair into a new token</li>
+            <li>Repeat until you reach your target vocabulary size</li>
+        </ol>
+
+        <pre>Corpus: "low", "lower", "newest"
+
+Step 0: l o w &lt;/w&gt;, l o w e r &lt;/w&gt;, n e w e s t &lt;/w&gt;
+
+Count pairs: (e,s)=1, (s,t)=1, (l,o)=2, (o,w)=2, (w,e)=1...
+
+Merge most frequent: (l,o) &rarr; "lo"
+Result: lo w &lt;/w&gt;, lo w e r &lt;/w&gt;, n e w e s t &lt;/w&gt;
+
+Count pairs again: (lo,w)=2, (e,s)=1, (s,t)=1...
+
+Merge: (lo,w) &rarr; "low"
+Result: low &lt;/w&gt;, low e r &lt;/w&gt;, n e w e s t &lt;/w&gt;
+
+<span class="comment">...continue for thousands of iterations</span></pre>
+
+        <p>After enough merges, common words like "the" become single tokens. Rare words like "Pneumonoultramicroscopicsilicovolcanoconiosis" stay fragmented, assembled from whatever pieces the algorithm has learned.</p>
+
+        <p><strong>The genius:</strong> Common patterns compress. Rare patterns don't. The vocabulary naturally allocates capacity to what matters most.</p>
+
+        <p><strong>The limitation:</strong> BPE is greedy. It merges the most frequent pair <em>right now</em>, with no lookahead. A globally suboptimal merge early on can cascade through the entire vocabulary.</p>
+
+        <h3>WordPiece: Frequency Isn't Everything</h3>
+
+        <p><strong>Used by:</strong> <a href="https://arxiv.org/abs/1810.04805">BERT</a>, DistilBERT, ELECTRA</p>
+
+        <p>Google's WordPiece looks similar to BPE, but asks a subtler question.</p>
+
+        <p>BPE asks: "Which pairs appear most often?"</p>
+
+        <p>WordPiece asks: "Which pairs appear together <em>more than you'd expect by chance</em>?"</p>
+
+        <p>The difference matters. Consider "th" and "e":</p>
+
+        <ul>
+            <li>They're both extremely common</li>
+            <li>They often appear together (as "the")</li>
+            <li>But they also appear separately all the time</li>
+        </ul>
+
+        <p>BPE might merge them just because they're frequent. WordPiece checks whether their co-occurrence is <em>surprising</em>.</p>
+
+        <p>This is <a href="https://en.wikipedia.org/wiki/Pointwise_mutual_information">Pointwise Mutual Information (PMI)</a>:</p>
+
+        <pre><span class="function">score</span>(a, b) = <span class="function">frequency</span>(ab) / (<span class="function">frequency</span>(a) &times; <span class="function">frequency</span>(b))</pre>
+
+        <p>High score = "these tokens belong together."</p>
+
+        <p>Low score = "they're just both common."</p>
+
+        <p><strong>The marker:</strong> WordPiece uses <code>##</code> to indicate continuation tokens:</p>
+
+        <pre><span class="string">"tokenization"</span> &rarr; [<span class="string">"token"</span>, <span class="string">"##ization"</span>]</pre>
+
+        <p>The <code>##</code> says: "I'm not a word start. I attach to whatever came before."</p>
+
+        <p>This explicit marking helps the model understand token boundaries. When BERT sees <code>##ization</code>, it knows this isn't a standalone concept, but it's a suffix.</p>
+
+        <p><strong>The trade-off:</strong> WordPiece is more principled but computationally heavier. You're not just counting; you're computing statistical associations.</p>
+
+        <h3>SentencePiece: What If Spaces Were Lies?</h3>
+
+        <p><strong>Used by:</strong> <a href="https://arxiv.org/abs/1910.10683">T5</a>, ALBERT, XLNet, mBART, <a href="https://ai.meta.com/llama/">LLaMA</a></p>
+
+        <p>Here's the problem with BPE and WordPiece: they assume you know where words begin and end.</p>
+
+        <p>For English, that's mostly fine. Split on spaces, handle punctuation, proceed.</p>
+
+        <p>For Chinese? There are no spaces.</p>
+
+        <p>For Japanese? Some words have spaces, some don't, and the rules are complex.</p>
+
+        <p>For German? "<a href="https://en.wikipedia.org/wiki/Rinderkennzeichnungs-_und_Rindfleischetikettierungs%C3%BCberwachungsaufgaben%C3%BCbertragungsgesetz">Rindfleischetikettierungsueberwachungsaufgabenuebertragungsgesetz</a>" is one word. (It means "beef labeling supervision duties delegation law." Obviously.)</p>
+
+        <figure id="img-2">
+            <img src="images/tokenization-pipeline-01.png" alt="A cow connected to a Rube Goldberg machine producing letter blocks">
+            <figcaption>No one said Rindfleischetikettierungsueberwachungsaufgabenuebertragungsgesetz was going to be easy</figcaption>
+        </figure>
+
+        <p>SentencePiece's insight: <strong>stop pre-tokenizing</strong>.</p>
+
+        <p>Traditional pipeline:</p>
+
+        <pre>Text &rarr; Split on spaces &rarr; Apply BPE/WordPiece to each word</pre>
+
+        <p>SentencePiece pipeline:</p>
+
+        <pre>Text &rarr; Apply subword algorithm directly (spaces are just another character)</pre>
+
+        <p><strong>The marker:</strong> Instead of <code>##</code> for continuations, SentencePiece uses <code>&#x2581;</code> (Unicode 2581) for word starts:</p>
+
+        <pre><span class="string">"Hello world"</span> &rarr; [<span class="string">"&#x2581;Hello"</span>, <span class="string">"&#x2581;world"</span>]
+<span class="string">"&#x4F60;&#x597D;&#x4E16;&#x754C;"</span> &rarr; [<span class="string">"&#x2581;&#x4F60;&#x597D;"</span>, <span class="string">"&#x4E16;&#x754C;"</span>]  <span class="comment">(no assumption about word boundaries)</span></pre>
+
+        <p>The <code>&#x2581;</code> says: "A new word starts here." Everything else is continuation.</p>
+
+        <p>This makes SentencePiece truly language-agnostic. It doesn't care whether your language uses spaces. It learns boundaries from data.</p>
+
+        <p><strong>The flexibility:</strong> SentencePiece isn't an algorithm; it's a framework. It can use BPE internally, or it can use Unigram (which we'll cover next). The key innovation is the preprocessing approach, not the merging logic.</p>
+
+        <h3>Unigram: Start Big, Prune Down</h3>
+
+        <p><strong>Used by:</strong> <a href="https://arxiv.org/abs/1910.10683">T5</a>, <a href="https://arxiv.org/abs/1909.11942">ALBERT</a> (via SentencePiece)</p>
+
+        <p>Every algorithm so far builds up from small pieces. Unigram goes the other direction.</p>
+
+        <p>Start with a huge vocabulary &mdash; every possible substring up to some length. Then ask: "If I remove this token, how much does it hurt my ability to represent the training data?"</p>
+
+        <p>Remove the tokens that hurt least. Keep going until you hit your target size.</p>
+
+        <p><strong>The Math:</strong></p>
+
+        <p>The Unigram model treats tokenization as probabilistic:</p>
+
+        <pre>P(text) = P(token_1) &times; P(token_2) &times; ... &times; P(token_n)</pre>
+
+        <p>For each candidate tokenization, compute the probability. Pick the one with highest probability.</p>
+
+        <p>Unlike BPE, which is deterministic (same text &rarr; same tokens, always), Unigram is inherently probabilistic. The same text could have multiple valid tokenizations, and the algorithm picks the most likely one.</p>
+
+        <p><strong>Example:</strong></p>
+
+        <pre><span class="string">"unaffable"</span> could be tokenized as:
+[<span class="string">"un"</span>, <span class="string">"aff"</span>, <span class="string">"able"</span>]     &rarr; P = <span class="number">0.003</span>
+[<span class="string">"una"</span>, <span class="string">"ff"</span>, <span class="string">"able"</span>]     &rarr; P = <span class="number">0.001</span>
+[<span class="string">"un"</span>, <span class="string">"affable"</span>]         &rarr; P = <span class="number">0.008</span>  <span class="comment">&larr; winner</span></pre>
+
+        <p><strong>The advantage:</strong> Unigram naturally handles ambiguity. When there are multiple reasonable tokenizations, it picks the most probable one based on training data statistics.</p>
+
+        <p><strong>The training trick:</strong> During training, you can randomly sample from multiple tokenizations (not just the best one). This is called "subword regularization." It helps the model learn that different tokenizations represent the same content.</p>
+
+        <h3>tiktoken: When Theory Meets Production</h3>
+
+        <p><strong>Used by:</strong> GPT-3.5, GPT-4, ChatGPT</p>
+
+        <p>tiktoken isn't a new algorithm. It's BPE, implemented in Rust, wrapped for Python.</p>
+
+        <p>Why does this matter?</p>
+
+        <p>Because tokenization happens on every single API call. Every prompt. Every response. Millions of times per second across OpenAI's infrastructure.</p>
+
+        <p><strong>The numbers:</strong></p>
+
+        <ul>
+            <li>3-6x faster than HuggingFace tokenizers</li>
+            <li>Exact compatibility with OpenAI's production systems</li>
+            <li>Open source: <code>pip install tiktoken</code></li>
+        </ul>
+
+        <pre><span class="keyword">import</span> tiktoken
+
+enc = tiktoken.<span class="function">encoding_for_model</span>(<span class="string">"gpt-4"</span>)
+tokens = enc.<span class="function">encode</span>(<span class="string">"Hello, world!"</span>)
+<span class="function">print</span>(tokens)      <span class="comment"># [9906, 11, 1917, 0]</span>
+<span class="function">print</span>(<span class="function">len</span>(tokens)) <span class="comment"># 4 tokens</span></pre>
+
+        <p><strong>Try it yourself:</strong></p>
+
+        <figure class="interactive-demo">
+            <iframe
+                src="https://6pd964.csb.app/"
+                title="Breaking Text - Live Tokenizer Comparison"
+                allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+                sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts">
+            </iframe>
+            <figcaption>Compare how GPT-3, GPT-4, GPT-4o, and SentencePiece tokenize the same input in real-time.</figcaption>
+        </figure>
+
+        <p><strong>The lesson:</strong> Algorithmic elegance matters, but so does engineering. GPT-4 didn't need a better tokenization algorithm. It needed the same algorithm to run faster.</p>
+
+        <div class="section-break">• • •</div>
+
+        <h2>The Comparison</h2>
+
+        <p><strong>If you're using a pre-trained model:</strong> Use whatever tokenizer it was trained with. Seriously. Don't mix and match. A model trained with BPE will produce garbage if you feed it WordPiece tokens.</p>
+
+        <p><strong>If you're training from scratch:</strong></p>
+
+        <ul>
+            <li><strong>English-only, BERT-style:</strong> WordPiece</li>
+            <li><strong>Multilingual:</strong> SentencePiece (with Unigram or BPE)</li>
+            <li><strong>Generative, GPT-style:</strong> BPE (via tiktoken or HuggingFace)</li>
+            <li><strong>Research, want flexibility:</strong> SentencePiece with Unigram</li>
+        </ul>
+
+        <p><strong>If you're building applications:</strong> Just count your tokens before sending.</p>
+
+        <pre><span class="keyword">import</span> tiktoken
+
+<span class="keyword">def</span> <span class="function">count_tokens</span>(text, model=<span class="string">"gpt-4"</span>):
+    enc = tiktoken.<span class="function">encoding_for_model</span>(model)
+    <span class="keyword">return</span> <span class="function">len</span>(enc.<span class="function">encode</span>(text))
+
+<span class="comment"># Now you can estimate costs, check context limits, etc.</span></pre>
+
+        <div class="section-break">• • •</div>
+
+        <h2>What The Algorithms Actually Do</h2>
+
+        <p>None of these algorithms understand language.</p>
+
+        <p>BPE finds frequent patterns. WordPiece finds statistically associated patterns. SentencePiece treats text as a byte stream. Unigram optimizes a probability distribution.</p>
+
+        <p>They're all just compression algorithms wearing linguistics as a costume.</p>
+
+        <figure id="img-3">
+            <img src="images/tokenization-pipeline-02.png" alt="A scientist at an RV cooking letter blocks">
+            <figcaption>We're not cooking. We're compressing.</figcaption>
+        </figure>
+
+        <p>And yet: they work. GPT-4 can write sonnets and debug code, processing text through an algorithm designed for data compression in 1994.</p>
+    </article>
+</body>
+</html>
