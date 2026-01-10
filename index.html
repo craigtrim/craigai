@@ -611,6 +611,26 @@
                     <img src="images/general/ask-a-linguist-waste-an-afternoon.png" alt="Ask a linguist" class="artwork-image">
                     <div class="artwork-caption">Ask a Linguist, Waste an Afternoon</div>
                 </div>
+
+                <!-- From: breaking-text/index.html -->
+                <!-- Randomly shows one of two images -->
+                <div class="artwork-card">
+                    <a href="breaking-text/#img-1">
+                        <img id="breaking-text-random" src="" alt="Breaking Text illustration" class="artwork-image">
+                        <div id="breaking-text-caption" class="artwork-caption"></div>
+                    </a>
+                </div>
+                <script>
+                    (function() {
+                        const options = [
+                            { src: 'breaking-text/images/breaking-text-01.png', caption: 'I am not in danger of fragmentation. I am the fragmenter.' },
+                            { src: 'breaking-text/images/tokenization-pipeline-02.png', caption: "We're not cooking. We're compressing." }
+                        ];
+                        const choice = options[Math.floor(Math.random() * options.length)];
+                        document.getElementById('breaking-text-random').src = choice.src;
+                        document.getElementById('breaking-text-caption').textContent = choice.caption;
+                    })();
+                </script>
             </div>
         </section>
 
