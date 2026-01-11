@@ -10,20 +10,16 @@
     - Available demos: shannon, eliza, dissociated, travesty, rnn, graves
 
     IMAGES (in ./images/):
-    - march-of-progress-01.png: Opening "evolution" image
+    - march-of-progress-01.png: Opening "evolution" cartoon
     - racter-policemans-beard.webp: RACTER book hawk illustrations
-    - byte-travesty-title.png, byte-travesty-authors.png: BYTE Magazine 1984 screenshots
-    - herd-of-unicorns-01.png: GPT-2 unicorn section
-    - snake-to-tail-01.png: Model collapse / poisoned well
-    - no-more-books-01.png: Closing "data wall" image
+    - byte-page-01.png through byte-page-15.png: BYTE Magazine 1984 (15 pages)
+    - herd-of-unicorns-01.png: GPT-2 unicorn cartoon
+    - snake-to-tail-01.png: Model collapse / poisoned well cartoon
+    - no-more-books-01.png: Closing "data wall" cartoon
 
     DEMO PREVIEW IMAGES (in ./images/):
-    - demo-shannon.webp: Markov chain demo preview
-    - demo-eliza.webp: ELIZA chatbot demo preview
-    - demo-dissociated.webp: Dissociated Press demo preview
-    - demo-travesty.webp: Travesty Generator demo preview
-    - demo-rnn.webp: RNN demo preview (Sutskever 2011)
-    - demo-graves.webp: LSTM/handwriting demo preview (Graves 2013)
+    - demo-shannon.webp, demo-eliza.webp, demo-dissociated.webp
+    - demo-travesty.webp, demo-rnn.webp, demo-graves.webp
 
     STYLE CONVENTIONS:
     - Uses Medium-like typography (charter font for body, sohne for headings)
@@ -38,10 +34,23 @@
     - Match Medium article for text, links, images
     - Image captions must match Medium exactly
 
-    LIGHTBOX MODAL:
-    - Add class="lightbox-trigger" and data-caption="..." to make images clickable
+    BREAKOUT IMAGES (Medium-style wider than text):
+    - Add class="breakout" to <figure> elements to make them 220px wider than text column
+    - Demo embeds (.demo-embed) automatically have breakout styling
+    - Responsive: collapses to normal width on screens < 900px
+    - Currently all figures use breakout styling for visual consistency
+
+    LIGHTBOX MODAL (single image popup):
+    - Add class="lightbox-trigger" and data-caption="..." to <img> for clickable zoom
     - Currently enabled for 3 cartoon images: march-of-progress, herd-of-unicorns, no-more-books
-    - Click image to open, click X/overlay/Escape to close
+    - Close via: X button, click overlay, or Escape key
+
+    BYTE MAGAZINE GALLERY MODAL (multi-page scrollable):
+    - Triggered by clicking the BYTE Magazine page 1 image (id="byteGalleryTrigger")
+    - Shows all 15 pages in a scrollable dark overlay
+    - Figure needs both class="breakout gallery-trigger" for styling + hover hint
+    - Close via: X button or Escape key
+    - Gallery HTML is at bottom of <body>, contains all 15 page images
 -->
 <html lang="en">
 <head>
