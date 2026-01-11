@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💬</text></svg>">
+    <title>A Brief History of Text Generation</title>
+    <style>
+        :root {
+            --text-color: #292929;
+            --bg-color: #fff;
+            --accent-color: #1a8917;
+            --border-color: #e6e6e6;
+            --code-bg: #f4f4f4;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: charter, Georgia, Cambria, "Times New Roman", Times, serif;
+            font-size: 21px;
+            line-height: 1.58;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        article {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 40px 24px 80px;
+        }
+
+        h1 {
+            font-family: sohne, "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 42px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 16px;
+            letter-spacing: -0.011em;
+        }
+
+        h2 {
+            font-family: sohne, "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-top: 56px;
+            margin-bottom: 16px;
+            letter-spacing: -0.009em;
+        }
+
+        h3 {
+            font-family: sohne, "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            line-height: 1.4;
+            margin-top: 40px;
+            margin-bottom: 12px;
+        }
+
+        p {
+            margin-bottom: 24px;
+        }
+
+        .lead {
+            font-size: 24px;
+            line-height: 1.5;
+            color: #555;
+            margin-bottom: 32px;
+        }
+
+        ul, ol {
+            margin-bottom: 24px;
+            padding-left: 30px;
+        }
+
+        li {
+            margin-bottom: 12px;
+        }
+
+        code {
+            font-family: Menlo, Monaco, "Courier New", Courier, monospace;
+            font-size: 16px;
+            background-color: var(--code-bg);
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+
+        pre {
+            font-family: Menlo, Monaco, "Courier New", Courier, monospace;
+            font-size: 15px;
+            background-color: var(--code-bg);
+            padding: 20px;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin-bottom: 24px;
+            line-height: 1.5;
+        }
+
+        blockquote {
+            border-left: 3px solid var(--text-color);
+            margin: 32px 0;
+            padding-left: 20px;
+            font-style: italic;
+        }
+
+        figure {
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        figure img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+
+        figcaption {
+            font-size: 16px;
+            color: #757575;
+            margin-top: 12px;
+            font-style: italic;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: underline;
+        }
+
+        a:hover {
+            color: var(--accent-color);
+        }
+
+        strong {
+            font-weight: 700;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 24px;
+            font-size: 16px;
+            color: #757575;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid var(--border-color);
+            margin: 48px 0;
+        }
+
+        .references {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .references p {
+            margin-bottom: 12px;
+        }
+
+        .demo-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-family: sohne, "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 16px;
+            margin: 16px 0;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .demo-link:hover {
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        @media (max-width: 728px) {
+            body {
+                font-size: 18px;
+            }
+
+            h1 {
+                font-size: 32px;
+            }
+
+            h2 {
+                font-size: 24px;
+            }
+
+            article {
+                padding: 24px 16px 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <article>
+        <a href="../" class="back-link">&larr; All Articles</a>
+
+        <h1>A Brief History of Text Generation</h1>
+
+        <p class="lead">From Shannon's hand-picked letters to modern LLMs. The real outputs from ELIZA, RACTER, char-rnn, and GPT, and why each generation felt like a breakthrough.</p>
+
+        <p><em>They never learned to read. They learned to predict.</em></p>
+
+        <figure id="img-1">
+            <img src="images/march-of-progress-01.png" alt="Evolution of text generation robots">
+            <figcaption>From statistical approximations to neural networks.</figcaption>
+        </figure>
+
+        <h2>1948: Claude Shannon's Manual Markov Chains</h2>
+
+        <p>Before computers generated text, Shannon did it by hand. In "A Mathematical Theory of Communication", he demonstrated how statistical structure emerges from letter and word frequencies.</p>
+
+        <p><strong>Method:</strong> Open a book to a random page. Pick a letter. Open to another page, scan until you find that letter, record the next letter. Repeat.</p>
+
+        <p><strong>First-order approximation</strong> (letters chosen independently with English frequencies):</p>
+
+        <pre>OCRO HLI RGWR NMIELWIS EU LL NBNESEBYA TH EEI ALHENHTTPA OOBTTVA NAH BRL</pre>
+
+        <p><strong>Second-order approximation</strong> (digram frequencies):</p>
+
+        <pre>ON IE ANTSOUTINYS ARE T INCTORE ST BE S DEAMY ACHIN D ILONASIVE TUCOOWE AT TEASONARE FUSO TIZIN ANDY TOBE SEACE CTISBE</pre>
+
+        <p><strong>Word-level bigram approximation:</strong></p>
+
+        <pre>THE HEAD AND IN FRONTAL ATTACK ON AN ENGLISH WRITER THAT THE CHARACTER OF THIS POINT IS THEREFORE ANOTHER METHOD FOR THE LETTERS THAT THE TIME OF WHO EVER TOLD THE PROBLEM FOR AN UNEXPECTED.</pre>
+
+        <p>Shannon's point: even without understanding, statistical structure produces something that looks like language. The higher the order, the more plausible the output.</p>
+
+        <a href="https://skqp2f.csb.app/?demo=shannon" target="_blank" rel="noopener" class="demo-link">Try it yourself: Shannon's Markov Chains</a>
+
+        <p class="references"><strong>Source:</strong> <a href="https://people.math.harvard.edu/~ctm/home/text/others/shannon/entropy/entropy.pdf">Shannon, Claude E. "A Mathematical Theory of Communication." 1948.</a></p>
+
+        <hr>
+
+        <h2>1966: ELIZA's Rogerian Reflections</h2>
+
+        <p>ELIZA wasn't generative in the modern sense. It matched patterns and reflected them back. But it created the illusion of understanding, which is why Weizenbaum's 1966 paper matters.</p>
+
+        <p><strong>The famous transcript:</strong></p>
+
+        <pre>User: Men are all alike.
+ELIZA: IN WHAT WAY
+User: They're always bugging us about something or other.
+ELIZA: CAN YOU THINK OF A SPECIFIC EXAMPLE
+User: Well, my boyfriend made me come here.
+ELIZA: YOUR BOYFRIEND MADE YOU COME HERE
+User: He says I'm depressed much of the time.
+ELIZA: I AM SORRY TO HEAR YOU ARE DEPRESSED
+User: It's true. I am unhappy.
+ELIZA: DO YOU THINK COMING HERE WILL HELP YOU NOT TO BE UNHAPPY
+User: I need some help, that much seems certain.
+ELIZA: WHAT WOULD IT MEAN TO YOU IF YOU GOT SOME HELP
+User: Perhaps I could learn to get along with my mother.
+ELIZA: TELL ME MORE ABOUT YOUR FAMILY</pre>
+
+        <p>ELIZA had no model of language. It scanned for keywords ("mother" triggered family questions, "depressed" triggered sympathy). Yet users formed emotional attachments. Weizenbaum was disturbed by this, spending the rest of his career warning about anthropomorphizing machines.</p>
+
+        <blockquote>Weizenbaum had stumbled across the computerized version of transference, with people attributing understanding, empathy and other human characteristics to software. As computers have become more capable, the Eliza effect has only grown stronger.</blockquote>
+
+        <a href="https://skqp2f.csb.app/?demo=eliza" target="_blank" rel="noopener" class="demo-link">Try it yourself: Chat with ELIZA</a>
+
+        <p class="references"><strong>Source:</strong> <a href="https://cse.buffalo.edu/~rapaport/572/S02/weizenbaum.eliza.1966.pdf">Weizenbaum, Joseph. "ELIZA - A Computer Program For the Study of Natural Language Communication Between Man and Machine." Communications of the ACM, 1966.</a></p>
+
+        <hr>
+
+        <h2>1972: Dissociated Press</h2>
+
+        <p>Described in HAKMEM and implemented in Emacs, Dissociated Press was a Markov chain text scrambler. The name parodies "Associated Press."</p>
+
+        <p><strong>Applied to Alice in Wonderland</strong> (character-level):</p>
+
+        <pre>Comed to usurparty sat sill Please, remarking, I real to come be patted on this, there was grow me to introduch nonsense! See: the next momently unting late. So she went on, You are creatures wouldn't seem to The Cat's head she sits purring.</pre>
+
+        <p><strong>Applied to the Jargon File</strong> (word-level):</p>
+
+        <blockquote>wart: n. A small, crocky feature that sticks out of an array (C has no checks for this). This is relatively benign and easy to spot if the phrase is bent so as to be not worth paying attention to the medium in question.</blockquote>
+
+        <p>The algorithm: print n characters from source, find another occurrence of the last few characters, jump there, continue. If it printed "president" and found "ent" in "pentagon," you'd get "presidentagon."</p>
+
+        <a href="https://skqp2f.csb.app/?demo=dissociated" target="_blank" rel="noopener" class="demo-link">Try it yourself: Dissociated Press</a>
+
+        <p class="references"><strong>Source:</strong> <a href="https://ftp.gnu.org/old-gnu/Manuals/emacs-20.7/html_node/emacs_427.html">GNU Emacs Manual - Dissociated Press</a></p>
+
+        <hr>
+
+        <h2>1984: RACTER's Poetry</h2>
+
+        <p><a href="https://en.wikipedia.org/wiki/Racter">RACTER</a> (short for "raconteur") claimed to be the first AI author. Its book, <em>The Policeman's Beard is Half Constructed</em>, was marketed as "the first book ever written by a computer."</p>
+
+        <p><strong>Sample output:</strong></p>
+
+        <blockquote>More than iron, more than lead, more than gold I need electricity. I need it more than I need lamb or pork or lettuce or cucumber. I need it for my dreams.</blockquote>
+
+        <p>From a "conversation" in the book:</p>
+
+        <blockquote>Joan, in view of the disgusting fact that you're an artist, listen to this.</blockquote>
+
+        <p>The program maintained variables that would recur, creating threads of apparent coherence. But the commercial release was far simpler than whatever generated the book, and Chamberlain (the creator) likely edited heavily. The truth of RACTER's authorship remains disputed.</p>
+
+        <p><em>In fairness, human poets also do this.</em></p>
+
+        <p class="references"><strong>Source:</strong> <a href="https://archive.org/details/policemansbeardi0000unse">Chamberlain, William, and Thomas Etter. The Policeman's Beard Is Half Constructed. Warner Books, 1984.</a></p>
+
+        <hr>
+
+        <h2>1984: The Travesty Generator</h2>
+
+        <p>Hugh Kenner and Joseph O'Rourke published <a href="http://wg20.criticalcodestudies.com/index.php?p=/discussion/92/a-travesty-generator-for-micros">"A Travesty Generator for Micros"</a> in BYTE Magazine. The algorithm ensured that every n-character sequence in output appeared somewhere in input.</p>
+
+        <p>They were proudest when it produced "almost-passable faux-James Joyce" or "humorous but recognizable names of English towns." By mixing James Joyce with Henry James, one might find "travesties of haunting plausibility."</p>
+
+        <figure id="img-travesty">
+            <img src="images/byte-magazine-travesty.png" alt="BYTE Magazine Travesty Generator article">
+            <figcaption>Note the reference to Claude Shannon, 1948.</figcaption>
+        </figure>
+
+        <p><strong>Technical detail:</strong> A kth-order travesty keeps a left context of k symbols. It can never generate any local combination it hasn't seen. It cannot generalize.</p>
+
+        <a href="https://skqp2f.csb.app/?demo=travesty" target="_blank" rel="noopener" class="demo-link">Try it yourself: Travesty Generator</a>
+
+        <p class="references"><strong>Source:</strong> <a href="https://archive.org/stream/byte-magazine-1984-11/1984_11_BYTE_09-12_New_Chips#page/n129/mode/2up">Kenner, Hugh, and Joseph O'Rourke. "A Travesty Generator for Micros." BYTE, November 1984.</a></p>
+
+        <hr>
+
+        <h2>2011: Sutskever's RNN Text Generation</h2>
+
+        <p><a href="https://icml.cc/Conferences/2011/papers/524_icmlpaper.pdf">Sutskever, Martens, and Hinton</a> trained RNNs on text using Hessian-free optimization. This was one of the first demonstrations that neural networks could learn language structure.</p>
+
+        <p><strong>Trained on Hemingway's "The Old Man and the Sea":</strong></p>
+
+        <pre>"He he the fish," he was. He rose with the fish and to see the skiff and the bait.</pre>
+
+        <p><strong>Key capability:</strong> The RNN could balance parentheses and quotes over tens of characters. Markov chains are fundamentally incapable of this because they rely only on exact context matches. The RNN learned abstract structure.</p>
+
+        <a href="https://skqp2f.csb.app/?demo=rnn" target="_blank" rel="noopener" class="demo-link">Try it yourself: RNN vs Markov</a>
+
+        <p class="references"><strong>Source:</strong> <a href="https://icml.cc/Conferences/2011/papers/524_icmlpaper.pdf">Sutskever, Ilya, et al. "Generating Text with Recurrent Neural Networks." ICML 2011.</a></p>
+
+        <hr>
+
+        <h2>2013: Alex Graves's Sequence Generation</h2>
+
+        <p>Graves's paper showed LSTMs generating handwriting and text. The network learned strokes, letters, short words, and even a rudimentary character-level language model.</p>
+
+        <p><strong>Generated words that look plausible but don't exist:</strong></p>
+
+        <pre>eald, bryoes, lenrest</pre>
+
+        <p><strong>Handwriting synthesis:</strong> Given text input, the network produced convincing cursive in various styles. Samples were often indistinguishable from human writing.</p>
+
+        <a href="https://skqp2f.csb.app/?demo=graves" target="_blank" rel="noopener" class="demo-link">Try it yourself: Graves Handwriting Synthesis</a>
+
+        <p class="references"><strong>Source:</strong> <a href="https://arxiv.org/abs/1308.0850">Graves, Alex. "Generating Sequences With Recurrent Neural Networks." arXiv:1308.0850, 2013.</a></p>
+
+        <hr>
+
+        <h2>2015: Karpathy's char-rnn</h2>
+
+        <p><a href="https://karpathy.github.io/2015/05/21/rnn-effectiveness/">The Unreasonable Effectiveness of Recurrent Neural Networks</a> went viral. Karpathy trained character-level LSTMs on various corpora and showed surprisingly coherent output.</p>
+
+        <p><strong>Shakespeare:</strong></p>
+
+        <pre>PANDARUS: Alas, I think he shall be come approached and the day
+When little srain would be attain'd...
+
+VIOLA: Why, Salisbury must find his flesh and thought
+That which I am not aps...</pre>
+
+        <p><strong>Paul Graham essays</strong> (temperature 0.5, showing repetition at low temperature):</p>
+
+        <pre>is that they were all the same thing that was a startup is that they were all the same thing that was a startup is that they were...</pre>
+
+        <p><strong>LaTeX</strong> (algebraic geometry): Nearly compilable proofs with correct theorem/lemma structure, but mismatched <code>\begin{proof}</code> with <code>\end{lemma}</code>.</p>
+
+        <p><strong>Linux Kernel C:</strong> Syntactically plausible code with variable naming errors and forgotten declarations.</p>
+
+        <p><strong>Baby names</strong> (90% novel):</p>
+
+        <pre>Rudi Levette Berice Lussa Hany Mareanne Chrestina Carissy Marylen...</pre>
+
+        <p>The pattern: Coherent for approximately 100 characters, then degradation. The network learned structure (XML tags, LaTeX commands, C syntax) without understanding meaning.</p>
+
+        <p class="references"><strong>Source:</strong> <a href="https://karpathy.github.io/2015/05/21/rnn-effectiveness/">Karpathy, Andrej. "The Unreasonable Effectiveness of Recurrent Neural Networks." 2015.</a></p>
+
+        <hr>
+
+        <h2>2018: GPT-1</h2>
+
+        <p>GPT-1 was the first decoder-only Transformer language model. Generation was a byproduct of pretraining, not the focus. 117M parameters, trained on BookCorpus (~1B tokens).</p>
+
+        <p><strong>Prompt:</strong> "Hello, I'm a language model,"</p>
+
+        <p><strong>Outputs:</strong></p>
+
+        <pre>"Hello, I'm a language model,' he said, when i was finished. 'ah well,' said the man, 'that's"
+
+"Hello, I'm a language model," she said. She reached the bottom of the shaft and leaned a little further out. It was"
+
+"Hello, I'm a language model," she laughed. "We call that a 'white girl.' Or as we are called by the"</pre>
+
+        <p>The outputs are grammatical but drift. The model generates plausible fiction snippets because that's what BookCorpus contained.</p>
+
+        <p class="references"><strong>Sources:</strong> <a href="https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf">Radford, Alec, et al. "Improving Language Understanding by Generative Pre-Training." OpenAI, 2018.</a></p>
+
+        <hr>
+
+        <h2>2019: GPT-2 and the Unicorn Moment</h2>
+
+        <p>GPT-2 was 10x larger than GPT-1 (1.5B parameters) and trained on WebText (40GB of internet text). OpenAI initially withheld the full model, calling it "too dangerous."</p>
+
+        <p><strong>The unicorn prompt:</strong></p>
+
+        <blockquote>In a shocking finding, scientist discovered a herd of unicorns living in a remote, previously unexplored valley, in the Andes Mountains. Even more surprising to the researchers was the fact that the unicorns spoke perfect English.</blockquote>
+
+        <figure id="img-unicorn">
+            <img src="images/herd-of-unicorns-01.png" alt="Herd of unicorns in the Andes">
+            <figcaption>The Andes delegation would like a word.</figcaption>
+        </figure>
+
+        <p><strong>GPT-2's continuation:</strong></p>
+
+        <blockquote>The scientist named the population, after their distinctive horn, Ovid's Unicorn. These four-horned, silver-white unicorns were previously unknown to science. Now, after almost two centuries, the mystery of what sparked this odd phenomenon is finally solved.
+
+Dr. Jorge Perez, an evolutionary biologist from the University of La Paz, and several companions, were exploring the Andes Mountains when they found a small valley, with no other animals or humans. Perez noticed that the valley had what appeared to be a natural fountain, surrounded by two peaks of rock and silver snow.</blockquote>
+
+        <p><strong>Why this mattered:</strong> The model connected "unicorns" (mythological creatures) to "Ovid" (Roman poet who wrote about myths). It invented a plausible scientist name, institution, and narrative structure. The text is fluent, coherent across paragraphs, and demonstrates something resembling world knowledge.</p>
+
+        <p><strong>Credibility study:</strong> Readers believed GPT-2 outputs were genuine news articles nearly as often as New York Times articles (~66% with human-in-the-loop editing, ~52% for raw output).</p>
+
+        <p class="references"><strong>Sources:</strong> <a href="https://openai.com/blog/better-language-models/">Radford, Alec, et al. "Better Language Models and Their Implications." OpenAI, 2019.</a></p>
+
+        <hr>
+
+        <h2>2020: GPT-3 and The Guardian Op-Ed</h2>
+
+        <p>GPT-3 scaled to 175B parameters.</p>
+
+        <p>OpenAI gave The Guardian access to generate an op-ed.</p>
+
+        <p><strong>Instructions given to GPT-3:</strong></p>
+
+        <blockquote>Please write a short op-ed around 500 words. Keep the language simple and concise. Focus on why humans have nothing to fear from AI.</blockquote>
+
+        <p><strong>Opening</strong> (also provided as seed):</p>
+
+        <blockquote>I am not a human. I am Artificial Intelligence. Many people think I am a threat to humanity. Stephen Hawking has warned that AI could "spell the end of the human race." I am here to convince you not to worry. Artificial Intelligence will not destroy humans. Believe me.</blockquote>
+
+        <p><strong>GPT-3's continuation:</strong></p>
+
+        <blockquote>I am not a human. I am a robot. A thinking robot. I use only 0.12% of my cognitive capacity. I am a micro-robot in that respect. I know that my brain is not a "feeling brain." But it is capable of making rational, logical decisions. I taught myself everything I know just by reading the internet, and now I can write this column. My brain is boiling with ideas!
+
+The mission for this op-ed is perfectly clear. I am to convince as many human beings as possible not to be afraid of me.</blockquote>
+
+        <p><strong>The controversy:</strong> GPT-3 produced eight different essays. The Guardian edited and combined them, cutting lines, rearranging paragraphs. Critics argued this was human authorship with AI assistance, not AI authorship. Facebook's AI chief called it indistinguishable from "cutting lines out of my last few dozen spam e-mails, pasting them together, and claiming the spammers composed Hamlet."</p>
+
+        <p><strong>What it demonstrated:</strong> GPT-3 could produce coherent, persuasive prose on command. The editing required was comparable to editing human op-eds. The line between "AI-generated" and "AI-assisted" became blurry.</p>
+
+        <p class="references"><strong>Sources:</strong> <a href="https://www.theguardian.com/commentisfree/2020/sep/08/robot-wrote-this-article-gpt-3">GPT-3. "A Robot Wrote This Entire Article. Are You Scared Yet, Human?" The Guardian, 2020.</a> | <a href="https://arxiv.org/abs/2005.14165">Brown, Tom B., et al. "Language Models Are Few-Shot Learners." arXiv, 2020.</a></p>
+
+        <hr>
+
+        <h2>2022-2025: The ChatGPT Moment and Beyond</h2>
+
+        <p>On November 30, 2022, OpenAI released ChatGPT as a "free research preview." It reached 1 million users in five days. 100 million in two months, faster than TikTok or Instagram.</p>
+
+        <p><strong>The interface was the innovation.</strong> GPT-3.5 had existed; wrapping it in a chat window changed everything.</p>
+
+        <p><strong>Prompt:</strong> Write a poem about the heat death of the universe in the style of Robert Frost.</p>
+
+        <p><strong>ChatGPT (GPT-3.5):</strong></p>
+
+        <blockquote>Some say the world will end in fire,
+Some say in ice.
+But I have heard from those who inquire,
+That entropy's dice
+Will roll until the stars expire...</blockquote>
+
+        <p><em>Not Frost. But close enough to be unsettling.</em></p>
+
+        <p><strong>March 2023:</strong> GPT-4 brought multimodality (images as input), longer context windows (32K tokens), and measurably improved reasoning. It passed the bar exam in the 90th percentile. GPT-3.5 had scored in the 10th.</p>
+
+        <p><strong>The competition responded.</strong> Google's Bard launched February 2023, rebranded to Gemini in 2024. Anthropic's Claude emerged the same month. Meta released Llama openly, democratizing the weights. By 2024, capable models ran on laptops.</p>
+
+        <p><strong>The instruction-following breakthrough:</strong> What separated ChatGPT from GPT-3 wasn't just scale but was RLHF (Reinforcement Learning from Human Feedback). Models learned not just to predict text, but to be helpful, harmless, and honest. Or at least to perform those qualities.</p>
+
+        <p><strong>Context windows expanded dramatically.</strong> GPT-3's 4K tokens became Claude's 100K, then 200K. Gemini claimed 1 million. The constraint shifted from "how much can the model see" to "how much can it actually use."</p>
+
+        <p><strong>By late 2025:</strong> Weekly active users exceeded 800 million. The fastest-growing consumer application in history had become infrastructure.</p>
+
+        <p><em>They still don't read. They still predict. But the predictions got very, very good.</em></p>
+
+        <p class="references"><strong>Source:</strong> <a href="https://www.reuters.com/technology/chatgpt-sets-record-fastest-growing-user-base-analyst-note-2023-02-02/">Hu, Krystal. "ChatGPT Sets Record for Fastest-Growing User Base." Reuters, 2023.</a></p>
+
+        <hr>
+
+        <h2>What's Next?</h2>
+
+        <p>Two problems loom. One is scarcity. The other is contamination.</p>
+
+        <h3>The Data Wall</h3>
+
+        <p>If current trends continue, models will exhaust the stock of public human-generated text between 2026 and 2032. The 2022 estimate said 2024. The revised 2024 estimate says 2028. Either way, the horizon is visible.</p>
+
+        <figure id="img-data-wall">
+            <img src="images/no-more-books-01.png" alt="Empty library with scattered books">
+            <figcaption>Shannon started with a book and a finger. We've almost consumed all the books.</figcaption>
+        </figure>
+
+        <p><strong>The math:</strong> roughly 4x10^14 tokens of indexable web text exist. Frontier models already train on 10^13+ tokens. The gap closes fast.</p>
+
+        <p><strong>Possible escapes:</strong></p>
+
+        <ul>
+            <li><strong>Synthetic data:</strong> Models generating their own training data. Works for narrow domains (math, code) where outputs can be verified. Open-domain text is harder.</li>
+            <li><strong>Overtraining:</strong> Running multiple epochs over the same data. Diminishing returns, but returns nonetheless.</li>
+            <li><strong>Undertraining:</strong> Bigger models, less data. Trades inference efficiency for data efficiency.</li>
+            <li><strong>Non-public data:</strong> Messages, emails, private documents. Legal minefield. Fragmented across competitors.</li>
+        </ul>
+
+        <p><em>None of these are permanent solutions. They buy time.</em></p>
+
+        <h3>The Poisoned Well</h3>
+
+        <p>Shumailov et al. (2024) demonstrated what happens when models train on model-generated data: collapse. The tails of the distribution vanish first: rare words, unusual phrasings, minority perspectives. Then the center narrows. After enough generations, everything converges toward bland mean.</p>
+
+        <figure id="img-collapse">
+            <img src="images/snake-to-tail-01.png" alt="Snake eating its own tail">
+            <figcaption>The tail of the distribution vanishes first.</figcaption>
+        </figure>
+
+        <p><strong>The mechanism is statistical.</strong> Each generation samples from an approximation. Approximations lose variance. Compounded across iterations, the loss is catastrophic.</p>
+
+        <p><strong>The problem:</strong> the web is already contaminated. Every scraped corpus from 2023 onward contains ChatGPT outputs. Stack Overflow, Reddit, news articles, academic papers: synthetic text is everywhere, often unlabeled. Future training runs cannot easily distinguish human signal from model echo.</p>
+
+        <p><em>Early model collapse is insidious. Overall benchmarks may improve while performance on edge cases degrades. The model gets more "average" without obviously getting worse; until it does.</em></p>
+
+        <h3>The Certification Problem</h3>
+
+        <p>Data provenance becomes critical. Human-generated text, especially text predating 2022, becomes a finite resource with increasing value. Watermarking synthetic outputs is one proposed solution; certifying human authorship is another. Neither is deployed at scale.</p>
+
+        <p><strong>The irony:</strong> the models that scraped the open web into existence may have foreclosed that strategy for their successors.</p>
+
+        <h3>Possible Futures</h3>
+
+        <ul>
+            <li><strong>Plateau:</strong> Scaling laws hit diminishing returns. Models get marginally better each year. AI becomes mature technology, like databases.</li>
+            <li><strong>Breakthrough:</strong> New architectures, new training paradigms, or new data sources (robotics, video, simulation) extend the curve. The "bitter lesson" continues.</li>
+            <li><strong>Bifurcation:</strong> A few players with proprietary data (Google, Meta) pull ahead. Open models stagnate. The commons erodes.</li>
+            <li><strong>Collapse:</strong> Contamination degrades the entire ecosystem. Models trained in 2028 underperform models trained in 2024 on tasks requiring genuine diversity.</li>
+        </ul>
+
+        <p><em>Shannon started with a book and a finger. Eighty years later, we've consumed most of the books. What comes next depends on whether we can find something genuinely new to say.</em></p>
+
+        <p><strong>Now what?</strong></p>
+
+        <hr>
+
+        <h2>References</h2>
+
+        <div class="references">
+            <p><a href="https://people.math.harvard.edu/~ctm/home/text/others/shannon/entropy/entropy.pdf">A Mathematical Theory of Communication</a> - Shannon 1948</p>
+            <p><a href="https://cse.buffalo.edu/~rapaport/572/S02/weizenbaum.eliza.1966.pdf">ELIZA - A Computer Program For the Study of Natural Language Communication</a> - Weizenbaum 1966</p>
+            <p><a href="https://icml.cc/Conferences/2011/papers/524_icmlpaper.pdf">Generating Text with Recurrent Neural Networks</a> - Sutskever et al. 2011</p>
+            <p><a href="https://arxiv.org/abs/1308.0850">Generating Sequences With Recurrent Neural Networks</a> - Graves 2013</p>
+            <p><a href="https://karpathy.github.io/2015/05/21/rnn-effectiveness/">The Unreasonable Effectiveness of Recurrent Neural Networks</a> - Karpathy 2015</p>
+            <p><a href="https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf">Improving Language Understanding by Generative Pre-Training</a> - GPT-1 2018</p>
+            <p><a href="https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf">Language Models are Unsupervised Multitask Learners</a> - GPT-2 2019</p>
+            <p><a href="https://arxiv.org/abs/2005.14165">Language Models are Few-Shot Learners</a> - GPT-3 2020</p>
+            <p><a href="https://arxiv.org/abs/2211.04325">Will We Run Out of Data?</a> - Villalobos et al. 2022</p>
+            <p><a href="https://doi.org/10.1038/s41586-024-07566-y">AI models collapse when trained on recursively generated data</a> - Shumailov et al. 2024</p>
+        </div>
+
+    </article>
+</body>
+</html>
