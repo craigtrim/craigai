@@ -37,6 +37,11 @@
     - Retain all MLA sources from Medium
     - Match Medium article for text, links, images
     - Image captions must match Medium exactly
+
+    LIGHTBOX MODAL:
+    - Add class="lightbox-trigger" and data-caption="..." to make images clickable
+    - Currently enabled for 3 cartoon images: march-of-progress, herd-of-unicorns, no-more-books
+    - Click image to open, click X/overlay/Escape to close
 -->
 <html lang="en">
 <head>
@@ -251,6 +256,63 @@
                 padding: 24px 16px 60px;
             }
         }
+
+        /* Lightbox Modal */
+        .lightbox-trigger {
+            cursor: zoom-in;
+        }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 40px;
+            color: #fff;
+            cursor: pointer;
+            z-index: 1001;
+            line-height: 1;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+
+        .modal-close:hover {
+            opacity: 1;
+        }
+
+        .modal-content {
+            max-width: 90vw;
+            max-height: 80vh;
+            object-fit: contain;
+            border-radius: 4px;
+        }
+
+        .modal-caption {
+            color: #fff;
+            font-size: 18px;
+            font-style: italic;
+            margin-top: 16px;
+            text-align: center;
+            max-width: 90vw;
+        }
     </style>
 </head>
 <body>
@@ -263,7 +325,7 @@
         <p class="lead">From Shannon's hand-picked letters to modern LLMs. The real outputs from ELIZA, RACTER, char-rnn, and GPT, and why each generation felt like a breakthrough.</p>
 
         <figure id="img-1">
-            <img src="images/march-of-progress-01.png" alt="Evolution of text generation robots">
+            <img src="images/march-of-progress-01.png" alt="Evolution of text generation robots" class="lightbox-trigger" data-caption="They never learned to read. They learned to predict.">
             <figcaption>They never learned to read. They learned to predict.</figcaption>
         </figure>
 
@@ -575,7 +637,7 @@ ELIZA: TELL ME MORE ABOUT YOUR FAMILY</pre>
         <blockquote>In a shocking finding, scientist discovered a herd of unicorns living in a remote, previously unexplored valley, in the Andes Mountains. Even more surprising to the researchers was the fact that the unicorns spoke perfect English.</blockquote>
 
         <figure id="img-unicorn">
-            <img src="images/herd-of-unicorns-01.png" alt="Herd of unicorns in the Andes">
+            <img src="images/herd-of-unicorns-01.png" alt="Herd of unicorns in the Andes" class="lightbox-trigger" data-caption="The Andes delegation would like a word.">
             <figcaption>The Andes delegation would like a word.</figcaption>
         </figure>
 
@@ -731,7 +793,7 @@ Will roll until the stars expire...</pre>
         <p><em>Shannon started with a book and a finger. Eighty years later, we've consumed most of the books. What comes next depends on whether we can find something genuinely new to say.</em></p>
 
         <figure id="img-data-wall">
-            <img src="images/no-more-books-01.png" alt="Empty library with scattered books">
+            <img src="images/no-more-books-01.png" alt="Empty library with scattered books" class="lightbox-trigger" data-caption="Now what?">
             <figcaption>Now what?</figcaption>
         </figure>
 
@@ -745,5 +807,45 @@ Will roll until the stars expire...</pre>
         </div>
 
     </article>
+
+    <!-- Lightbox Modal -->
+    <div class="modal-overlay" id="imageModal">
+        <span class="modal-close" id="modalClose">&times;</span>
+        <img class="modal-content" id="modalImage" src="" alt="">
+        <p class="modal-caption" id="modalCaption"></p>
+    </div>
+
+    <script>
+        (function() {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            const modalCaption = document.getElementById('modalCaption');
+            const closeBtn = document.getElementById('modalClose');
+
+            // Open modal when clicking lightbox-trigger images
+            document.querySelectorAll('.lightbox-trigger').forEach(function(img) {
+                img.addEventListener('click', function() {
+                    modal.classList.add('active');
+                    modalImg.src = this.src;
+                    modalCaption.textContent = this.dataset.caption || '';
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+
+            // Close modal
+            function closeModal() {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            closeBtn.addEventListener('click', closeModal);
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) closeModal();
+            });
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') closeModal();
+            });
+        })();
+    </script>
 </body>
 </html>
