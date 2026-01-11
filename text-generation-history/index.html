@@ -1,4 +1,35 @@
 <!DOCTYPE html>
+<!--
+    A Brief History of Text Generation
+    ==================================
+    This article mirrors Craig's Medium post. When updating:
+
+    STRUCTURE:
+    - Each historical section has: narrative text, demo embed (if applicable), MLA sources
+    - Demo embeds use consolidated CodeSandbox: https://skqp2f.csb.app/?demo=<name>
+    - Available demos: shannon, eliza, dissociated, travesty, rnn, graves
+
+    IMAGES (in ./images/):
+    - march-of-progress-01.png: Opening "evolution" image
+    - racter-policemans-beard.webp: RACTER book hawk illustrations
+    - byte-travesty-title.png, byte-travesty-authors.png: BYTE Magazine 1984 screenshots
+    - herd-of-unicorns-01.png: GPT-2 unicorn section
+    - snake-to-tail-01.png: Model collapse / poisoned well
+    - no-more-books-01.png: Closing "data wall" image
+
+    STYLE CONVENTIONS:
+    - Uses Medium-like typography (charter font for body, sohne for headings)
+    - MLA citations in .source divs after each major section
+    - Blockquotes for historical outputs and quotes
+    - <pre> for multi-line code/dialogue (e.g., ELIZA transcript)
+
+    AUTHOR GUIDELINES (from author-guidelines.md):
+    - No em dashes
+    - No co-author on git commits
+    - Retain all MLA sources from Medium
+    - Match Medium article for text, links, images
+    - Image captions must match Medium exactly
+-->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -218,6 +249,7 @@
     <article>
         <a href="../" class="back-link">&larr; All Articles</a>
 
+        <!-- HEADER: Title and lead paragraph with opening image -->
         <h1>A Brief History of Text Generation</h1>
 
         <p class="lead">From Shannon's hand-picked letters to modern LLMs. The real outputs from ELIZA, RACTER, char-rnn, and GPT, and why each generation felt like a breakthrough.</p>
@@ -267,6 +299,7 @@
 
         <hr>
 
+        <!-- SECTION: ELIZA (1966) - Pattern matching, not generative. Includes The Economist quote about Eliza effect -->
         <h2>1966: ELIZA's Rogerian Reflections</h2>
 
         <p>ELIZA wasn't generative in the modern sense. It matched patterns and reflected them back. But it created the illusion of understanding, which is why <a href="https://cse.buffalo.edu/~rapaport/572/S02/weizenbaum.eliza.1966.pdf">Weizenbaum's 1966 paper</a> matters.</p>
@@ -311,6 +344,7 @@ ELIZA: TELL ME MORE ABOUT YOUR FAMILY</pre>
 
         <hr>
 
+        <!-- SECTION: Dissociated Press (1972) - Markov chain text scrambler from HAKMEM/Emacs -->
         <h2>1972: Dissociated Press</h2>
 
         <p>Described in <a href="https://www.inwap.com/pdp10/hbaker/hakmem/hacks.html#item154">HAKMEM</a> and implemented in Emacs, Dissociated Press was a Markov chain text scrambler. The name parodies "Associated Press."</p>
@@ -342,6 +376,7 @@ ELIZA: TELL ME MORE ABOUT YOUR FAMILY</pre>
 
         <hr>
 
+        <!-- SECTION: RACTER (1984) - "First AI author", disputed authorship. Image: racter-policemans-beard.webp -->
         <h2>1984: RACTER's Poetry</h2>
 
         <p><a href="https://en.wikipedia.org/wiki/Racter">RACTER</a> (short for "raconteur") claimed to be the first AI author. Its book, <em><a href="https://archive.org/details/policemansbeardi0000unse">The Policeman's Beard is Half Constructed</a></em>, was marketed as "the first book ever written by a computer."</p>
@@ -369,6 +404,7 @@ ELIZA: TELL ME MORE ABOUT YOUR FAMILY</pre>
 
         <hr>
 
+        <!-- SECTION: Travesty Generator (1984) - BYTE Magazine article. Images: byte-travesty-title.png, byte-travesty-authors.png -->
         <h2>1984: The Travesty Generator</h2>
 
         <p>Hugh Kenner and Joseph O'Rourke published <a href="https://archive.org/stream/byte-magazine-1984-11/1984_11_BYTE_09-12_New_Chips#page/n129/mode/2up">"A Travesty Generator for Micros"</a> in BYTE Magazine. The algorithm ensured that every n-character sequence in output appeared somewhere in input.</p>
@@ -403,6 +439,7 @@ ELIZA: TELL ME MORE ABOUT YOUR FAMILY</pre>
 
         <hr>
 
+        <!-- SECTION: Sutskever RNN (2011) - First neural text generation, Hessian-free optimization -->
         <h2>2011: Sutskever's RNN Text Generation</h2>
 
         <p><a href="https://icml.cc/Conferences/2011/papers/524_icmlpaper.pdf">Sutskever, Martens, and Hinton</a> trained RNNs on text using Hessian-free optimization. This was one of the first demonstrations that neural networks could learn language structure.</p>
@@ -430,6 +467,7 @@ ELIZA: TELL ME MORE ABOUT YOUR FAMILY</pre>
 
         <hr>
 
+        <!-- SECTION: Alex Graves (2013) - LSTMs for handwriting and text, mixture density networks -->
         <h2>2013: Alex Graves's Sequence Generation</h2>
 
         <p><a href="https://arxiv.org/abs/1308.0850">Graves's paper</a> showed LSTMs generating handwriting and text. The network learned strokes, letters, short words, and even a rudimentary character-level language model.</p>
@@ -457,6 +495,7 @@ ELIZA: TELL ME MORE ABOUT YOUR FAMILY</pre>
 
         <hr>
 
+        <!-- SECTION: Karpathy char-rnn (2015) - "Unreasonable Effectiveness" blog post, viral moment -->
         <h2>2015: Karpathy's char-rnn</h2>
 
         <p><a href="https://karpathy.github.io/2015/05/21/rnn-effectiveness/">The Unreasonable Effectiveness of Recurrent Neural Networks</a> went viral. Karpathy trained character-level LSTMs on various corpora and showed surprisingly coherent output.</p>
@@ -491,6 +530,7 @@ ELIZA: TELL ME MORE ABOUT YOUR FAMILY</pre>
 
         <hr>
 
+        <!-- SECTION: GPT-1 (2018) - First decoder-only Transformer LM, 117M params, BookCorpus -->
         <h2>2018: GPT-1</h2>
 
         <p><a href="https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf">GPT-1</a> was the first decoder-only Transformer language model. Generation was a byproduct of pretraining, not the focus. 117M parameters, trained on BookCorpus (~1B tokens).</p>
@@ -517,6 +557,7 @@ ELIZA: TELL ME MORE ABOUT YOUR FAMILY</pre>
 
         <hr>
 
+        <!-- SECTION: GPT-2 (2019) - 1.5B params, "too dangerous to release". Image: herd-of-unicorns-01.png -->
         <h2>2019: GPT-2 and the Unicorn Moment</h2>
 
         <p><a href="https://openai.com/blog/better-language-models/">GPT-2</a> was 10x larger than GPT-1 (1.5B parameters) and trained on WebText (40GB of internet text). OpenAI initially withheld the full model, calling it "too dangerous."</p>
@@ -550,6 +591,7 @@ ELIZA: TELL ME MORE ABOUT YOUR FAMILY</pre>
 
         <hr>
 
+        <!-- SECTION: GPT-3 (2020) - 175B params, The Guardian op-ed controversy, heavy editing debate -->
         <h2>2020: GPT-3 and The Guardian Op-Ed</h2>
 
         <p><a href="https://arxiv.org/abs/2005.14165">GPT-3</a> scaled to 175B parameters.</p>
@@ -584,6 +626,7 @@ ELIZA: TELL ME MORE ABOUT YOUR FAMILY</pre>
 
         <hr>
 
+        <!-- SECTION: ChatGPT (2022-2025) - 1M users in 5 days, RLHF breakthrough, GPT-4, competition -->
         <h2>2022-2025: The ChatGPT Moment and Beyond</h2>
 
         <p>On November 30, 2022, OpenAI released ChatGPT as a "free research preview." It reached 1 million users in five days. 100 million in two months, which was faster than TikTok or Instagram.</p>
@@ -621,10 +664,12 @@ Will roll until the stars expire...</pre>
 
         <hr>
 
+        <!-- SECTION: What's Next - Data wall, model collapse, possible futures. Images: snake-to-tail-01.png, no-more-books-01.png -->
         <h2>What's Next?</h2>
 
         <p><em>Two problems loom. One is scarcity. The other is contamination.</em></p>
 
+        <!-- Subsection: Data exhaustion problem, 2026-2032 estimates -->
         <h3>The Data Wall</h3>
 
         <p>If current trends continue, <a href="https://arxiv.org/abs/2211.04325">models will exhaust the stock of public human-generated text</a> between 2026 and 2032. The 2022 estimate said 2024. The revised 2024 estimate says 2028. Either way, the horizon is visible.</p>
@@ -642,6 +687,7 @@ Will roll until the stars expire...</pre>
 
         <p><em>None of these are permanent solutions. They buy time.</em></p>
 
+        <!-- Subsection: Model collapse from training on synthetic data (Shumailov 2024 Nature paper) -->
         <h3>The Poisoned Well</h3>
 
         <p>Shumailov et al. (2024) <a href="https://doi.org/10.1038/s41586-024-07566-y">demonstrated what happens</a> when models train on model-generated data: collapse. The tails of the distribution vanish first which include rare words, unusual phrasings, minority perspectives. Then the center narrows. After enough generations, everything converges toward bland mean.</p>
@@ -657,12 +703,14 @@ Will roll until the stars expire...</pre>
 
         <p><em>Early model collapse is insidious. Overall benchmarks may improve while performance on edge cases degrades. The model gets more "average" without obviously getting worse; until it does.</em></p>
 
+        <!-- Subsection: Data provenance, watermarking, pre-2022 text value -->
         <h3>The Certification Problem</h3>
 
         <p>Data provenance becomes critical. Human-generated text, especially text predating 2022, becomes a finite resource with increasing value. Watermarking synthetic outputs is one proposed solution; certifying human authorship is another. Neither is deployed at scale.</p>
 
         <p><strong>The irony:</strong> the models that scraped the open web into existence may have foreclosed that strategy for their successors.</p>
 
+        <!-- Subsection: Four scenarios - plateau, breakthrough, bifurcation, collapse -->
         <h3>Possible Futures</h3>
 
         <ol>
