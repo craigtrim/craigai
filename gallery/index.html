@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💬</text></svg>">
+    <title>Gallery - Craig Trim</title>
+    <style>
+        :root {
+            --text-color: #292929;
+            --bg-color: #fff;
+            --accent-color: #1a8917;
+            --border-color: #e6e6e6;
+            --card-shadow: 0 1px 4px rgba(0,0,0,0.08);
+            --card-hover-shadow: 0 4px 12px rgba(0,0,0,0.12);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: sohne, "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 48px 24px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 32px;
+            font-size: 16px;
+            color: #757575;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            color: var(--accent-color);
+        }
+
+        .artwork-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .artwork-card {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: box-shadow 0.2s ease, transform 0.2s ease;
+            background: white;
+        }
+
+        .artwork-card:hover {
+            box-shadow: var(--card-hover-shadow);
+            transform: translateY(-2px);
+        }
+
+        .artwork-card a {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .artwork-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .artwork-caption {
+            padding: 16px 20px;
+            font-size: 14px;
+            color: #757575;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .artwork-card.standalone {
+            cursor: pointer;
+        }
+
+        .image-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            cursor: pointer;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .image-modal.active {
+            display: flex;
+        }
+
+        .image-modal img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 8px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+        }
+
+        @media (max-width: 728px) {
+            .container {
+                padding: 24px 16px;
+            }
+
+            .artwork-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../" class="back-link">&larr; Back</a>
+
+        <div class="artwork-grid">
+            <!-- From: tokenization/index.html -->
+            <div class="artwork-card">
+                <a href="../tokenization/#img-2">
+                    <img src="../tokenization/images/image2.png" alt="NLP challenges with words" class="artwork-image">
+                    <div class="artwork-caption">Why NLP Engineers Drink</div>
+                </a>
+            </div>
+            <div class="artwork-card">
+                <a href="../tokenization/#img-3">
+                    <img src="../tokenization/images/image3.png" alt="Morphemes illustration" class="artwork-image">
+                    <div class="artwork-caption">At least these have spaces between them.</div>
+                </a>
+            </div>
+            <div class="artwork-card">
+                <a href="../tokenization/#img-4">
+                    <img src="../tokenization/images/image4.png" alt="Subword tokenization concept" class="artwork-image">
+                    <div class="artwork-caption">The pieces are all there. Theoretically.</div>
+                </a>
+            </div>
+            <div class="artwork-card">
+                <a href="../tokenization/#img-6">
+                    <img src="../tokenization/images/image6.png" alt="Long word tokenization" class="artwork-image">
+                    <div class="artwork-caption">Pneumonoultramicroscopicsilicovolcanoconiosis enters the chat.</div>
+                </a>
+            </div>
+
+            <!-- From: bpe-history/index.html -->
+            <div class="artwork-card">
+                <a href="../bpe-history/#img-1">
+                    <img src="../bpe-history/images/image1.png" alt="Philip Gage working" class="artwork-image">
+                    <div class="artwork-caption">He never once looked up.</div>
+                </a>
+            </div>
+            <div class="artwork-card">
+                <a href="../bpe-history/#img-2">
+                    <img src="../bpe-history/images/image2.png" alt="BPE simplicity" class="artwork-image">
+                    <div class="artwork-caption">Twenty years later, guess who's running GPT-4?</div>
+                </a>
+            </div>
+            <div class="artwork-card">
+                <a href="../bpe-history/#img-4">
+                    <img src="../bpe-history/images/image4.png" alt="1994 paper" class="artwork-image">
+                    <div class="artwork-caption">Wait. This one's from 1994.</div>
+                </a>
+            </div>
+
+            <!-- From: multilingual-tax/index.html -->
+            <div class="artwork-card">
+                <a href="../multilingual-tax/#img-overlords">
+                    <img src="../images/multilingual-tax/praying-mantis-overlords.png" alt="People kneeling before insect overlord" class="artwork-image">
+                    <div class="artwork-caption">The cost of surrender depends on your alphabet.</div>
+                </a>
+            </div>
+            <div class="artwork-card">
+                <a href="../multilingual-tax/#img-globe">
+                    <img src="../images/multilingual-tax/globe-puzzle-1.png" alt="Globe made of puzzle pieces with one hemisphere fragmented" class="artwork-image">
+                    <div class="artwork-caption">The pieces are all there. Some just cost more.</div>
+                </a>
+            </div>
+
+            <!-- From: glitch-tokens/index.html -->
+            <div class="artwork-card">
+                <a href="../glitch-tokens/#img-museum">
+                    <img src="../images/glitch-tokens/museum-gallery-1.png" alt="People viewing portraits in a museum gallery" class="artwork-image">
+                    <div class="artwork-caption">The most-drawn figure in human history, finally recognized.</div>
+                </a>
+            </div>
+            <div class="artwork-card">
+                <a href="../glitch-tokens/#img-sanitize">
+                    <img src="../images/glitch-tokens/sanitize-inputs-1.png" alt="Scientist reading a letter while monsters peek through a cracked door" class="artwork-image">
+                    <div class="artwork-caption">This is why we have input filters.</div>
+                </a>
+            </div>
+            <div class="artwork-card">
+                <a href="../glitch-tokens/#img-cathedral">
+                    <img src="../images/glitch-tokens/token-cathedral.png" alt="Gothic cathedral built on a foundation of letter blocks" class="artwork-image">
+                    <div class="artwork-caption">Elegance above. Frequency counts below.</div>
+                </a>
+            </div>
+
+            <!-- Standalone image -->
+            <div class="artwork-card standalone" data-src="../images/general/ask-a-linguist-waste-an-afternoon.png">
+                <img src="../images/general/ask-a-linguist-waste-an-afternoon.png" alt="Ask a linguist" class="artwork-image">
+                <div class="artwork-caption">Ask a Linguist, Waste an Afternoon</div>
+            </div>
+
+            <!-- From: text-generation-history/index.html -->
+            <div class="artwork-card">
+                <a href="../text-generation-history/#img-1">
+                    <img src="../text-generation-history/images/march-of-progress-01.png" alt="Evolution of text generation robots" class="artwork-image">
+                    <div class="artwork-caption">From statistical approximations to neural networks.</div>
+                </a>
+            </div>
+            <div class="artwork-card">
+                <a href="../text-generation-history/#img-unicorn">
+                    <img src="../text-generation-history/images/herd-of-unicorns-01.png" alt="Herd of unicorns in the Andes" class="artwork-image">
+                    <div class="artwork-caption">The Andes delegation would like a word.</div>
+                </a>
+            </div>
+            <div class="artwork-card">
+                <a href="../text-generation-history/#img-collapse">
+                    <img src="../text-generation-history/images/snake-to-tail-01.png" alt="Snake eating its own tail" class="artwork-image">
+                    <div class="artwork-caption">The tail of the distribution vanishes first.</div>
+                </a>
+            </div>
+            <div class="artwork-card">
+                <a href="../text-generation-history/#img-data-wall">
+                    <img src="../text-generation-history/images/no-more-books-01.png" alt="Empty library with scattered books" class="artwork-image">
+                    <div class="artwork-caption">Shannon started with a book and a finger. We've almost consumed all the books.</div>
+                </a>
+            </div>
+
+            <!-- From: breaking-text/index.html -->
+            <div class="artwork-card">
+                <a href="../breaking-text/#img-1">
+                    <img src="../breaking-text/images/breaking-text-01.png" alt="Breaking Text illustration" class="artwork-image">
+                    <div class="artwork-caption">I am not in danger of fragmentation. I am the fragmenter.</div>
+                </a>
+            </div>
+            <div class="artwork-card">
+                <a href="../breaking-text/#img-1">
+                    <img src="../breaking-text/images/tokenization-pipeline-02.png" alt="Tokenization pipeline" class="artwork-image">
+                    <div class="artwork-caption">We're not cooking. We're compressing.</div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Image modal for standalone images -->
+    <div id="imageModal" class="image-modal">
+        <img id="modalImage" src="" alt="Enlarged image">
+    </div>
+
+    <script>
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+
+        document.querySelectorAll('.artwork-card.standalone').forEach(card => {
+            card.addEventListener('click', () => {
+                modalImg.src = card.dataset.src;
+                modal.classList.add('active');
+            });
+        });
+
+        modal.addEventListener('click', () => {
+            modal.classList.remove('active');
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                modal.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>

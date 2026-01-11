@@ -233,6 +233,17 @@
             margin-top: 48px;
         }
 
+        .view-all-link {
+            font-size: 15px;
+            color: #757575;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .view-all-link:hover {
+            color: var(--accent-color);
+        }
+
         /* Image modal for standalone images (no article link) */
         .image-modal {
             display: none;
@@ -510,169 +521,58 @@
 
         <!--
             IMAGES SECTION
-            AI-generated CARTOON illustrations from articles only.
-            DO NOT include: flowcharts, mermaid diagrams, tables, screenshots, iframes.
-            ONLY include: AI-generated artistic/cartoon imagery.
-
-            IMPORTANT:
-            1. Captions must match the figcaption in the source article EXACTLY.
-            2. If an article randomly rotates images, just pick one for this gallery.
-            3. Each image card links to article#anchor where anchor matches the figure id in the source article.
-               - The source article <figure> must have id="img-X" attribute
-               - The link here should be href="article/#img-X"
-
-            Current images (CARTOONS ONLY):
-            - tokenization/: image2, image3, image4, image6 (image1 & image5 are tables)
-            - bpe-history/: image1, image2, image4 (image3=flowchart, image5=no caption, image6=table, image7=timeline)
-            - multilingual-tax/: praying-mantis-overlords, globe-puzzle-1
-            - glitch-tokens/: museum-gallery, sanitize-inputs, token-cathedral
+            Shows 6 random images from the full gallery.
+            Full gallery at: gallery/index.html
         -->
         <section>
-            <h2 class="section-title">Images</h2>
-            <div class="artwork-grid">
-                <!-- From: tokenization/index.html -->
-                <!-- image1 is a table, image5 is a table - excluded -->
-                <div class="artwork-card">
-                    <a href="tokenization/#img-2">
-                        <img src="tokenization/images/image2.png" alt="NLP challenges with words" class="artwork-image">
-                        <div class="artwork-caption">Why NLP Engineers Drink</div>
-                    </a>
-                </div>
-                <div class="artwork-card">
-                    <a href="tokenization/#img-3">
-                        <img src="tokenization/images/image3.png" alt="Morphemes illustration" class="artwork-image">
-                        <div class="artwork-caption">At least these have spaces between them.</div>
-                    </a>
-                </div>
-                <div class="artwork-card">
-                    <a href="tokenization/#img-4">
-                        <img src="tokenization/images/image4.png" alt="Subword tokenization concept" class="artwork-image">
-                        <div class="artwork-caption">The pieces are all there. Theoretically.</div>
-                    </a>
-                </div>
-                <div class="artwork-card">
-                    <a href="tokenization/#img-6">
-                        <img src="tokenization/images/image6.png" alt="Long word tokenization" class="artwork-image">
-                        <div class="artwork-caption">Pneumonoultramicroscopicsilicovolcanoconiosis enters the chat.</div>
-                    </a>
-                </div>
-
-                <!-- From: bpe-history/index.html -->
-                <!-- image3 is flowchart, image5 has no caption, image6 is table, image7 is timeline table - excluded -->
-                <div class="artwork-card">
-                    <a href="bpe-history/#img-1">
-                        <img src="bpe-history/images/image1.png" alt="Philip Gage working" class="artwork-image">
-                        <div class="artwork-caption">He never once looked up.</div>
-                    </a>
-                </div>
-                <div class="artwork-card">
-                    <a href="bpe-history/#img-2">
-                        <img src="bpe-history/images/image2.png" alt="BPE simplicity" class="artwork-image">
-                        <div class="artwork-caption">Twenty years later, guess who's running GPT-4?</div>
-                    </a>
-                </div>
-                <div class="artwork-card">
-                    <a href="bpe-history/#img-4">
-                        <img src="bpe-history/images/image4.png" alt="1994 paper" class="artwork-image">
-                        <div class="artwork-caption">Wait. This one's from 1994.</div>
-                    </a>
-                </div>
-
-                <!-- From: multilingual-tax/index.html -->
-                <div class="artwork-card">
-                    <a href="multilingual-tax/#img-overlords">
-                        <img src="images/multilingual-tax/praying-mantis-overlords.png" alt="People kneeling before insect overlord" class="artwork-image">
-                        <div class="artwork-caption">The cost of surrender depends on your alphabet.</div>
-                    </a>
-                </div>
-                <div class="artwork-card">
-                    <a href="multilingual-tax/#img-globe">
-                        <img src="images/multilingual-tax/globe-puzzle-1.png" alt="Globe made of puzzle pieces with one hemisphere fragmented" class="artwork-image">
-                        <div class="artwork-caption">The pieces are all there. Some just cost more.</div>
-                    </a>
-                </div>
-
-                <!-- From: glitch-tokens/index.html -->
-                <div class="artwork-card">
-                    <a href="glitch-tokens/#img-museum">
-                        <img src="images/glitch-tokens/museum-gallery-1.png" alt="People viewing portraits in a museum gallery" class="artwork-image">
-                        <div class="artwork-caption">The most-drawn figure in human history, finally recognized.</div>
-                    </a>
-                </div>
-                <div class="artwork-card">
-                    <a href="glitch-tokens/#img-sanitize">
-                        <img src="images/glitch-tokens/sanitize-inputs-1.png" alt="Scientist reading a letter while monsters peek through a cracked door" class="artwork-image">
-                        <div class="artwork-caption">This is why we have input filters.</div>
-                    </a>
-                </div>
-                <div class="artwork-card">
-                    <a href="glitch-tokens/#img-cathedral">
-                        <img src="images/glitch-tokens/token-cathedral.png" alt="Gothic cathedral built on a foundation of letter blocks" class="artwork-image">
-                        <div class="artwork-caption">Elegance above. Frequency counts below.</div>
-                    </a>
-                </div>
-
-                <!--
-                    STANDALONE IMAGE (not from any article)
-                    This image has no article to link to. Instead, clicking it opens a modal
-                    that displays the image larger. Click anywhere (on or off the modal) to close.
-
-                    To add more standalone images:
-                    1. Add class="artwork-card standalone" to the card div
-                    2. Add data-src="path/to/image.png" with the full image path
-                    3. The JS below will handle the modal behavior automatically
-                -->
-                <div class="artwork-card standalone" data-src="images/general/ask-a-linguist-waste-an-afternoon.png">
-                    <img src="images/general/ask-a-linguist-waste-an-afternoon.png" alt="Ask a linguist" class="artwork-image">
-                    <div class="artwork-caption">Ask a Linguist, Waste an Afternoon</div>
-                </div>
-
-                <!-- From: text-generation-history/index.html -->
-                <div class="artwork-card">
-                    <a href="text-generation-history/#img-1">
-                        <img src="text-generation-history/images/march-of-progress-01.png" alt="Evolution of text generation robots" class="artwork-image">
-                        <div class="artwork-caption">From statistical approximations to neural networks.</div>
-                    </a>
-                </div>
-                <div class="artwork-card">
-                    <a href="text-generation-history/#img-unicorn">
-                        <img src="text-generation-history/images/herd-of-unicorns-01.png" alt="Herd of unicorns in the Andes" class="artwork-image">
-                        <div class="artwork-caption">The Andes delegation would like a word.</div>
-                    </a>
-                </div>
-                <div class="artwork-card">
-                    <a href="text-generation-history/#img-collapse">
-                        <img src="text-generation-history/images/snake-to-tail-01.png" alt="Snake eating its own tail" class="artwork-image">
-                        <div class="artwork-caption">The tail of the distribution vanishes first.</div>
-                    </a>
-                </div>
-                <div class="artwork-card">
-                    <a href="text-generation-history/#img-data-wall">
-                        <img src="text-generation-history/images/no-more-books-01.png" alt="Empty library with scattered books" class="artwork-image">
-                        <div class="artwork-caption">Shannon started with a book and a finger. We've almost consumed all the books.</div>
-                    </a>
-                </div>
-
-                <!-- From: breaking-text/index.html -->
-                <!-- Randomly shows one of two images -->
-                <div class="artwork-card">
-                    <a href="breaking-text/#img-1">
-                        <img id="breaking-text-random" src="" alt="Breaking Text illustration" class="artwork-image">
-                        <div id="breaking-text-caption" class="artwork-caption"></div>
-                    </a>
-                </div>
-                <script>
-                    (function() {
-                        const options = [
-                            { src: 'breaking-text/images/breaking-text-01.png', caption: 'I am not in danger of fragmentation. I am the fragmenter.' },
-                            { src: 'breaking-text/images/tokenization-pipeline-02.png', caption: "We're not cooking. We're compressing." }
-                        ];
-                        const choice = options[Math.floor(Math.random() * options.length)];
-                        document.getElementById('breaking-text-random').src = choice.src;
-                        document.getElementById('breaking-text-caption').textContent = choice.caption;
-                    })();
-                </script>
+            <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 32px;">
+                <h2 class="section-title" style="margin: 0;">Images</h2>
+                <a href="gallery/" class="view-all-link">View all &rarr;</a>
             </div>
+            <div class="artwork-grid" id="randomImages">
+                <!-- Images will be randomly selected by JS -->
+            </div>
+            <script>
+                (function() {
+                    const allImages = [
+                        { href: 'tokenization/#img-2', src: 'tokenization/images/image2.png', alt: 'NLP challenges with words', caption: 'Why NLP Engineers Drink' },
+                        { href: 'tokenization/#img-3', src: 'tokenization/images/image3.png', alt: 'Morphemes illustration', caption: 'At least these have spaces between them.' },
+                        { href: 'tokenization/#img-4', src: 'tokenization/images/image4.png', alt: 'Subword tokenization concept', caption: 'The pieces are all there. Theoretically.' },
+                        { href: 'tokenization/#img-6', src: 'tokenization/images/image6.png', alt: 'Long word tokenization', caption: 'Pneumonoultramicroscopicsilicovolcanoconiosis enters the chat.' },
+                        { href: 'bpe-history/#img-1', src: 'bpe-history/images/image1.png', alt: 'Philip Gage working', caption: 'He never once looked up.' },
+                        { href: 'bpe-history/#img-2', src: 'bpe-history/images/image2.png', alt: 'BPE simplicity', caption: 'Twenty years later, guess who\'s running GPT-4?' },
+                        { href: 'bpe-history/#img-4', src: 'bpe-history/images/image4.png', alt: '1994 paper', caption: 'Wait. This one\'s from 1994.' },
+                        { href: 'multilingual-tax/#img-overlords', src: 'images/multilingual-tax/praying-mantis-overlords.png', alt: 'People kneeling before insect overlord', caption: 'The cost of surrender depends on your alphabet.' },
+                        { href: 'multilingual-tax/#img-globe', src: 'images/multilingual-tax/globe-puzzle-1.png', alt: 'Globe made of puzzle pieces', caption: 'The pieces are all there. Some just cost more.' },
+                        { href: 'glitch-tokens/#img-museum', src: 'images/glitch-tokens/museum-gallery-1.png', alt: 'People viewing portraits in a museum gallery', caption: 'The most-drawn figure in human history, finally recognized.' },
+                        { href: 'glitch-tokens/#img-sanitize', src: 'images/glitch-tokens/sanitize-inputs-1.png', alt: 'Scientist reading a letter while monsters peek through a cracked door', caption: 'This is why we have input filters.' },
+                        { href: 'glitch-tokens/#img-cathedral', src: 'images/glitch-tokens/token-cathedral.png', alt: 'Gothic cathedral built on a foundation of letter blocks', caption: 'Elegance above. Frequency counts below.' },
+                        { href: 'text-generation-history/#img-1', src: 'text-generation-history/images/march-of-progress-01.png', alt: 'Evolution of text generation robots', caption: 'From statistical approximations to neural networks.' },
+                        { href: 'text-generation-history/#img-unicorn', src: 'text-generation-history/images/herd-of-unicorns-01.png', alt: 'Herd of unicorns in the Andes', caption: 'The Andes delegation would like a word.' },
+                        { href: 'text-generation-history/#img-collapse', src: 'text-generation-history/images/snake-to-tail-01.png', alt: 'Snake eating its own tail', caption: 'The tail of the distribution vanishes first.' },
+                        { href: 'text-generation-history/#img-data-wall', src: 'text-generation-history/images/no-more-books-01.png', alt: 'Empty library with scattered books', caption: 'Shannon started with a book and a finger. We\'ve almost consumed all the books.' },
+                        { href: 'breaking-text/#img-1', src: 'breaking-text/images/breaking-text-01.png', alt: 'Breaking Text illustration', caption: 'I am not in danger of fragmentation. I am the fragmenter.' },
+                        { href: 'breaking-text/#img-1', src: 'breaking-text/images/tokenization-pipeline-02.png', alt: 'Tokenization pipeline', caption: 'We\'re not cooking. We\'re compressing.' }
+                    ];
+
+                    // Shuffle and pick 6
+                    const shuffled = allImages.sort(() => Math.random() - 0.5);
+                    const selected = shuffled.slice(0, 6);
+
+                    const grid = document.getElementById('randomImages');
+                    selected.forEach(img => {
+                        const card = document.createElement('div');
+                        card.className = 'artwork-card';
+                        card.innerHTML = `
+                            <a href="${img.href}">
+                                <img src="${img.src}" alt="${img.alt}" class="artwork-image">
+                                <div class="artwork-caption">${img.caption}</div>
+                            </a>
+                        `;
+                        grid.appendChild(card);
+                    });
+                })();
+            </script>
         </section>
 
         <!--
