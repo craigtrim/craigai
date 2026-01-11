@@ -184,7 +184,8 @@
         }
 
         @media (max-width: 900px) {
-            figure.breakout {
+            figure.breakout,
+            .demo-embed {
                 margin-left: 0;
                 margin-right: 0;
                 max-width: 100%;
@@ -261,6 +262,10 @@
             border-radius: 8px;
             overflow: hidden;
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            /* Breakout styling - wider than text column */
+            margin-left: calc(-110px);
+            margin-right: calc(-110px);
+            max-width: calc(100% + 220px);
         }
 
         .demo-embed img {
