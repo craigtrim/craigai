@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💬</text></svg>">
+    <title>Demos - Craig Trim</title>
+    <!--
+        =======================================================================
+        DEMOS LANDING PAGE
+        =======================================================================
+
+        PURPOSE:
+        This page displays ALL interactive demos in a single view.
+        The main landing page (index.html) shows a random subset of 6 demos
+        with a "View all" link that points here.
+
+        DESIGN PATTERN:
+        - Consistent with gallery/index.html structure
+        - Minimal chrome: just a back link and the grid
+        - Each demo card links to an external CodeSandbox
+        - Cards have emoji icons in dark gradient headers for visual appeal
+
+        MAINTENANCE:
+        When adding new demos:
+        1. Add the demo card HTML here
+        2. Add the demo to the allDemos array in index.html
+        3. The random selection on the main page will automatically include it
+
+        DEMO CATEGORIES:
+        - Tokenization demos (BPE, multilingual, algorithms)
+        - Text generation history demos (Shannon through Graves)
+        - Security/edge case demos (glitch tokens, attacks)
+        =======================================================================
+    -->
+    <style>
+        :root {
+            --text-color: #292929;
+            --bg-color: #fff;
+            --accent-color: #1a8917;
+            --border-color: #e6e6e6;
+            --card-shadow: 0 1px 4px rgba(0,0,0,0.08);
+            --card-hover-shadow: 0 4px 12px rgba(0,0,0,0.12);
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: sohne, "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 48px 24px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 32px;
+            font-size: 16px;
+            color: #757575;
+            text-decoration: none;
+        }
+
+        .back-link:hover { color: var(--accent-color); }
+
+        .demos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 32px;
+        }
+
+        .demo-card {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: box-shadow 0.2s ease, transform 0.2s ease;
+            background: white;
+        }
+
+        .demo-card:hover {
+            box-shadow: var(--card-hover-shadow);
+            transform: translateY(-2px);
+        }
+
+        .demo-card a {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .demo-icon {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+        }
+
+        .card-content { padding: 24px; }
+
+        .card-tag {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--accent-color);
+            margin-bottom: 12px;
+        }
+
+        .card-title {
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 1.3;
+            margin: 0 0 12px 0;
+        }
+
+        .card-description {
+            font-size: 15px;
+            color: #757575;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 728px) {
+            .container { padding: 24px 16px; }
+            .demos-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../" class="back-link">&larr; Back</a>
+
+        <div class="demos-grid">
+            <!--
+                ===============================================================
+                TOKENIZATION DEMOS
+                These demos accompany the tokenization-focused articles.
+                ===============================================================
+            -->
+            <div class="demo-card">
+                <a href="https://codesandbox.io/p/sandbox/tokenization-demo-y4qczk" target="_blank" rel="noopener">
+                    <div class="demo-icon">&#x1F4DD;</div>
+                    <div class="card-content">
+                        <span class="card-tag">Interactive</span>
+                        <h3 class="card-title">The Evolution of Tokenization</h3>
+                        <p class="card-description">Watch how text gets tokenized across different eras of NLP, from rule-based to modern subword methods.</p>
+                    </div>
+                </a>
+            </div>
+
+            <div class="demo-card">
+                <a href="https://codesandbox.io/p/sandbox/bpe-compression-demo-cw29y3" target="_blank" rel="noopener">
+                    <div class="demo-icon">&#x1F5DC;</div>
+                    <div class="card-content">
+                        <span class="card-tag">Interactive</span>
+                        <h3 class="card-title">BPE Compression: The Algorithm</h3>
+                        <p class="card-description">Step through Byte Pair Encoding compression in real-time. See how frequent pairs get merged into single tokens.</p>
+                    </div>
+                </a>
+            </div>
+
+            <div class="demo-card">
+                <a href="https://codesandbox.io/p/sandbox/multilingual-tokenizer-demo-cw89l8" target="_blank" rel="noopener">
+                    <div class="demo-icon">&#x1F30D;</div>
+                    <div class="card-content">
+                        <span class="card-tag">Interactive</span>
+                        <h3 class="card-title">The Multilingual Tax Calculator</h3>
+                        <p class="card-description">Compare token costs across 31 languages. See firsthand how Tamil costs 7x more than English for the same sentence.</p>
+                    </div>
+                </a>
+            </div>
+
+            <div class="demo-card">
+                <a href="https://codesandbox.io/p/sandbox/morphological-radar-charts-fghj4p" target="_blank" rel="noopener">
+                    <div class="demo-icon">&#x1F4CA;</div>
+                    <div class="card-content">
+                        <span class="card-tag">Interactive</span>
+                        <h3 class="card-title">How Grammar Shapes Token Cost</h3>
+                        <p class="card-description">Visualize how language structure affects BPE compression. Analytic vs Agglutinative vs Fusional vs Polysynthetic.</p>
+                    </div>
+                </a>
+            </div>
+
+            <div class="demo-card">
+                <a href="https://codesandbox.io/p/sandbox/morphological-ceiling-explorer-z43ltr" target="_blank" rel="noopener">
+                    <div class="demo-icon">&#x1F6A7;</div>
+                    <div class="card-content">
+                        <span class="card-tag">Interactive</span>
+                        <h3 class="card-title">Why More Data Won't Fix This</h3>
+                        <p class="card-description">Slide corpus dominance from 1% to 100% and watch morphology set an immovable ceiling on compression.</p>
+                    </div>
+                </a>
+            </div>
+
+            <!--
+                ===============================================================
+                SECURITY / EDGE CASE DEMOS
+                Demos exploring tokenization vulnerabilities and edge cases.
+                ===============================================================
+            -->
+            <div class="demo-card">
+                <a href="https://codesandbox.io/p/sandbox/token-boundary-attacks-pqg2nf" target="_blank" rel="noopener">
+                    <div class="demo-icon">&#x1F6E1;</div>
+                    <div class="card-content">
+                        <span class="card-tag">Interactive</span>
+                        <h3 class="card-title">Token Boundary Attacks</h3>
+                        <p class="card-description">Explore how tokenization gaps enable filter evasion. Inject whitespace, homoglyphs, and invisible characters to bypass text-based safety filters.</p>
+                    </div>
+                </a>
+            </div>
+
+            <div class="demo-card">
+                <a href="https://codesandbox.io/p/sandbox/invisible-unicode-explorer-jj99w6" target="_blank" rel="noopener">
+                    <div class="demo-icon">&#x1F47B;</div>
+                    <div class="card-content">
+                        <span class="card-tag">Interactive</span>
+                        <h3 class="card-title">Invisible Unicode Explorer</h3>
+                        <p class="card-description">164+ invisible characters that can break your LLM. Zero-width spaces, directional controls, tag characters, and more.</p>
+                    </div>
+                </a>
+            </div>
+
+            <!--
+                ===============================================================
+                UTILITY DEMOS
+                Practical tools for working with tokens and models.
+                ===============================================================
+            -->
+            <div class="demo-card">
+                <a href="https://codesandbox.io/p/sandbox/token-calculator-57vrxf" target="_blank" rel="noopener">
+                    <div class="demo-icon">&#x1F4B0;</div>
+                    <div class="card-content">
+                        <span class="card-tag">Interactive</span>
+                        <h3 class="card-title">Token Cost Calculator</h3>
+                        <p class="card-description">Calculate real API costs across languages and models. Enter custom text or use presets to see pricing for GPT-4, Claude, and more.</p>
+                    </div>
+                </a>
+            </div>
+
+            <div class="demo-card">
+                <a href="https://t3k2qq.csb.app/" target="_blank" rel="noopener">
+                    <div class="demo-icon">&#x1F3B0;</div>
+                    <div class="card-content">
+                        <span class="card-tag">Interactive</span>
+                        <h3 class="card-title">Sampling Parameter Explorer</h3>
+                        <p class="card-description">Visualize how temperature, top-k, and top-p affect token selection. Watch probability distributions shift as you adjust sampling parameters.</p>
+                    </div>
+                </a>
+            </div>
+
+            <div class="demo-card">
+                <a href="https://6pd964.csb.app/" target="_blank" rel="noopener">
+                    <div class="demo-icon">&#x1F9EA;</div>
+                    <div class="card-content">
+                        <span class="card-tag">Interactive</span>
+                        <h3 class="card-title">Breaking Text</h3>
+                        <p class="card-description">Compare live tokenizers side-by-side. See how GPT-3, GPT-4, GPT-4o, and SentencePiece break the same text into tokens.</p>
+                    </div>
+                </a>
+            </div>
+
+            <!--
+                ===============================================================
+                TEXT GENERATION HISTORY DEMOS
+                These demos accompany "A Brief History of Text Generation" article.
+                All use the consolidated sandbox (skqp2f) with URL parameters.
+                This saves CodeSandbox slots while appearing as separate demos.
+                ===============================================================
+            -->
+            <div class="demo-card">
+                <a href="https://skqp2f.csb.app/?demo=shannon" target="_blank" rel="noopener">
+                    <div class="demo-icon">&#x1F4CA;</div>
+                    <div class="card-content">
+                        <span class="card-tag">Interactive</span>
+                        <h3 class="card-title">Shannon's Markov Chains (1948)</h3>
+                        <p class="card-description">Watch Order 0, Order 2, and word bigrams generate text simultaneously. See how statistical structure produces language-like output.</p>
+                    </div>
+                </a>
+            </div>
+
+            <div class="demo-card">
+                <a href="https://skqp2f.csb.app/?demo=eliza" target="_blank" rel="noopener">
+                    <div class="demo-icon">&#x1F6CB;</div>
+                    <div class="card-content">
+                        <span class="card-tag">Interactive</span>
+                        <h3 class="card-title">ELIZA (1966)</h3>
+                        <p class="card-description">Chat with the first chatbot. Watch keyword detection in real-time and see how pattern matching creates the illusion of understanding.</p>
+                    </div>
+                </a>
+            </div>
+
+            <div class="demo-card">
+                <a href="https://skqp2f.csb.app/?demo=dissociated" target="_blank" rel="noopener">
+                    <div class="demo-icon">&#x1F4F0;</div>
+                    <div class="card-content">
+                        <span class="card-tag">Interactive</span>
+                        <h3 class="card-title">Dissociated Press (1972)</h3>
+                        <p class="card-description">Watch the cursor jump when it finds matching character sequences. See how local coherence emerges from simple pattern matching.</p>
+                    </div>
+                </a>
+            </div>
+
+            <div class="demo-card">
+                <a href="https://skqp2f.csb.app/?demo=travesty" target="_blank" rel="noopener">
+                    <div class="demo-icon">&#x1F3AD;</div>
+                    <div class="card-content">
+                        <span class="card-tag">Interactive</span>
+                        <h3 class="card-title">Travesty Generator (1984)</h3>
+                        <p class="card-description">Watch the sliding context window sample one character at a time. Adjust k from 2 (chaotic) to 6 (near-copy) to see the coherence/originality tradeoff.</p>
+                    </div>
+                </a>
+            </div>
+
+            <div class="demo-card">
+                <a href="https://skqp2f.csb.app/?demo=rnn" target="_blank" rel="noopener">
+                    <div class="demo-icon">&#x1F9E0;</div>
+                    <div class="card-content">
+                        <span class="card-tag">Interactive</span>
+                        <h3 class="card-title">RNN Text Generation (2011)</h3>
+                        <p class="card-description">Compare RNN and Markov chain architectures side-by-side. See why hidden state enables patterns that fixed-window models cannot learn.</p>
+                    </div>
+                </a>
+            </div>
+
+            <div class="demo-card">
+                <a href="https://skqp2f.csb.app/?demo=graves" target="_blank" rel="noopener">
+                    <div class="demo-icon">&#x270D;</div>
+                    <div class="card-content">
+                        <span class="card-tag">Interactive</span>
+                        <h3 class="card-title">Graves Handwriting (2013)</h3>
+                        <p class="card-description">Watch handwriting emerge stroke-by-stroke. Explore how mixture density networks output probability distributions instead of single points.</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,6 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!--
+        =======================================================================
+        CRAIG TRIM - MAIN LANDING PAGE
+        =======================================================================
+
+        ARCHITECTURE OVERVIEW:
+        This is a static GitHub Pages site (craigtrim.com) with three content types:
+
+        1. WRITING (articles)
+           - Full articles in folders: tokenization/, bpe-history/, etc.
+           - Each article has its own index.html
+           - writing/index.html shows ALL articles
+           - This page shows RANDOM 6 articles with "View all" link
+
+        2. DEMOS (interactive CodeSandbox embeds)
+           - External links to CodeSandbox demos
+           - demos/index.html shows ALL demos
+           - This page shows RANDOM 6 demos with "View all" link
+
+        3. IMAGES (AI-generated illustrations)
+           - Images stored in article folders and images/
+           - gallery/index.html shows ALL images
+           - This page shows RANDOM 6 images with "View all" link
+
+        UX PATTERN:
+        Each section uses JavaScript to randomly select 6 items on page load.
+        This creates variety for returning visitors while keeping the page
+        scannable. "View all" links provide access to complete collections.
+
+        MAINTENANCE:
+        When adding new content:
+        1. Add to the appropriate landing page (writing/, demos/, or gallery/)
+        2. Add to the corresponding allX array in the script below
+        3. The random selection will automatically include new items
+
+        CODESANDBOX CONSOLIDATION:
+        Text generation demos use a single sandbox (skqp2f) with URL parameters
+        (?demo=shannon, ?demo=eliza, etc.) to save CodeSandbox slots while
+        appearing as separate demos to users.
+        =======================================================================
+    -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💬</text></svg>">
@@ -304,291 +345,222 @@
         </script>
 
         <!--
+            =======================================================================
             WRITING SECTION
-            Article cards linking to full articles.
-            - Tag (upper left): category label in green
-            - card-meta: read time only (removed topic from lower right)
+            =======================================================================
+
+            Shows 6 randomly selected articles on each page load.
+            Full list available at: writing/index.html
+
+            Each article has:
+            - tag: Category label (History, NLP, Algorithms, Equity, Security)
+            - title: Article headline
+            - description: 1-2 sentence summary
+            - readTime: Estimated reading time
+            - year: Publication year
+
+            To add a new article:
+            1. Create the article folder with index.html
+            2. Add to writing/index.html
+            3. Add to the allArticles array below
         -->
         <section class="first-section">
-            <h2 class="section-title">Writing</h2>
-            <div class="articles-grid">
-                <article class="article-card">
-                    <a href="text-generation-history/">
-                        <div class="card-content">
-                            <span class="card-tag">History</span>
-                            <h3 class="card-title">A Brief History of Text Generation</h3>
-                            <p class="card-description">From Shannon's hand-picked letters to modern LLMs. The real outputs from ELIZA, RACTER, char-rnn, and GPT, and why each generation felt like a breakthrough.</p>
-                        </div>
-                        <div class="card-meta">
-                            <span>13 min read</span>
-                            <span>2026</span>
-                        </div>
-                    </a>
-                </article>
-
-                <article class="article-card">
-                    <a href="tokenization/">
-                        <div class="card-content">
-                            <span class="card-tag">NLP</span>
-                            <h3 class="card-title">The Elegant Hack Powering Modern AI</h3>
-                            <p class="card-description">Understanding how LLMs transform text into tokens, and why this seemingly simple process has profound implications for cost, context limits, and model behavior.</p>
-                        </div>
-                        <div class="card-meta">
-                            <span>12 min read</span>
-                            <span>2026</span>
-                        </div>
-                    </a>
-                </article>
-
-                <article class="article-card">
-                    <a href="breaking-text/">
-                        <div class="card-content">
-                            <span class="card-tag">Algorithms</span>
-                            <h3 class="card-title">Breaking Text</h3>
-                            <p class="card-description">BPE, WordPiece, SentencePiece, Unigram. Four algorithms, four trade-offs, none of them know what a word is.</p>
-                        </div>
-                        <div class="card-meta">
-                            <span>6 min read</span>
-                            <span>2026</span>
-                        </div>
-                    </a>
-                </article>
-
-                <article class="article-card">
-                    <a href="bpe-history/">
-                        <div class="card-content">
-                            <span class="card-tag">History</span>
-                            <h3 class="card-title">The 30-Year Journey of an Algorithm That Accidentally Learned to Read</h3>
-                            <p class="card-description">How a 1994 data compression algorithm became the foundation of modern AI. The untold story of Byte Pair Encoding's journey from C Users Journal to GPT-4.</p>
-                        </div>
-                        <div class="card-meta">
-                            <span>15 min read</span>
-                            <span>2026</span>
-                        </div>
-                    </a>
-                </article>
-
-                <article class="article-card">
-                    <a href="multilingual-tax/">
-                        <div class="card-content">
-                            <span class="card-tag">Equity</span>
-                            <h3 class="card-title">Why Non-English Speakers Pay More for AI</h3>
-                            <p class="card-description">Tamil speakers pay 7x more tokens than English speakers for the same meaning. The hidden cost of tokenization and why morphology sets a compression ceiling.</p>
-                        </div>
-                        <div class="card-meta">
-                            <span>10 min read</span>
-                            <span>2026</span>
-                        </div>
-                    </a>
-                </article>
-
-                <article class="article-card">
-                    <a href="glitch-tokens/">
-                        <div class="card-content">
-                            <span class="card-tag">Security</span>
-                            <h3 class="card-title">When Tokens Glitch and Users Attack</h3>
-                            <p class="card-description">Reddit usernames that break GPT. Invisible characters that bypass filters. The edge cases where tokenization fails spectacularly.</p>
-                        </div>
-                        <div class="card-meta">
-                            <span>8 min read</span>
-                            <span>2026</span>
-                        </div>
-                    </a>
-                </article>
+            <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 32px;">
+                <h2 class="section-title" style="margin: 0;">Writing</h2>
+                <a href="writing/" class="view-all-link">View all &rarr;</a>
             </div>
+            <div class="articles-grid" id="randomArticles">
+                <!-- Articles will be randomly selected by JS -->
+            </div>
+            <script>
+                (function() {
+                    // All available articles - add new articles here
+                    const allArticles = [
+                        {
+                            href: 'text-generation-history/',
+                            tag: 'History',
+                            title: 'A Brief History of Text Generation',
+                            description: 'From Shannon\'s hand-picked letters to modern LLMs. The real outputs from ELIZA, RACTER, char-rnn, and GPT, and why each generation felt like a breakthrough.',
+                            readTime: '13 min read',
+                            year: '2026'
+                        },
+                        {
+                            href: 'tokenization/',
+                            tag: 'NLP',
+                            title: 'The Elegant Hack Powering Modern AI',
+                            description: 'Understanding how LLMs transform text into tokens, and why this seemingly simple process has profound implications for cost, context limits, and model behavior.',
+                            readTime: '12 min read',
+                            year: '2026'
+                        },
+                        {
+                            href: 'breaking-text/',
+                            tag: 'Algorithms',
+                            title: 'Breaking Text',
+                            description: 'BPE, WordPiece, SentencePiece, Unigram. Four algorithms, four trade-offs, none of them know what a word is.',
+                            readTime: '6 min read',
+                            year: '2026'
+                        },
+                        {
+                            href: 'bpe-history/',
+                            tag: 'History',
+                            title: 'The 30-Year Journey of an Algorithm That Accidentally Learned to Read',
+                            description: 'How a 1994 data compression algorithm became the foundation of modern AI. The untold story of Byte Pair Encoding\'s journey from C Users Journal to GPT-4.',
+                            readTime: '15 min read',
+                            year: '2026'
+                        },
+                        {
+                            href: 'multilingual-tax/',
+                            tag: 'Equity',
+                            title: 'Why Non-English Speakers Pay More for AI',
+                            description: 'Tamil speakers pay 7x more tokens than English speakers for the same meaning. The hidden cost of tokenization and why morphology sets a compression ceiling.',
+                            readTime: '10 min read',
+                            year: '2026'
+                        },
+                        {
+                            href: 'glitch-tokens/',
+                            tag: 'Security',
+                            title: 'When Tokens Glitch and Users Attack',
+                            description: 'Reddit usernames that break GPT. Invisible characters that bypass filters. The edge cases where tokenization fails spectacularly.',
+                            readTime: '8 min read',
+                            year: '2026'
+                        }
+                    ];
+
+                    // Shuffle and pick up to 6 (or all if fewer than 6)
+                    const shuffled = allArticles.sort(() => Math.random() - 0.5);
+                    const selected = shuffled.slice(0, 6);
+
+                    // Render article cards
+                    const grid = document.getElementById('randomArticles');
+                    selected.forEach(article => {
+                        const card = document.createElement('article');
+                        card.className = 'article-card';
+                        card.innerHTML = `
+                            <a href="${article.href}">
+                                <div class="card-content">
+                                    <span class="card-tag">${article.tag}</span>
+                                    <h3 class="card-title">${article.title}</h3>
+                                    <p class="card-description">${article.description}</p>
+                                </div>
+                                <div class="card-meta">
+                                    <span>${article.readTime}</span>
+                                    <span>${article.year}</span>
+                                </div>
+                            </a>
+                        `;
+                        grid.appendChild(card);
+                    });
+                })();
+            </script>
         </section>
 
         <!--
+            =======================================================================
             DEMOS SECTION
-            Interactive CodeSandbox demos.
-            Each card has an emoji icon in a dark gradient header.
+            =======================================================================
+
+            Shows 6 randomly selected demos on each page load.
+            Full list available at: demos/index.html
+
+            Each demo has:
+            - href: Link to CodeSandbox (external)
+            - icon: Emoji HTML entity for visual identification
+            - title: Demo name
+            - description: What the demo shows/teaches
+
+            CODESANDBOX CONSOLIDATION NOTE:
+            Text generation demos (Shannon, ELIZA, Dissociated Press, Travesty,
+            RNN, Graves) all use a single sandbox "skqp2f" with URL parameters.
+            This saves CodeSandbox slots while appearing as separate demos.
+            Example: https://skqp2f.csb.app/?demo=eliza
+
+            To add a new demo:
+            1. Create the CodeSandbox
+            2. Add to demos/index.html
+            3. Add to the allDemos array below
         -->
         <section>
-            <h2 class="section-title">Demos</h2>
-            <div class="demos-grid">
-                <div class="demo-card">
-                    <a href="https://codesandbox.io/p/sandbox/tokenization-demo-y4qczk" target="_blank" rel="noopener">
-                        <div class="demo-icon">&#x1F4DD;</div>
-                        <div class="card-content">
-                            <span class="card-tag">Interactive</span>
-                            <h3 class="card-title">The Evolution of Tokenization</h3>
-                            <p class="card-description">Watch how text gets tokenized across different eras of NLP, from rule-based to modern subword methods.</p>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="demo-card">
-                    <a href="https://codesandbox.io/p/sandbox/bpe-compression-demo-cw29y3" target="_blank" rel="noopener">
-                        <div class="demo-icon">&#x1F5DC;</div>
-                        <div class="card-content">
-                            <span class="card-tag">Interactive</span>
-                            <h3 class="card-title">BPE Compression: The Algorithm</h3>
-                            <p class="card-description">Step through Byte Pair Encoding compression in real-time. See how frequent pairs get merged into single tokens.</p>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="demo-card">
-                    <a href="https://codesandbox.io/p/sandbox/multilingual-tokenizer-demo-cw89l8" target="_blank" rel="noopener">
-                        <div class="demo-icon">&#x1F30D;</div>
-                        <div class="card-content">
-                            <span class="card-tag">Interactive</span>
-                            <h3 class="card-title">The Multilingual Tax Calculator</h3>
-                            <p class="card-description">Compare token costs across 31 languages. See firsthand how Tamil costs 7x more than English for the same sentence.</p>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="demo-card">
-                    <a href="https://codesandbox.io/p/sandbox/morphological-radar-charts-fghj4p" target="_blank" rel="noopener">
-                        <div class="demo-icon">&#x1F4CA;</div>
-                        <div class="card-content">
-                            <span class="card-tag">Interactive</span>
-                            <h3 class="card-title">How Grammar Shapes Token Cost</h3>
-                            <p class="card-description">Visualize how language structure affects BPE compression. Analytic vs Agglutinative vs Fusional vs Polysynthetic.</p>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="demo-card">
-                    <a href="https://codesandbox.io/p/sandbox/morphological-ceiling-explorer-z43ltr" target="_blank" rel="noopener">
-                        <div class="demo-icon">&#x1F6A7;</div>
-                        <div class="card-content">
-                            <span class="card-tag">Interactive</span>
-                            <h3 class="card-title">Why More Data Won't Fix This</h3>
-                            <p class="card-description">Slide corpus dominance from 1% to 100% and watch morphology set an immovable ceiling on compression.</p>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="demo-card">
-                    <a href="https://codesandbox.io/p/sandbox/token-boundary-attacks-pqg2nf" target="_blank" rel="noopener">
-                        <div class="demo-icon">&#x1F6E1;</div>
-                        <div class="card-content">
-                            <span class="card-tag">Interactive</span>
-                            <h3 class="card-title">Token Boundary Attacks</h3>
-                            <p class="card-description">Explore how tokenization gaps enable filter evasion. Inject whitespace, homoglyphs, and invisible characters to bypass text-based safety filters.</p>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="demo-card">
-                    <a href="https://codesandbox.io/p/sandbox/invisible-unicode-explorer-jj99w6" target="_blank" rel="noopener">
-                        <div class="demo-icon">&#x1F47B;</div>
-                        <div class="card-content">
-                            <span class="card-tag">Interactive</span>
-                            <h3 class="card-title">Invisible Unicode Explorer</h3>
-                            <p class="card-description">164+ invisible characters that can break your LLM. Zero-width spaces, directional controls, tag characters, and more.</p>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="demo-card">
-                    <a href="https://codesandbox.io/p/sandbox/token-calculator-57vrxf" target="_blank" rel="noopener">
-                        <div class="demo-icon">&#x1F4B0;</div>
-                        <div class="card-content">
-                            <span class="card-tag">Interactive</span>
-                            <h3 class="card-title">Token Cost Calculator</h3>
-                            <p class="card-description">Calculate real API costs across languages and models. Enter custom text or use presets to see pricing for GPT-4, Claude, and more.</p>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="demo-card">
-                    <a href="https://t3k2qq.csb.app/" target="_blank" rel="noopener">
-                        <div class="demo-icon">&#x1F3B0;</div>
-                        <div class="card-content">
-                            <span class="card-tag">Interactive</span>
-                            <h3 class="card-title">Sampling Parameter Explorer</h3>
-                            <p class="card-description">Visualize how temperature, top-k, and top-p affect token selection. Watch probability distributions shift as you adjust sampling parameters.</p>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="demo-card">
-                    <a href="https://6pd964.csb.app/" target="_blank" rel="noopener">
-                        <div class="demo-icon">&#x1F9EA;</div>
-                        <div class="card-content">
-                            <span class="card-tag">Interactive</span>
-                            <h3 class="card-title">Breaking Text</h3>
-                            <p class="card-description">Compare live tokenizers side-by-side. See how GPT-3, GPT-4, GPT-4o, and SentencePiece break the same text into tokens.</p>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="demo-card">
-                    <a href="https://skqp2f.csb.app/?demo=shannon" target="_blank" rel="noopener">
-                        <div class="demo-icon">&#x1F4CA;</div>
-                        <div class="card-content">
-                            <span class="card-tag">Interactive</span>
-                            <h3 class="card-title">Shannon's Markov Chains (1948)</h3>
-                            <p class="card-description">Watch Order 0, Order 2, and word bigrams generate text simultaneously. See how statistical structure produces language-like output.</p>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="demo-card">
-                    <a href="https://skqp2f.csb.app/?demo=eliza" target="_blank" rel="noopener">
-                        <div class="demo-icon">&#x1F6CB;</div>
-                        <div class="card-content">
-                            <span class="card-tag">Interactive</span>
-                            <h3 class="card-title">ELIZA (1966)</h3>
-                            <p class="card-description">Chat with the first chatbot. Watch keyword detection in real-time and see how pattern matching creates the illusion of understanding.</p>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="demo-card">
-                    <a href="https://skqp2f.csb.app/?demo=dissociated" target="_blank" rel="noopener">
-                        <div class="demo-icon">&#x1F4F0;</div>
-                        <div class="card-content">
-                            <span class="card-tag">Interactive</span>
-                            <h3 class="card-title">Dissociated Press (1972)</h3>
-                            <p class="card-description">Watch the cursor jump when it finds matching character sequences. See how local coherence emerges from simple pattern matching.</p>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="demo-card">
-                    <a href="https://skqp2f.csb.app/?demo=travesty" target="_blank" rel="noopener">
-                        <div class="demo-icon">&#x1F3AD;</div>
-                        <div class="card-content">
-                            <span class="card-tag">Interactive</span>
-                            <h3 class="card-title">Travesty Generator (1984)</h3>
-                            <p class="card-description">Watch the sliding context window sample one character at a time. Adjust k from 2 (chaotic) to 6 (near-copy) to see the coherence/originality tradeoff.</p>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="demo-card">
-                    <a href="https://skqp2f.csb.app/?demo=rnn" target="_blank" rel="noopener">
-                        <div class="demo-icon">&#x1F9E0;</div>
-                        <div class="card-content">
-                            <span class="card-tag">Interactive</span>
-                            <h3 class="card-title">RNN Text Generation (2011)</h3>
-                            <p class="card-description">Compare RNN and Markov chain architectures side-by-side. See why hidden state enables patterns that fixed-window models cannot learn.</p>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="demo-card">
-                    <a href="https://skqp2f.csb.app/?demo=graves" target="_blank" rel="noopener">
-                        <div class="demo-icon">&#x270D;</div>
-                        <div class="card-content">
-                            <span class="card-tag">Interactive</span>
-                            <h3 class="card-title">Graves Handwriting (2013)</h3>
-                            <p class="card-description">Watch handwriting emerge stroke-by-stroke. Explore how mixture density networks output probability distributions instead of single points.</p>
-                        </div>
-                    </a>
-                </div>
-
+            <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 32px;">
+                <h2 class="section-title" style="margin: 0;">Demos</h2>
+                <a href="demos/" class="view-all-link">View all &rarr;</a>
             </div>
+            <div class="demos-grid" id="randomDemos">
+                <!-- Demos will be randomly selected by JS -->
+            </div>
+            <script>
+                (function() {
+                    // All available demos - add new demos here
+                    const allDemos = [
+                        // Tokenization demos
+                        { href: 'https://codesandbox.io/p/sandbox/tokenization-demo-y4qczk', icon: '&#x1F4DD;', title: 'The Evolution of Tokenization', description: 'Watch how text gets tokenized across different eras of NLP, from rule-based to modern subword methods.' },
+                        { href: 'https://codesandbox.io/p/sandbox/bpe-compression-demo-cw29y3', icon: '&#x1F5DC;', title: 'BPE Compression: The Algorithm', description: 'Step through Byte Pair Encoding compression in real-time. See how frequent pairs get merged into single tokens.' },
+                        { href: 'https://codesandbox.io/p/sandbox/multilingual-tokenizer-demo-cw89l8', icon: '&#x1F30D;', title: 'The Multilingual Tax Calculator', description: 'Compare token costs across 31 languages. See firsthand how Tamil costs 7x more than English for the same sentence.' },
+                        { href: 'https://codesandbox.io/p/sandbox/morphological-radar-charts-fghj4p', icon: '&#x1F4CA;', title: 'How Grammar Shapes Token Cost', description: 'Visualize how language structure affects BPE compression. Analytic vs Agglutinative vs Fusional vs Polysynthetic.' },
+                        { href: 'https://codesandbox.io/p/sandbox/morphological-ceiling-explorer-z43ltr', icon: '&#x1F6A7;', title: 'Why More Data Won\'t Fix This', description: 'Slide corpus dominance from 1% to 100% and watch morphology set an immovable ceiling on compression.' },
+
+                        // Security demos
+                        { href: 'https://codesandbox.io/p/sandbox/token-boundary-attacks-pqg2nf', icon: '&#x1F6E1;', title: 'Token Boundary Attacks', description: 'Explore how tokenization gaps enable filter evasion. Inject whitespace, homoglyphs, and invisible characters to bypass text-based safety filters.' },
+                        { href: 'https://codesandbox.io/p/sandbox/invisible-unicode-explorer-jj99w6', icon: '&#x1F47B;', title: 'Invisible Unicode Explorer', description: '164+ invisible characters that can break your LLM. Zero-width spaces, directional controls, tag characters, and more.' },
+
+                        // Utility demos
+                        { href: 'https://codesandbox.io/p/sandbox/token-calculator-57vrxf', icon: '&#x1F4B0;', title: 'Token Cost Calculator', description: 'Calculate real API costs across languages and models. Enter custom text or use presets to see pricing for GPT-4, Claude, and more.' },
+                        { href: 'https://t3k2qq.csb.app/', icon: '&#x1F3B0;', title: 'Sampling Parameter Explorer', description: 'Visualize how temperature, top-k, and top-p affect token selection. Watch probability distributions shift as you adjust sampling parameters.' },
+                        { href: 'https://6pd964.csb.app/', icon: '&#x1F9EA;', title: 'Breaking Text', description: 'Compare live tokenizers side-by-side. See how GPT-3, GPT-4, GPT-4o, and SentencePiece break the same text into tokens.' },
+
+                        // Text generation history demos (consolidated sandbox with URL params)
+                        { href: 'https://skqp2f.csb.app/?demo=shannon', icon: '&#x1F4CA;', title: 'Shannon\'s Markov Chains (1948)', description: 'Watch Order 0, Order 2, and word bigrams generate text simultaneously. See how statistical structure produces language-like output.' },
+                        { href: 'https://skqp2f.csb.app/?demo=eliza', icon: '&#x1F6CB;', title: 'ELIZA (1966)', description: 'Chat with the first chatbot. Watch keyword detection in real-time and see how pattern matching creates the illusion of understanding.' },
+                        { href: 'https://skqp2f.csb.app/?demo=dissociated', icon: '&#x1F4F0;', title: 'Dissociated Press (1972)', description: 'Watch the cursor jump when it finds matching character sequences. See how local coherence emerges from simple pattern matching.' },
+                        { href: 'https://skqp2f.csb.app/?demo=travesty', icon: '&#x1F3AD;', title: 'Travesty Generator (1984)', description: 'Watch the sliding context window sample one character at a time. Adjust k from 2 (chaotic) to 6 (near-copy) to see the coherence/originality tradeoff.' },
+                        { href: 'https://skqp2f.csb.app/?demo=rnn', icon: '&#x1F9E0;', title: 'RNN Text Generation (2011)', description: 'Compare RNN and Markov chain architectures side-by-side. See why hidden state enables patterns that fixed-window models cannot learn.' },
+                        { href: 'https://skqp2f.csb.app/?demo=graves', icon: '&#x270D;', title: 'Graves Handwriting (2013)', description: 'Watch handwriting emerge stroke-by-stroke. Explore how mixture density networks output probability distributions instead of single points.' }
+                    ];
+
+                    // Shuffle and pick 6
+                    const shuffled = allDemos.sort(() => Math.random() - 0.5);
+                    const selected = shuffled.slice(0, 6);
+
+                    // Render demo cards
+                    const grid = document.getElementById('randomDemos');
+                    selected.forEach(demo => {
+                        const card = document.createElement('div');
+                        card.className = 'demo-card';
+                        card.innerHTML = `
+                            <a href="${demo.href}" target="_blank" rel="noopener">
+                                <div class="demo-icon">${demo.icon}</div>
+                                <div class="card-content">
+                                    <span class="card-tag">Interactive</span>
+                                    <h3 class="card-title">${demo.title}</h3>
+                                    <p class="card-description">${demo.description}</p>
+                                </div>
+                            </a>
+                        `;
+                        grid.appendChild(card);
+                    });
+                })();
+            </script>
         </section>
 
         <!--
+            =======================================================================
             IMAGES SECTION
-            Shows 6 random images from the full gallery.
+            =======================================================================
+
+            Shows 6 randomly selected images on each page load.
             Full gallery at: gallery/index.html
+
+            Each image has:
+            - href: Link to article#anchor where image appears
+            - src: Path to image file
+            - alt: Accessibility description
+            - caption: Witty caption shown below image
+
+            Images come from articles (stored in article/images/) or
+            shared folders (images/multilingual-tax/, images/glitch-tokens/, etc.)
+
+            To add a new image:
+            1. Add to gallery/index.html
+            2. Add to the allImages array below
         -->
         <section>
             <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 32px;">

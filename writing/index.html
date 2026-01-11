@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💬</text></svg>">
+    <title>Writing - Craig Trim</title>
+    <!--
+        =======================================================================
+        WRITING LANDING PAGE
+        =======================================================================
+
+        PURPOSE:
+        This page displays ALL articles in a single view.
+        The main landing page (index.html) shows a random subset of articles
+        with a "View all" link that points here.
+
+        DESIGN PATTERN:
+        - Consistent with gallery/index.html and demos/index.html structure
+        - Minimal chrome: just a back link and the grid
+        - Each article card links to the article's folder (e.g., tokenization/)
+        - Cards show tag, title, description, read time, and year
+
+        ARTICLE CATEGORIES:
+        - History: Evolution of algorithms and techniques over time
+        - NLP: Natural language processing fundamentals
+        - Algorithms: Technical deep-dives into specific methods
+        - Equity: Social implications of technical choices
+        - Security: Vulnerabilities and edge cases
+
+        MAINTENANCE:
+        When adding new articles:
+        1. Create the article folder with index.html
+        2. Add the article card HTML here
+        3. Add the article to the allArticles array in index.html
+        4. The random selection on the main page will automatically include it
+        =======================================================================
+    -->
+    <style>
+        :root {
+            --text-color: #292929;
+            --bg-color: #fff;
+            --accent-color: #1a8917;
+            --border-color: #e6e6e6;
+            --card-shadow: 0 1px 4px rgba(0,0,0,0.08);
+            --card-hover-shadow: 0 4px 12px rgba(0,0,0,0.12);
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: sohne, "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 48px 24px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 32px;
+            font-size: 16px;
+            color: #757575;
+            text-decoration: none;
+        }
+
+        .back-link:hover { color: var(--accent-color); }
+
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 32px;
+        }
+
+        .article-card {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: box-shadow 0.2s ease, transform 0.2s ease;
+            background: white;
+        }
+
+        .article-card:hover {
+            box-shadow: var(--card-hover-shadow);
+            transform: translateY(-2px);
+        }
+
+        .article-card a {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .card-content { padding: 24px; }
+
+        .card-tag {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--accent-color);
+            margin-bottom: 12px;
+        }
+
+        .card-title {
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 1.3;
+            margin: 0 0 12px 0;
+        }
+
+        .card-description {
+            font-size: 15px;
+            color: #757575;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        .card-meta {
+            padding: 16px 24px;
+            border-top: 1px solid var(--border-color);
+            font-size: 14px;
+            color: #757575;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        @media (max-width: 728px) {
+            .container { padding: 24px 16px; }
+            .articles-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../" class="back-link">&larr; Back</a>
+
+        <div class="articles-grid">
+            <!--
+                ===============================================================
+                HISTORY ARTICLES
+                Tracing the evolution of algorithms and techniques.
+                ===============================================================
+            -->
+            <article class="article-card">
+                <a href="../text-generation-history/">
+                    <div class="card-content">
+                        <span class="card-tag">History</span>
+                        <h3 class="card-title">A Brief History of Text Generation</h3>
+                        <p class="card-description">From Shannon's hand-picked letters to modern LLMs. The real outputs from ELIZA, RACTER, char-rnn, and GPT, and why each generation felt like a breakthrough.</p>
+                    </div>
+                    <div class="card-meta">
+                        <span>13 min read</span>
+                        <span>2026</span>
+                    </div>
+                </a>
+            </article>
+
+            <article class="article-card">
+                <a href="../bpe-history/">
+                    <div class="card-content">
+                        <span class="card-tag">History</span>
+                        <h3 class="card-title">The 30-Year Journey of an Algorithm That Accidentally Learned to Read</h3>
+                        <p class="card-description">How a 1994 data compression algorithm became the foundation of modern AI. The untold story of Byte Pair Encoding's journey from C Users Journal to GPT-4.</p>
+                    </div>
+                    <div class="card-meta">
+                        <span>15 min read</span>
+                        <span>2026</span>
+                    </div>
+                </a>
+            </article>
+
+            <!--
+                ===============================================================
+                NLP FUNDAMENTALS
+                Core concepts in natural language processing.
+                ===============================================================
+            -->
+            <article class="article-card">
+                <a href="../tokenization/">
+                    <div class="card-content">
+                        <span class="card-tag">NLP</span>
+                        <h3 class="card-title">The Elegant Hack Powering Modern AI</h3>
+                        <p class="card-description">Understanding how LLMs transform text into tokens, and why this seemingly simple process has profound implications for cost, context limits, and model behavior.</p>
+                    </div>
+                    <div class="card-meta">
+                        <span>12 min read</span>
+                        <span>2026</span>
+                    </div>
+                </a>
+            </article>
+
+            <!--
+                ===============================================================
+                ALGORITHMS
+                Technical deep-dives into specific methods.
+                ===============================================================
+            -->
+            <article class="article-card">
+                <a href="../breaking-text/">
+                    <div class="card-content">
+                        <span class="card-tag">Algorithms</span>
+                        <h3 class="card-title">Breaking Text</h3>
+                        <p class="card-description">BPE, WordPiece, SentencePiece, Unigram. Four algorithms, four trade-offs, none of them know what a word is.</p>
+                    </div>
+                    <div class="card-meta">
+                        <span>6 min read</span>
+                        <span>2026</span>
+                    </div>
+                </a>
+            </article>
+
+            <!--
+                ===============================================================
+                EQUITY
+                Social implications of technical choices.
+                ===============================================================
+            -->
+            <article class="article-card">
+                <a href="../multilingual-tax/">
+                    <div class="card-content">
+                        <span class="card-tag">Equity</span>
+                        <h3 class="card-title">Why Non-English Speakers Pay More for AI</h3>
+                        <p class="card-description">Tamil speakers pay 7x more tokens than English speakers for the same meaning. The hidden cost of tokenization and why morphology sets a compression ceiling.</p>
+                    </div>
+                    <div class="card-meta">
+                        <span>10 min read</span>
+                        <span>2026</span>
+                    </div>
+                </a>
+            </article>
+
+            <!--
+                ===============================================================
+                SECURITY
+                Vulnerabilities and edge cases.
+                ===============================================================
+            -->
+            <article class="article-card">
+                <a href="../glitch-tokens/">
+                    <div class="card-content">
+                        <span class="card-tag">Security</span>
+                        <h3 class="card-title">When Tokens Glitch and Users Attack</h3>
+                        <p class="card-description">Reddit usernames that break GPT. Invisible characters that bypass filters. The edge cases where tokenization fails spectacularly.</p>
+                    </div>
+                    <div class="card-meta">
+                        <span>8 min read</span>
+                        <span>2026</span>
+                    </div>
+                </a>
+            </article>
+        </div>
+    </div>
+</body>
+</html>
